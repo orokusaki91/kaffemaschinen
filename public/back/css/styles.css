@@ -1,0 +1,116 @@
+body * {
+    font-family: 'Lato', sans-serif;
+}
+
+.bg-site-color a {
+
+    color: #1a1a1a !important;
+}
+
+.bg-site-second-color {
+    background-color: #510094;
+}
+
+.btn-schoen {
+    display: inline-block;
+    border: none;
+    transition: all 0.2s;
+    font-weight: 500;
+    background: #583520;
+    padding: 10px 35px;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+.btn-schoen:hover {
+    background: #734826;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+a {
+    color: #de5421;
+    text-decoration: none;
+}
+a:hover {
+    color: #de5421;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #de5421;
+    border: #de5421;
+}
+.btn-primary:hover {
+    background-color: #de5421;
+}
+
+.text-primary {
+    color: #de5421 !important;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.cover-text {
+    text-align: center;
+}
+.cover-text > form > button {
+    color: #ffffff;
+    background-color: #de5421;
+    border: #de5421;
+    width: 100px;
+    margin-right: 20px;
+}
+.cover-text > form > a {
+    width: 100px;
+}
+
+/***********************/
+
+.status {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.status.online {
+    background-color: green;
+}
+.status.offline {
+    background-color: red;
+}
+
+.list-group-item-action:focus, .list-group-item-action:hover {
+    background: none;
+}
+
+.admin_active {
+    background: #583520;
+    color: #fff;
+    transition: all .2s;
+}
+
+.admin_active:hover {
+    background: #734826;
+    color: #fff;
+    transition: all .2s;
+}
+
+.toggle-off.btn {
+    padding-left: 24px;
+    background: #252525;
+    color: #fff;
+    cursor: pointer;
+}
+
+.toggle-on.btn {
+    padding-right: 24px;
+    cursor: pointer;
+}
