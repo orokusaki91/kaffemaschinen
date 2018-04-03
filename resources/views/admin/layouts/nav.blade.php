@@ -1,8 +1,8 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #1a1a1a;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <a class="navbar-brand text-white" href="{{ route('admin.product.index') }}">
-        <p style="color: black; font-size: 24px; margin: 0;">Admin Panel</p>
+        <p style="color: #fff; font-size: 24px; margin: 0;">Dobrodosao Admin</p>
     </a>
 
     <button class="navbar-toggler" type="button"
@@ -13,7 +13,7 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="nav-link text-white"  style="color: #000 !important;" href="{{ route('admin.logout') }}">
+                <a class="nav-link text-white"  style="color: #fff !important;" href="{{ route('admin.logout') }}">
                     Logout
                 </a>
             </li>
