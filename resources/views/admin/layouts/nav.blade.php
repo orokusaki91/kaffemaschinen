@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <a class="navbar-brand text-white" href="{{ route('admin.product.index') }}">
-        <p style="color: #fff; font-size: 24px; margin: 0;">Dobrodosao Admin</p>
+        <p style="border:0; color: #fff; font-size: 24px; margin: 0;">Willkommen Admin</p>
     </a>
 
     <button class="navbar-toggler" type="button"
