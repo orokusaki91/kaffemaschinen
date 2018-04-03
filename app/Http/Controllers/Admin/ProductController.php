@@ -32,10 +32,10 @@ class ProductController extends Controller
             ->column('name', ['sortable' => true, 'label' => __('lang.name')])
             ->column('created_at', ['sortable' => true, 'label' => __('lang.created-at')])
             ->linkColumn(__('lang.edit'), [], function ($model) {
-                return "<a href='" . route('admin.product.edit', $model->id) . "' >".__('lang.edit')."</a>";
+                return "<a href='" . route('admin.product.edit', $model->id) . "'><i class='fa fa-edit' aria-hidden='true'></i></a>";
             })
             ->linkColumn(__('lang.delete'), [], function ($model) {
-                return "<a href='#' onclick='showDeleteModal({$model->id}, \"{$model->name}\")'>". __('lang.delete') ."</a>";
+                return "<a href='#' onclick='showDeleteModal({$model->id}, \"{$model->name}\")'><i class='fa fa-trash' aria-hidden='true'></i></a>";
             })
             ->setPagination(100);
 

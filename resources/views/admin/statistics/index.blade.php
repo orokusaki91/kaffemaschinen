@@ -24,7 +24,7 @@
                 <div class="card-body" style="min-height: 90px;">
                     <div class="row">
                         <div class="col-lg-4 text-center">
-                            <em class="oi oi-cart" style="font-size: 50px"></em>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </div>
                         <div class="col-lg-8 pv-lg">
                             <div class="h2 mt0">{{ $totalOrder }}</div>
@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-4 text-center">
-                            <img src="/back/img/cash.svg" alt="My SVG Icon">
+                            <i class="fa fa-users" aria-hidden="true"></i>
                         </div>
                         <div class="col-lg-8 pv-lg">
                             <div class="h5 mt0">CHF {{ number_format($sumCartValues, 2) }}</div>
