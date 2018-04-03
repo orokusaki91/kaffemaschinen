@@ -17,7 +17,7 @@
     <link href="{{ asset('back/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('back/css/open-iconic-bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('back/css/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('back/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/css/styles.css?ver=' . str_random(10)) }}" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
 
