@@ -35,7 +35,7 @@
                         <div class="status {{ $row->$identifier ? 'online' : 'offline' }}"></div>
                     @elseif($column->type() == "image")
                         <?php $identifier = $column->identifier() ?>
-                        <img height="30px" width="30px" src="{{ $row->$identifier->smallUrl }}" />
+                        <img  src="{{ $row->$identifier->smallUrl }}" />
                     @elseif($column->identifier() == "created_at")
                         <?php $identifier = $column->identifier() ?>
                         {{ $row->$identifier->format('j. m. Y. H:i') }}
