@@ -5,10 +5,10 @@
     <div class="row mb-4">
         <div onclick="showhide('myChart3')" class="col-lg-3 col-sm-12">
             <div class="card" style="min-height: 95px;">
-                <div class="card-body">
+                <div class="card-body boja1">
                     <div class="row">
                         <div class="col-lg-4 text-center bg-primary-dark pv-lg">
-                            <img src="/back/img/money.svg" alt="My SVG Icon">
+                            <img src="/back/img/money2.svg" alt="My SVG Icon">
                         </div>
                         <div class="col-lg-8 pv-lg">
                             <div class="h5 mt0">CHF {{ number_format($sumOrders, 2) }}</div>
@@ -21,7 +21,7 @@
 
         <div onclick="showhide('myChart2')" class="col-lg-3 col-sm-12">
             <div class="card" style="min-height: 95px;">
-                <div class="card-body" style="min-height: 90px;">
+                <div class="card-body boja2" style="min-height: 90px;">
                     <div class="row">
                         <div class="col-lg-4 text-center">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -37,10 +37,10 @@
 
         <div onclick="showhide('myChart4')" class="col-lg-3 col-sm-12">
             <div class="card" style="min-height: 95px;">
-                <div class="card-body">
+                <div class="card-body boja3">
                     <div class="row">
                         <div class="col-lg-4 text-center">
-                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
                         </div>
                         <div class="col-lg-8 pv-lg">
                             <div class="h5 mt0">CHF {{ number_format($sumCartValues, 2) }}</div>
@@ -53,10 +53,10 @@
 
         <div onclick="showhide('myChart')" class="col-lg-3 col-sm-12">
             <div class="card" style="min-height: 95px;">
-                <div class="card-body" style="min-height: 90px;">
+                <div class="card-body boja4" style="min-height: 90px;">
                     <div class="row">
                         <div class="col-lg-4 text-center">
-                            <img src="/back/img/people.svg" height="60px" alt="My SVG Icon">
+                            <img src="/back/img/people2.svg" height="60px" alt="My SVG Icon">
                         </div>
                         <div class="col-lg-8 pv-lg">
                             <div class="h2 mt0">{{ $countVisits }}</div>
@@ -122,7 +122,7 @@
         display:none;
     }
     .card-body:hover {
-        background-color: #ccc;
+       
         -webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out;
     }
     .card-body img {
