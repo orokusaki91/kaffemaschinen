@@ -14,8 +14,12 @@
             <div class="fr-slider">
                 <ul class="slides">
                     @foreach($sliders as $slider)
+                  
                         <li>
-                            <img src="{{ $slider->image }}" alt="">
+                        	<h1>Lorem ipsum</h1>
+                            <a href="#">
+                            	<img src="{{ $slider->image }}" alt="">
+                            </a>
                         </li>
                     @endforeach
                 </ul>
