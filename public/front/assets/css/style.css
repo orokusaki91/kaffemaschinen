@@ -1851,6 +1851,18 @@ ul.b-crumbs {
     margin: 0 0 50px;
 }
 
+.fr-slider h1 {
+	display:block;
+	color:#fff;
+	font-size:22px;
+	margin-bottom:10px;
+	text-align:center;
+}
+.fr-slider a {
+	display:block;
+	color:red;
+}
+
 .fr-slider {
     margin: 0;
     overflow: hidden;
@@ -4055,7 +4067,6 @@ Catalog | Gallery View
 }
 
 .section-sb-current ul li a {
-    color: #1a1a1a;
     transition: all 0.2s;
     padding: 10px 15px;
     display: block;
@@ -4103,6 +4114,13 @@ Catalog | Gallery View
 
 .section-sb-current > ul > li {
     border-top: 1px solid #e0e4f6;
+	background:#333;
+}
+.section-sb-current > ul > li a {
+	color:#fff;
+}
+.vertical-menu {
+	margin-top:73px;
 }
 
 .section-sb-current > ul > li:first-child {
@@ -9184,8 +9202,25 @@ Media
 	color:#000;
 	background:#D4DFFF;
 }
+.section-cont .section-items .prod-i:nth-child(1n):hover {
+	background:#E8E8E8;
+}
+.prod-i:hover {
+	box-shadow:2px 2px 7px 2px #333;
+	background:#E8E8E8;
+}
+.prod-i:hover h3 a {
+	color:#734826;
+}
+.prod-items .prodlist-i:hover {
+	box-shadow:2px 2px 7px 2px #333;
+	background:#E8E8E8;
+}
 
+.myacc_table > tbody > tr:nth-of-type(2n){
+	background:#f1f1f1;
+}
 
-
-
-
+.prod-items .prodlist-i-add:hover {
+	background:#B06A40;
+}
