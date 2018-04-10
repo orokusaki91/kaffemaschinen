@@ -309,4 +309,4 @@
     });
     @endif
 </script>
-@stop
+@endsection
