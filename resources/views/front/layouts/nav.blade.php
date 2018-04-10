@@ -9,10 +9,10 @@
     </li>
     @foreach($navs as $nav)
         <?php $childCategories = $nav['children']; ?>
-        <li class="{{ count($childCategories) > 0 ? 'dropdown' : '' }}">
+        <li class="{{ count($childCategories) > 0 ? 'dropdown-new' : '' }}">
             <a href="" class="{{ $__env->yieldContent('nav_active_category') == $nav->slug ? 'active' : '' }}">{{ $nav->name }} {{ count($childCategories) > 0 ? '&#9662;' : '' }}</a>
             @if(count($childCategories) > 0)
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu-new">
                     @foreach($childCategories as $childCategory)
                         <li>
                             <a href="{{ url('shop?slug=' . $childCategory->slug) }}">{{ $childCategory->name }}</a>

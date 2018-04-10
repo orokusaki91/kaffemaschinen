@@ -9221,3 +9221,30 @@ Media
 .prod-items .prodlist-i-add:hover {
 	background:#B06A40;
 }
+
+
+.dropdown-new li a {
+    display: block;
+    padding: 15px;
+    color: #000;
+    background: #fff;
+}
+
+.dropdown-new li {
+    background: #fff;
+}
+
+.dropdown-new li:hover {
+    background: red;
+}
+
+.dropdown-menu-new {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+}
+
+.dropdown-new:hover .dropdown-menu-new {
+    display: block;
+}
