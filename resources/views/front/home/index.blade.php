@@ -22,10 +22,9 @@
             </div>
         </div>
         <!-- Catalog Sidebar - start -->
-        <h1 class="main-ttl"><span>Kategorie</span></h1>
-        <div class="section-sb">
-            @include('front.catalog.category.options')
-        </div>
+        <h1 class="main-ttl"><span>Produkte</span></h1>
+        
+    
             <!-- Catalog Categories - end -->
         <div class="section-cont">
             <!-- Catalog Topbar - start -->

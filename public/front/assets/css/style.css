@@ -3986,12 +3986,10 @@ Catalog | Gallery View
     border: none!important;
 }
 
-
 .section-sb {
-    float: left;
-    width: 25%;
-    /*	padding: 0 0 50px;*/
+	display:none;
 }
+
 
 .section-sb-current {
     /*	margin: 0 0 50px;*/
@@ -4570,9 +4568,12 @@ Catalog | Gallery View
  Catalog Topbar
 ----------------------------------*/
 
+
+
+
 .section-cont {
-    float: left;
-    width: 75%;
+    float: none;
+    width: 100%;
     padding: 0 0 10px 30px;
 }
 
@@ -9165,3 +9166,26 @@ Media
 /*----------------------------------
 Media
 ----------------------------------*/
+
+
+
+
+
+/* DROPDOWN NAV Nikola */
+.dropdown-menu>li>a {
+	padding:6px 20px;
+	text-transform:none
+}
+.dropdown-menu {
+	width:100%;
+}
+
+.dropdown-menu>li>a:hover {
+	color:#000;
+	background:#D4DFFF;
+}
+
+
+
+
+

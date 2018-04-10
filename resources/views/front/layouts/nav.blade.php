@@ -9,9 +9,24 @@
     </li>
     @foreach($navs as $nav)
     <li>
-        <a href="{{ URL::to('shop?slug=' . $nav->slug) }}" class="{{ $__env->yieldContent('nav_active_category') == $nav->slug ? 'active' : '' }}">
-            {{ $nav->name }}
-        </a>
+        <!-- <a href="{{ URL::to('shop?slug=' . $nav->slug) }}" class="{{ $__env->yieldContent('nav_active_category') == $nav->slug ? 'active' : '' }}">
+            {{ $nav->name }};
+        </a> -->
+        
+        <li class="dropdown">
+            <a href="#" class="{{ $__env->yieldContent('nav_active_category') == $nav->slug ? 'active' : '' }}">
+            {{ $nav->name }} &#9662;
+        	</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">lorem ipsum</a></li>
+                <li><a href="#">lorem ipsum</a></li>
+                <li><a href="#">lorem ipsum</a></li>
+                <li><a href="#">lorem ipsum</a></li>
+                <li><a href="#">lorem ipsum</a></li>
+            </ul>
+        </li>
+        
+      
     </li>
     @endforeach
     <li>
@@ -21,3 +36,5 @@
     </li>
 </ul>
 <!-- Main menu - end -->
+
+
