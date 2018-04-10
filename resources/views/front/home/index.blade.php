@@ -16,8 +16,8 @@
                     @foreach($sliders as $slider)
                   
                         <li>
-                        	<h1>Lorem ipsum</h1>
-                            <a href="#">
+                        	<h1>{{ $slider->heading }}</h1>
+                            <a href="{{ $slider->url }}">
                             	<img src="{{ $slider->image }}" alt="">
                             </a>
                         </li>
