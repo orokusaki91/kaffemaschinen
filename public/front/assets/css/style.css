@@ -9194,9 +9194,6 @@ Media
 	padding:6px 20px;
 	text-transform:none
 }
-.dropdown-menu {
-	width:100%;
-}
 
 .dropdown-menu>li>a:hover {
 	color:#000;
