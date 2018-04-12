@@ -309,14 +309,27 @@
 
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
+
+@if(Session::has('order_made'))
 <script>
-    @if(Session::has('order_made'))
     swal({
         title: '{{ __('front.all_done') }}',
         confirmButtonText: 'OK',
         type: 'success',
         text: '{{ Session::get('order_made') }}'
     });
-    @endif
 </script>
+@endif
+
+@if(Session::has('registration_success'))
+<script>
+    swal({
+        title: '{{ __('front.all_done') }}',
+        confirmButtonText: 'OK',
+        type: 'success',
+        text: '{{ Session::get('registration_success') }}'
+    });
+</script>
+@endif
+
 @endsection

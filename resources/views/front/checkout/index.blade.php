@@ -3,6 +3,10 @@
 @section('meta_title','Checkout Page')
 @section('meta_description','Checkout Page')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('front/assets/css/order.css?ver=' . str_random(10)) }}">
+@endsection
+
 @section('content')
 <main>
 <div class="container">
@@ -21,6 +25,24 @@
                         Zur Kasse
                 </li>
             </ul>
+
+            <div class="steps-1">
+                <ul class="ul-2">
+                    <li id="checkout_cart">
+                        <a href="{{ url(route('cart.view')) }}">
+                            <span class="step-1 done"><span class="number-1">1</span><span class="text-1">Warenkorb</span></span>
+                        </a>
+                    </li>
+                    <li id="checkout_register">
+                        <span class="step-2 done"><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
+                            </li>
+                    <li id="checkout_control">
+                        <span class="step-3 on"><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
     <div class="main-ttl"><span>{{ __('front.checkout') }}</span></div>
 
     @if(count($cartItems) <=  0)
@@ -69,9 +91,6 @@
                                 id="name" class="form-control checkout-input">
                             </div>
                         </div>
-                       
-                       
-
                         @endif
                     </div>
                 </div>
@@ -154,78 +173,7 @@
                                     </div>
                                 </div>
                             </div>
-
                             @endif
-
-
-                            <div class="form-group col-sm-12" style="padding-left: 0px">
-                                <label style="color: #fff;">
-                                    <input type="checkbox" id="use_different_shipping_address" name="use_different_shipping_address">&nbsp;{{ __('front.different-shipping-address') }}
-                                </label>
-                                </div>
-
-                            </div>
-                            <?php
-                            $addresses = NULL;
-                            if (NULL !== $user) {
-                                $addresses = $user->getShippingAddresses();
-                            }
-                            ?>
-
-                            <div id="different-shipping-form" style="display: none; clear: both;">
-                                <div class="radio shipping-address-wrapper">
-                                    <div class="row">
-                                        <div class="form-group  col-sm-6">
-                                            {{--<label class="control-label" for="input-billing-firstname">{{ __('front.account-first-name') }}*</label>--}}
-                                            <input type="text" name="shipping_first_name"
-                                            value="" placeholder="{{ __('front.account-first-name') }}"
-                                            id="name" class="form-control checkout-input">
-                                        </div>
-                                        <div class="form-group  col-sm-6">
-                                            {{--<label class="control-label" for="input-billing-lastname">{{ __('front.account-last-name') }}*</label>--}}
-                                            <input type="text" name="shipping_last_name"
-                                            value="" placeholder="{{ __('front.account-last-name') }}"
-                                            id="name" class="form-control checkout-input">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        {{--<label class="control-label" for="input-shipping-address-1">{{ __('front.account-address-1') }}*</label>--}}
-                                        <input type="text" name="shipping_address" value="" placeholder="{{ __('front.account-address-1') }}"
-                                        id="name" class="form-control checkout-input">
-                                    </div>
-
-                                    <div class="form-group">
-                                        {{--<label class="control-label" for="input-shipping-address-2">{{ __('front.account-Address 2') }}</label>--}}
-                                        <input type="text" name="shipping_address2" value="" placeholder="{{ __('front.account-Address 2') }}"
-                                        id="name" class="form-control checkout-input">
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            {{--<label class="control-label" for="input-shipping-postcode">{{ __('front.account-zip') }}*</label>--}}
-                                            <input type="text" data-name="postcode" name="shipping_postcode" value=""
-                                            placeholder="{{ __('front.account-zip') }}"
-                                            id="name" class="form-control checkout-input">
-                                        </div>
-
-
-                                        <div class="form-group  col-sm-6">
-                                            {{--<label class="control-label" for="input-shipping-city">{{ __('front.account-city') }}*</label>--}}
-                                            <input type="text" data-name="city" name="shipping_city" placeholder="{{ __('front.account-city') }}"
-                                            id="name" class="form-control checkout-input">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            {{--<label class="control-label" for="input-shipping-phone">{{ __('front.phone') }}</label>--}}
-                                            <input type="text" name="shipping_phone" value="" placeholder="{{ __('front.phone') }}"
-                                            id="name" class="form-control checkout-input">
-                                        </div>
-                                    </div>
-                            </div>
 
                         </div>
                     </div>

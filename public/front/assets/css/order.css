@@ -18,11 +18,6 @@ ul.ul-2 li {
     float: left;
 }
 
-.steps-1 .on {
-    color: #ffffff;
-    background-position: right 0px;
-}
-
 .steps-1 .step-1 {
     position: absolute;
     top: 0px;
@@ -31,7 +26,7 @@ ul.ul-2 li {
     z-index: 10;
     display: inline-block;
     background-image: url(../../../sprite-checkout-1.png);
-    /*background-position: right -60px;*/
+    background-position: right -60px;
     background-repeat: no-repeat;
 }
 
@@ -89,6 +84,16 @@ ul.ul-2 li {
     background-image: url(../../../sprite-checkout-1.png);
     background-position: left -60px;
     background-repeat: no-repeat;
+}
+
+.steps-1 .on {
+    color: #ffffff;
+    background-position: right 0px;
+}
+
+.steps-1 .done {
+    color: #666666;
+    background-position: right -120px;
 }
 
 .price-1 {

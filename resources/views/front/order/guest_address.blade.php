@@ -29,7 +29,7 @@
             <div class="steps-1">
                 <ul class="ul-2">
                     <li id="checkout_cart">
-                        <a href="{{ url(route('cart.view')) }}">
+                         <a href="{{ url(route('cart.view')) }}">
                             <span class="step-1 done"><span class="number-1">1</span><span class="text-1">Warenkorb</span></span>
                         </a>
                     </li>
@@ -37,7 +37,7 @@
                         <span class="step-2 on"><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
                             </li>
                     <li id="checkout_control">
-                        <span class="step-3"><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
+                        <span class="step-3 "><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -45,7 +45,7 @@
             <div class="auth-wrap">
                 <div class="auth-col">
                     <h1 class="main-ttl"><span>{{ __('front.account-register') }}</span></h1>
-                    <form class="register" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="register" role="form" method="POST" action="{{ url('order/address/guest') }}">
                         {{ csrf_field() }}
                         <p>
                             <select onchange="checkCompany()" name="is_company" id="is_company">
@@ -87,12 +87,6 @@
                         <p>
                             <input id="password" placeholder="E-mail" type="email" name="email" value="{{ old('email') }}" required>
                         </p>
-                        <p>
-                            <input id="reg_password" placeholder="{{ __('front.account-password') }}" type="password"  name="password" required>
-                        </p>
-                        <p>
-                            <input id="password" placeholder="{{ __('front.account-confirm-password') }}" type="password" name="password_confirmation" required>
-                        </p>
                         <div class="remember_me_register">
                            <input id="subscribe" type="checkbox" name="subscribe" style="display:none">
                             <label class="labelcina" for="subscribe">{{ __('front.i-want-to-subscribe') }}<span class="required"></span></label>
@@ -104,9 +98,6 @@
                     </form>
                 </div>
             </div>
-
-
-
         </section>
     </main>
     <!-- Main Content - end -->

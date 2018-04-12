@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front\Auth;
 
+use Session;
+use Illuminate\Support\Facades\URL;
 use App\Events\UserRegisteredEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Database\Address;
@@ -73,24 +75,27 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
 
+        $user->confirmed = 1;
         $user->is_company = $request->is_company;
         $user->company_name = $request->company_name;
         $user->save();
 
-        dispatch(new SendVerificationEmail($user));
-
         if ($request->subscribe){
-
             $email = $request->email;
             $check = Subscriber::where('email', '=', $email)->first();
 
             if (count($check) == 0) {
                 Subscriber::create(['email' => $email]);
             }
-
         }
 
-        return view('front.auth.verification');
+        Auth::login($user);
+
+        if (Session::has('cart')) {
+            return redirect()->route('order.address.guest');
+        } else {
+            return redirect('/')->with('registration_success', 'Registrierung erfolgreich');
+        }
 
     }
     /**
@@ -138,7 +143,6 @@ class RegisterController extends Controller
     public function verify($token)
     {
         $user = User::where('token', $token)->first();
-        $user->confirmed = 1;
 
         if($user->save()){
             return view('front.auth.emailconfirm', ['user' => $user]);

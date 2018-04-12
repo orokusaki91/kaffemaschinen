@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Front;
 use App\Jobs\SendOrderMail;
 use App\Models\Database\Product;
 use DB;
+use Auth;
 use Session;
+use Illuminate\Support\Facades\Input;
 use App\Models\Database\User;
 use App\Models\Database\Order;
 use App\Models\Database\Address;
@@ -211,27 +213,101 @@ class OrderController extends Controller
 		return view('front.order.login');
 	}
 
-	public function postLogin() {
-		$email = $request->input('email');
+	public function postLogin(Request $request) {
+        $email = $request->input('email');
         $password = $request->input('password');
         $remember = (Input::has('remember_me')) ? true : false;
 
         if (Auth::attempt(['email' => $email, 'password' => $password, 'confirmed' => 1], $remember)) {
-            $url = URL::previous();
-            $checkoutUrl = route('checkout.index');
-
-            if ($url == $checkoutUrl){
-                return redirect($checkoutUrl);
-            } else {
-                return redirect($this->redirectPath());
-            }
+            return redirect('order.address');
         } else {
-        	return redirect()->route('order.login');
+            $user = User::all()->where('email', $email)->first();
+            if (count($user) != 1) {
+                return redirect(route('order.login'))
+                    ->with('status', 'Die Logindaten sind ungültig!' );
+            } else {
+                if ($user->confirmed == 1) {
+                    return redirect(route('order.login'))
+                        ->with('status', 'Falsches Passwort. Bitte versuchen Sie es erneut!' );
+                } else {
+                    return redirect(route('order.login'))
+                        ->with('status', 'Benutzerkonto wurde noch nicht verifiziert. Bitte überprüfen Sie Ihre Mail.' );
+                }
+            }
         }
 	}
 
 	public function register()
 	{
-		return view('front.order.login');
+		return view('front.order.register');
+	}
+
+	public function showGuestAddressForm()
+	{
+		return view('front.order.guest_address');
+	}
+
+	public function postGuestAddressForm(Request $request)
+	{
+		$this->validate($request, [
+			'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+		]);
+
+		$user = User::create([
+            'title' => $data['title'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'confirmed' => 1,
+            'is_company' => $request->is_company,
+            'company_name' => $request->company_name,
+            'token' => base64_encode($data['email']),
+        ]);
+
+        $user->save();
+
+        $address = Address::create([
+            'user_id' => $user->id,
+            'type' => 'BILLING',
+            'first_name' => $data['first_name'],
+            'last_name' =>$data['last_name'],
+            'address1' => $data['address'],
+            'postcode' => $data['zip'],
+            'city' => $data['city'],
+            'phone' => $data['phone'],
+        ]);
+
+        Session::put('guest_user', $user);
+        Session::put('guest_address', $address);
+
+        if ($request->subscribe){
+            $email = $request->email;
+            $check = Subscriber::where('email', '=', $email)->first();
+
+            if (count($check) == 0) {
+                Subscriber::create(['email' => $email]);
+            }
+        }
+
+        return redirect()->route('order.address');
+	}
+
+	public function showOrderAddress()
+	{
+		if (Session::has('guest_user')) {
+			$user = Session::get('guest_user');
+		} else {
+			$user = Auth::user();
+		}
+
+		if (Session::has('guest_address')) {
+			$address = Session::get('guest_address');
+        } else {
+			$address = $user->addresses;
+        }
+
+		return view('front.order.address', compact('user', 'address'));
 	}
 }

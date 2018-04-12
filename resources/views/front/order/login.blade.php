@@ -28,10 +28,12 @@
             <div class="steps-1">
                 <ul class="ul-2">
                     <li id="checkout_cart">
-                        <span class="step-1  on"><span class="number-1">1</span><span class="text-1">Warenkorb</span></span>
-                            </li>
+                        <a href="{{ url(route('cart.view')) }}">
+                            <span class="step-1 done"><span class="number-1">1</span><span class="text-1">Warenkorb</span></span>
+                        </a>
+                    </li>
                     <li id="checkout_register">
-                        <span class="step-2 "><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
+                        <span class="step-2 on"><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
                             </li>
                     <li id="checkout_control">
                         <span class="step-3 "><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
@@ -93,7 +95,7 @@
 
 			<div class="col-md-3">
 				<h3>Als Gast bestellen (ohne Registrierung)</h3>
-                <form class="login" role="form" method="get" action="{{ route('order.guest') }}">
+                <form class="login" role="form" method="get" action="{{ route('order.address.guest') }}">
 					<div class="login_button">
 	                 	<input class="button_login" type="submit" value="Als Gast bestellen">
 	                </div>

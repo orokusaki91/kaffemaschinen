@@ -53,8 +53,16 @@ Route::middleware(['web'])
         Route::get('/order/register', ['as' => 'order.register', 'uses' => 'OrderController@register']);
         Route::post('/order/register', ['as' => 'order.register.post', 'uses' => 'OrderController@postRegister']);
 
-        Route::get('/order/guest', ['as' => 'order.guest', 'uses' => 'OrderController@showGuestForm']);
-        Route::post('/order/guest', ['as' => 'order.guest.post', 'uses' => 'OrderController@postGuestForm']);
+        Route::get('/order/address', ['as' => 'order.address', 'uses' => 'OrderController@showOrderAddress']);
+
+        Route::get('/order/address/guest', ['as' => 'order.address.guest', 'uses' => 'OrderController@showGuestAddressForm']);
+        Route::post('/order/address/guest', ['as' => 'order.address.guest.post', 'uses' => 'OrderController@postGuestAddressForm']);
+
+        Route::get('/order/payment/billing_address', ['as' => 'order.billing_address', 'uses' => 'OrderController@showBillingAddressForm']);
+        Route::post('/order/payment/billing_address', ['as' => 'order.billing_address.post', 'uses' => 'OrderController@postBillingAddress']);
+
+        Route::get('/order/payment/shipping_address', ['as' => 'order.shipping_address', 'uses' => 'OrderController@showShippingAddressForm']);
+        Route::post('/order/payment/shipping_address', ['as' => 'order.shipping_address.post', 'uses' => 'OrderController@postShippingAddress']);
 
         //* ***** END KAFFEMASCHINEN CART FRONT ROUTES  *****  */
 

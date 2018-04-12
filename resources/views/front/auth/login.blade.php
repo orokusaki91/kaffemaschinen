@@ -31,6 +31,10 @@
                             <div class="alert alert-danger">
                                 {{ session('status') }}
                             </div>
+                        @elseif(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
                         @endif
                         <p>
                             <input placeholder="E-mail" id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
