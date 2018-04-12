@@ -37,6 +37,9 @@
                 <form method="post" action="{{ route('cart.update.delivery') }}" id="cart-form" style="border-radius: 4px; background-color: white; padding: 15px;">
                     {{ csrf_field() }}
                     <div class="cart-items-wrap">
+                        <div id="updateCartLoader" class="ajax-loading-1" style="display: none;"><span class="ajax-loading-1" id="ajax-loading-1">
+                            <img src="{{ asset('front/assets/img/loading-icon.gif') }}" class="white"></span>
+                        </div>
                         <table class="cart-items">
                             <thead>
                                 <tr>
