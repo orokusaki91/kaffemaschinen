@@ -4,17 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-sm-12 h1" >{{ __('lang.orders-sold') }}</div>
-            <div class="col-lg-3 col-sm-12">
-                <select class="form-control" name="select-shipping" onchange="location=this.value;">
-                    <option value="{{ urldecode(route('admin.order.index', array_merge(request()->query(), ['delivery_type' => '']), false)) }}" @if (app('request')->input('delivery_type') == null || app('request')->input('delivery_type') == '') selected @endif>Wählen Sie den Zustelltyp aus</option>
-                    <option value="{{ urldecode(route('admin.order.index', array_merge(request()->query(), ['delivery_type' => 'Lieferung']), false)) }}" @if (app('request')->input('delivery_type') == 'delivery') selected @endif>Lieferung</option>
-                    <option value="{{ urldecode(route('admin.order.index', array_merge(request()->query(), ['delivery_type' => 'Abholung']), false)) }}" @if (app('request')->input('delivery_type') == 'pickup') selected @endif>Abholung</option>
-                </select>
-            </div>
+         
             <div class="col-lg-3 col-sm-12">
                 <select class="form-control" name="select-status" onchange="location=this.value;">
                     <option value="{{ urldecode(route('admin.order.index', array_merge(request()->query(), ['delivery_status' => '']), false)) }}"  @if (app('request')->input('delivery_status') == null || app('request')->input('delivery_status') == '') selected @endif>Wählen Sie den Lieferstatus</option>
-                    <option value="{{ urldecode(route('admin.order.index', array_merge(request()->query(), ['delivery_status' => '1']), false)) }}" @if (app('request')->input('delivery_status') == '1') selected @endif>Öffen</option>
+                    <option value="{{ urldecode(route('admin.order.index', array_merge(request()->query(), ['delivery_status' => '1']), false)) }}" @if (app('request')->input('delivery_status') == '1') selected @endif>Offen</option>
                     <option value="{{ urldecode(route('admin.order.index', array_merge(request()->query(), ['delivery_status' => '2']), false)) }}" @if (app('request')->input('delivery_status') == '2') selected @endif>Abgeschlossen</option>
                 </select>
             </div>

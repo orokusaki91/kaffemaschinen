@@ -3997,7 +3997,10 @@ Catalog | Gallery View
 }
 
 .section-sb {
-	display:none;
+	
+}
+.section-sb-current > ul > li a:hover {
+	color:#333;
 }
 
 
@@ -7970,7 +7973,7 @@ body .component-desc.component-desc-ct {
 
 .f-menu-list .f-menu {
     float: left;
-    width: 33%;
+    width: 19%;
     padding: 0 15px;
     margin: 0 0 25px;
 }
@@ -8017,7 +8020,7 @@ body .component-desc.component-desc-ct {
 
 .f-subscribe {
     float: left;
-    width: 25%;
+    width: 24%;
     padding: 0 15px;
     margin: 0 0 10px;
 }
@@ -9246,10 +9249,61 @@ Media
     left: 0;
     display: none;
 	z-index:99999999999;
-	min-width:250px;
+	min-width:195px;
+	text-align:left;
 }
 
 .dropdown-new:hover .dropdown-menu-new {
     display: block;
 }
+
+.col-lg-3 {
+	flex: 0 0 33%;
+	max-width:33%;
+}
+
+.auth-wrap .auth-col {
+	width:100%;
+}
+.auth-wrap .auth-col .myacc_table th:nth-of-type(1) {
+	width:30%;
+}
+.auth-wrap .auth-col .myacc_table th:nth-of-type(2) {
+	width:70%;
+}
+
+.fa-cc-visa {
+	color:#007FE8;
+	font-size:25px;
+	float:left;
+	margin-right:5px;
+}
+.fa-cc-paypal {
+	color:#005AA4;
+	font-size:25px;
+	float:left;
+	margin-right:5px;
+}
+
+.nav .nav-pills .nav-stacked img {
+	float:left;
+	margin-right:5px;
+}
+
+.card-header {
+	font-weight:bold;
+	letter-spacing:1px;
+}
+
+.form-group label {
+	font-weight:bold;
+	letter-spacing:1px;
+}
+
+.buttons .clearfix .float-right {
+	font-weight:bold;
+	letter-spacing:1px;
+}
+
+
 

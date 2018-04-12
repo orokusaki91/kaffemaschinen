@@ -69,7 +69,7 @@ return [
     'title' => 'Titel',
     'pdv' => 'MwSt.',
     'has-packaging' => 'Karton',
-    'packaging' => 'Stück à Karton',
+    'packaging' => 'Anzahl Stück',
     'contact-only' => 'Kontaktformular',
     'company-name' => 'Firmenname',
     'website' => 'Webseite',

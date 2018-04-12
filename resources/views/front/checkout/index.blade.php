@@ -45,6 +45,18 @@
                         }
                         ?>
                         @if(!Auth::check())
+                         <div class="row">
+                            <div class="form-group col-sm-6">
+                                <select onchange="checkCompany()" name="is_company" id="is_company" class="form-control checkout-input">
+                                    <option selected disabled>{{ __('front.please-select') }}</option>
+                                    <option value="0">{{ __('front.private-customer') }}</option>
+                                    <option value="1">{{ __('front.business-customer') }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-6" id="check_company" style="display: none;">
+                                <input id="company_name" class="form-control checkout-input" placeholder="Firmenname" type="text" name="company_name" value="{{ old('company_name') }}">
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 {{--<label class="control-label" for="input-user-first-name">{{ __('front.account-first-name') }}*</label>--}}
@@ -57,39 +69,8 @@
                                 id="name" class="form-control checkout-input">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <select onchange="checkCompany()" name="is_company" id="is_company" class="form-control checkout-input">
-                                    <option selected disabled>{{ __('front.please-select') }}</option>
-                                    <option value="0">{{ __('front.private-customer') }}</option>
-                                    <option value="1">{{ __('front.business-customer') }}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-6" id="check_company" style="display: none;">
-                                <input id="company_name" class="form-control checkout-input" placeholder="Firmenname" type="text" name="company_name" value="{{ old('company_name') }}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {{--<label class="control-label" for="input-user-email">E-Mail*</label>--}}
-                            <input type="text" name="email" placeholder="E-Mail"
-                            id="name" class="form-control checkout-input">
-                        </div>
-
-                        <div class="register-form">
-                            <div class="row">
-                                <div class="form-group  col-sm-6">
-                                    {{--<label class="control-label" for="input-billing-password">{{ __('front.account-password') }}*</label>--}}
-                                    <input type="password" name="password" placeholder="{{ __('front.account-password') }}"
-                                    id="name" class="form-control checkout-input">
-                                </div>
-                                <div class="form-group  col-sm-6">
-                                    {{--<label class="control-label" for="input-billing-confirm">{{ __('front.account-confirm-password') }}*</label>--}}
-                                    <input type="password" name="password_confirmation"
-                                    placeholder="{{ __('front.account-confirm-password') }}"
-                                    id="name" class="form-control checkout-input">
-                                </div>
-                            </div>
-                        </div>
+                       
+                       
 
                         @endif
                     </div>
@@ -130,6 +111,28 @@
                                     id="name" class="form-control checkout-input">
                                 </div>
                             </div>
+                            
+                             <div class="form-group">
+                            {{--<label class="control-label" for="input-user-email">E-Mail*</label>--}}
+                            <input type="text" name="email" placeholder="E-Mail"
+                            id="name" class="form-control checkout-input">
+                        </div>
+
+                        <div class="register-form">
+                            <div class="row">
+                                <div class="form-group  col-sm-6">
+                                    {{--<label class="control-label" for="input-billing-password">{{ __('front.account-password') }}*</label>--}}
+                                    <input type="password" name="password" placeholder="{{ __('front.account-password') }}"
+                                    id="name" class="form-control checkout-input">
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    {{--<label class="control-label" for="input-billing-confirm">{{ __('front.account-confirm-password') }}*</label>--}}
+                                    <input type="password" name="password_confirmation"
+                                    placeholder="{{ __('front.account-confirm-password') }}"
+                                    id="name" class="form-control checkout-input">
+                                </div>
+                            </div>
+                        </div>
                             @else
 
                             <div class="form-group  col-sm-12">

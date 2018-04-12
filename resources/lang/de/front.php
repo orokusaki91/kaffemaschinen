@@ -83,7 +83,7 @@ return [
     'place-order' => 'Bestellung aufgeben',
     'payment-option' => 'Bezahlmöglichkeit',
 
-    'different-shipping-address' => 'Verwenden Sie eine unterschiedliche Adresse für den Versand?',
+    'different-shipping-address' => 'Abweichende Versandadresse',
     'select-payment-method' => 'Bitte wählen Sie die bevorzugte Zahlungsart für diese Bestellung aus.',
     'shopping-cart-delivery' => 'Einkaufswagen für die Lieferung',
     'shopping-cart-store' => 'Einkaufswagen für Abholung vom Geschäft',

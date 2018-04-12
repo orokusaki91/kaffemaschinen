@@ -3,20 +3,43 @@
 
 
     <div class="container f-menu-list">
+    
         <div class="row">
-            <div class="f-menu">
+             <div class="f-menu">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="http://centrocaffe.ch/">centrocaffe.ch</a></li>
+                    <li><a href="#">Althardstrasse 160</a></li>
+                    <li><a href="#"></i>CH-8105 Regensdorf</a></li>
+                </ul>
+            </div>
+            
+             <div class="f-menu">
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="#">AGB's</a></li>
                     <li><a href="#">Impressum</a></li>
-                    <li><a href="{{ route('contact') }}"><i class="fa fa-envelope-open-o" aria-hidden="true"></i>Kontaktformular</a></li>
+                    <li><a href="{{ route('contact') }}"><i class="fa fa-envelope-open-o" aria-hidden="true"></i>Kontakt</a></li>
                 </ul>
             </div>
+            
             <div class="f-menu">
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a></li>
-
+                    
                 </ul>
             </div>
+            
+            <div class="f-menu">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>Zahlungsmöglichkeiten:</li>
+                    <li><i class="fa fa-cc-visa" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-cc-paypal" aria-hidden="true"></i></li>
+                </ul>
+            </div>
+        
+                    
+          
+            
+           
 
             <div class="f-subscribe">
                 <h3>Newsletter abonnieren</h3>
