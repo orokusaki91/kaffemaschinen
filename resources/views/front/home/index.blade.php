@@ -14,12 +14,19 @@
             <div class="fr-slider">
                 <ul class="slides">
                     @foreach($sliders as $slider)
-                  
                         <li>
-                        	<h1>Lorem ipsum</h1>
-                            <a href="#">
-                            	<img src="{{ $slider->image }}" alt="">
-                            </a>
+                            <img src="{{ $slider->image }}" alt="">
+                            <div class="fr-slider-cont">
+                                <h3 style="color: {{ $slider->color }}">{{ $slider->heading }}</h3>
+                                <div style="color: {{ $slider->color }}">
+                                    {!! $slider->body !!}
+                                </div>
+                                @if(!is_null($slider->url))
+                                <p class="fr-slider-more-wrap">
+                                    <a class="fr-slider-more" href="{{ $slider->url }}" style="background-color: {{ $slider->color }}; color: {{ getForegroundColor($slider->color) }};">{{ $slider->button }}</a>
+                                </p>
+                                @endif
+                            </div>
                         </li>
                     @endforeach
                 </ul>

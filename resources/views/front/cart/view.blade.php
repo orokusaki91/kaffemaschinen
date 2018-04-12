@@ -138,7 +138,9 @@
                     </div>
                     <ul class="cart-total">
                         <li class="notification" style="float: left;">
-                            {{ __('front.cart-lower-100-shipping-included') }}
+                            <p>{{ __('front.shipping-option') }}:</p>
+                            <p>{{ __('front.cart-lower-than') }}</p>
+                            <p>{{ __('front.cart-bigger-than') }}</p>
                         </li>
                         <li class="cart-summ">
                             {{ __('front.total') }}: <b>CHF <span style="color: #ff0000;" class="total-sum-price">{{ number_format(($total > 100 ? $total : $total + $shipping),2) }}</span></b>

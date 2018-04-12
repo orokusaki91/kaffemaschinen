@@ -43,8 +43,8 @@ Wir bieten eine grosse Auswahl an Kaffeeprodukten und Kaffeegeräten.">
     <link rel="stylesheet" href="{{ asset('front/assets/css/swiper.css') }}">
     <link rel="stylesheet" href="{{ asset('front/assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/assets/css/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/assets/css/media.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/style.css?ver=' . str_random(10)) }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/media.css?ver=' . str_random(10)) }}">
     @yield('styles')
 
 </head>

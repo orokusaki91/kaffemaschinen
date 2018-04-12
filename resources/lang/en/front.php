@@ -31,4 +31,7 @@ return [
 
     'delivery_option' => 'Delivery Option',
 
+    'cart-lower-than' => 'For a value of goods up to CHF 99.95 - CHF 8.50 (postage and packing flat rate)',
+    'cart-bigger-than' => 'Free shipping for orders over 100',
+
 ];

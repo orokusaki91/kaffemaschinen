@@ -115,6 +115,9 @@ return [
     'please-select' => 'Bitte auswählen',
     'private-customer' => 'Privatkunde',
     'business-customer' => 'Geschäftskunde',
+
+    'cart-lower-than' => 'Bei einem Warenwert bis CHF 99.95 - CHF 8.50 (Porto und Verpackung pauschal)',
+    'cart-bigger-than' => 'Ab einem Warenwert von 100 CHF versandkostenfrei',
 //
 //Save changes = Änderungen speichern (ilisamo „speichern“)     '' => '',  {{ __('front.') }}
 
