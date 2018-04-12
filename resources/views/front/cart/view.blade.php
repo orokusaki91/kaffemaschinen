@@ -5,6 +5,7 @@
 
 @section('styles')
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('front/assets/css/order.css?ver=' . str_random(10)) }}">
     <style>
         .checkbox {
             margin: 0;
@@ -27,9 +28,20 @@
                     </a>
                 </li>
             </ul>
-            <h1 class="main-ttl">
-                <span>Warenkorb</span>
-            </h1>
+            <div class="steps-1">
+                <ul class="ul-2">
+                    <li id="checkout_cart">
+                        <span class="step-1  on"><span class="number-1">1</span><span class="text-1">Warenkorb</span></span>
+                            </li>
+                    <li id="checkout_register">
+                        <span class="step-2 "><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
+                            </li>
+                    <li id="checkout_control">
+                        <span class="step-3 "><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
             @if(count($cartItems) <= 0)
                 <p style="color:#fff;">{{ __('front.product-no-found') }}</p>
             @else
@@ -136,6 +148,13 @@
                                         </tr>
                                     @endif
                                 @endforeach
+                                <tr class="delivery-2">
+                                    <td colspan="5" style="text-align: right">Porto / Versandkosten:</td>
+                                    <td class="price-1">
+                                        <span class="currency-1">CHF</span> 
+                                        <span class="amount-1">0.00</span>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -145,14 +164,12 @@
                             <p>{{ __('front.cart-lower-than') }}</p>
                             <p>{{ __('front.cart-bigger-than') }}</p>
                         </li>
-                        <li class="cart-summ">
-                            {{ __('front.total') }}: <b>CHF <span style="color: #ff0000;" class="total-sum-price">{{ number_format(($total > 100 ? $total : $total + $shipping),2) }}</span></b>
-                            {!! ($total < 100) ? '<p class="cart_pdv">'. __('front.shipping-included') .'</p>' : '<p class="cart_pdv">'. __('front.shipping-not-included') .'</p>' !!}
-
+                        <li class="cart-summ">Total (inkl.MwSt): <b>CHF <span style="color: #ff0000;" class="total-sum-price">{{ number_format(($total > 100 ? $total : $total + $shipping),2) }}</span></b>
+                            {{-- {!! ($total < 100) ? '<p class="cart_pdv">'. __('front.shipping-included') .'</p>' : '<p class="cart_pdv">'. __('front.shipping-not-included') .'</p>' !!} --}}
                         </li>
                     </ul>
                     <div class="cart-submit">
-                        <button type="submit" id="button-checkout" class="cart-submit-btn" style="margin-bottom: 0;">{{ __('front.checkout') }}</button>
+                        <button type="submit" id="button-checkout" class="cart-submit-btn" style="margin-bottom: 0;">{{ __('front.weiter') }}</button>
                         <a href="{{ route('home') }}" class="cart-clear" id="continue-shopping" style="color: #583520; margin-bottom: 0;">{{ __('front.continue-shopping') }}</a>
                     </div>
                 </form>

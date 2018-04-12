@@ -205,4 +205,33 @@ class OrderController extends Controller
 			}
 		});
 	}
+
+	public function login()
+	{
+		return view('front.order.login');
+	}
+
+	public function postLogin() {
+		$email = $request->input('email');
+        $password = $request->input('password');
+        $remember = (Input::has('remember_me')) ? true : false;
+
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'confirmed' => 1], $remember)) {
+            $url = URL::previous();
+            $checkoutUrl = route('checkout.index');
+
+            if ($url == $checkoutUrl){
+                return redirect($checkoutUrl);
+            } else {
+                return redirect($this->redirectPath());
+            }
+        } else {
+        	return redirect()->route('order.login');
+        }
+	}
+
+	public function register()
+	{
+		return view('front.order.login');
+	}
 }

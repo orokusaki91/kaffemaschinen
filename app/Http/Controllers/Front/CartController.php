@@ -171,7 +171,7 @@ class CartController extends Controller
         Session::put('hasDelivery', $hasDelivery);
 
         //return redirect()->back();
-        return redirect('/checkout');
+        return redirect()->route('order.login');
     }
 
     public function destroy($id, $type)

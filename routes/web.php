@@ -47,6 +47,15 @@ Route::middleware(['web'])
 
         Route::post('/order', ['as' => 'order.place', 'uses' => 'OrderController@place']);
 
+        Route::get('/order/login', ['as' => 'order.login', 'uses' => 'OrderController@login']);
+        Route::post('/order/login', ['as' => 'order.login.post', 'uses' => 'OrderController@postLogin']);
+
+        Route::get('/order/register', ['as' => 'order.register', 'uses' => 'OrderController@register']);
+        Route::post('/order/register', ['as' => 'order.register.post', 'uses' => 'OrderController@postRegister']);
+
+        Route::get('/order/guest', ['as' => 'order.guest', 'uses' => 'OrderController@showGuestForm']);
+        Route::post('/order/guest', ['as' => 'order.guest.post', 'uses' => 'OrderController@postGuestForm']);
+
         //* ***** END KAFFEMASCHINEN CART FRONT ROUTES  *****  */
 
         Route::get('/checkout', ['as' => 'checkout.index', 'uses' => 'CheckoutController@index']);
