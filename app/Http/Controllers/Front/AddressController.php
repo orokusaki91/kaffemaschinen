@@ -23,8 +23,7 @@ class AddressController extends Controller
 
     public function show($id)
     {
-        $address = Address::find($id);
-
+        $address = Auth::user()->addresses()->findOrFail($id);
         return redirect()->route('my-account.address.index');
     }
 
@@ -63,7 +62,6 @@ class AddressController extends Controller
         $address->first_name = $request->first_name;
         $address->last_name = $request->last_name;
         $address->address1 = $request->address;
-        $address->address2 = $request->address2;
         $address->postcode = $request->postcode;
         $address->city = $request->city;
         $address->phone = $request->phone;
@@ -98,7 +96,6 @@ class AddressController extends Controller
         $address->first_name = $request->first_name;
         $address->last_name = $request->last_name;
         $address->address1 = $request->address;
-        $address->address2 = $request->address2;
         $address->postcode = $request->postcode;
         $address->city = $request->city;
         $address->phone = $request->phone;
