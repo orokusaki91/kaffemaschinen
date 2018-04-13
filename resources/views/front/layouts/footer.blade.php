@@ -30,9 +30,10 @@
             
             <div class="f-menu">
                 <ul class="nav nav-pills nav-stacked">
-                    <li>Zahlungsmöglichkeiten:</li>
-                    <li><i class="fa fa-cc-visa" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-cc-paypal" aria-hidden="true"></i></li>
+                    <li>Zahlungsmöglichkeiten:</li> 
+                    <li><img src="{{ asset('front/assets/img/cards/visa.png') }}" alt=""></li>
+                    <li><img src="{{ asset('front/assets/img/cards/master-card.png') }}" alt=""></li>
+                    <li><img src="{{ asset('front/assets/img/cards/american-express.png') }}" alt=""></li>
                 </ul>
             </div>
             <div class="f-subscribe">

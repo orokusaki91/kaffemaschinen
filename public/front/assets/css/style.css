@@ -1953,16 +1953,17 @@ ul.b-crumbs {
 }
 
 .fr-slider .flex-control-paging li a {
-    width: 23px;
-    height: 3px;
+    width: 25px;
+    height: 8px;
     background: #e0e4f6;
     box-shadow: none;
     transition: all 0.2s;
+	margin-right:5px;
 }
 
 .fr-slider .flex-control-paging li a:hover,
 .fr-slider .flex-control-paging li a.flex-active {
-    background: #373d54;
+    background: #583520;
 }
 
 /*----------------------------------
@@ -3989,7 +3990,8 @@ Catalog | Gallery View
 ----------------------------------*/
 
 .profile_section-sb {
-    width: 100%!important;
+    width: 85%!important;
+	box-shadow:3px 3px 3px #333;
 }
 
 .profile_section-sb-list {
@@ -4100,7 +4102,8 @@ Catalog | Gallery View
 }
 
 .section-sb-current > ul > li > a > .categ-1-label:hover {
-    background: #f8fafc;
+    background: #8C6851;
+	color:#000;
 }
 
 .section-sb-current ul li.active > a {
@@ -4115,7 +4118,7 @@ Catalog | Gallery View
 
 .section-sb-current > ul > li {
     border-top: 1px solid #e0e4f6;
-	background:#333;
+	background:#B18F79;
 }
 .section-sb-current > ul > li a {
 	color:#fff;
@@ -7986,6 +7989,12 @@ body .component-desc.component-desc-ct {
     text-transform: uppercase;
 }
 
+.f-menu img {
+	width:25%;
+	float:left;
+	margin-right:10px;
+}
+
 .f-menu-list .f-menu ul li a {
     color: white;
     font-size: 14px;
@@ -9203,6 +9212,8 @@ Media
 .section-cont .section-items .prod-i:nth-child(1n):hover {
 	background:#E8E8E8;
 }
+
+
 .prod-i:hover {
 	box-shadow:2px 2px 7px 2px #333;
 	background:#E8E8E8;
@@ -9216,11 +9227,13 @@ Media
 }
 
 .myacc_table > tbody > tr:nth-of-type(2n){
-	background:#f1f1f1;
+	background:#e3e3e3;
 }
 
 .prod-items .prodlist-i-add:hover {
-	background:#B06A40;
+	background:#B18F79;
+	color:#000;
+	box-shadow:2px 2px 5px #333;
 }
 
 
@@ -9239,7 +9252,7 @@ Media
 }
 
 .dropdown-new li a:hover {
-    background: #883f01ab;
+    background: #B18F79;
 	color:#000;
 }
 
