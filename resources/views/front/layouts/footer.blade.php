@@ -35,12 +35,6 @@
                     <li><i class="fa fa-cc-paypal" aria-hidden="true"></i></li>
                 </ul>
             </div>
-        
-                    
-          
-            
-           
-
             <div class="f-subscribe">
                 <h3>Newsletter abonnieren</h3>
                 <form method="post" action="{{ route('subscribe') }}" class="f-subscribe-form">
