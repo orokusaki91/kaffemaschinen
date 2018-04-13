@@ -58,12 +58,12 @@
                         <span class="prodlist-i-price">
                             <b>CHF {{ number_format($product->discount_price, 2) }}</b><br>
                             <span style="text-decoration:line-through">CHF {{ number_format($product->price,2) }}</span><span class="price-off">-{{ number_format(100-($product->discount_price/$product->price*100), 0) }}%</span><br>
-                            <span>inkl. MwSt {{ $product->pdv }}%</span>
+                            <span>zzgl. MwSt {{ $product->pdv }}%</span>
                          </span>
                     @else
                         <span class="prodlist-i-price">
                             <b>CHF {{ number_format($product->price,2) }}</b><br>
-                            <span>inkl. MwSt {{ $product->pdv }}%</span>
+                            <span>zzgl. MwSt {{ $product->pdv }}%</span>
                         </span>
                     @endif
                 </form>

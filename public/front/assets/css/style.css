@@ -3265,7 +3265,7 @@ Catalog | Gallery View
 
 .prod-items .prodlist-i {
     min-height: 250px;
-    border: 1px solid #e0e4f6;
+    
     transition: all 0.2s;
     position: relative;
     padding: 22px 22px 7px 300px;
@@ -8211,6 +8211,45 @@ body .component-desc.component-desc-ct {
 	.container {
 		width:100%;
 	}
+	
+	.dropdown-new:hover .dropdown-menu-new {
+		width:70%;
+		text-align:center;
+		margin-left:15%;
+	}
+	.dropdown-new li a {
+		background:#a3a3a3 !important;
+		border-bottom:1px solid #fff;
+	}
+	.dropdown-new li a:hover {
+		background: #B18F79 !important;
+		color:#000 !important;
+	}
+	
+	
+	.topmenu {
+		width:85%;
+		margin-left:7%;
+	}
+	
+	.profile_section-sb {
+		width:75% !important;
+		margin-left:10%;
+	}
+	
+	.f-menu img {
+		width:10%;
+		float:none;
+	}
+	
+	.prod-items .prodlist-i-price {
+		margin-top:-50px !important;
+		float: right !important;
+	}
+	.nikolabuton {
+		margin-top:30px;
+	}
+	
 }
 
 @media only screen and (max-width: 480px) {

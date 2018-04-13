@@ -94,8 +94,8 @@ return [
     'shipping-not-included' => 'Lieferkosten nicht inbegriffen',
     'category-max' => 'Sie haben die max. Anzahl an Kategorien erreicht',
 
-    'with_vat' => 'inkl. MwSt :vat%',
-    'contain_vat' => 'inkl. MwSt :vat%',
+    'with_vat' => 'zzgl. MwSt :vat%',
+    'contain_vat' => 'zzgl. MwSt :vat%',
 
     'name_asc' => 'name a-z',
     'name_desc' => 'name z-a',
