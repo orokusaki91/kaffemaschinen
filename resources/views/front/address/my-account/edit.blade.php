@@ -38,10 +38,10 @@
                                                    id="input-shipping-address-1" class="form-control">
                                         </div>
 
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <input type="text" name="address2" value="{{ $address->address2 }}" placeholder="{{ __('front.account-Address 2') }}"
                                                    id="input-shipping-address-2" class="form-control">
-                                        </div>
+                                        </div> --}}
 
                                         <div class="row">
                                             <div class="form-group col-sm-6">
@@ -50,7 +50,6 @@
                                                        id="input-shipping-postcode"
                                                        class="shipping tax-calculation  form-control">
                                             </div>
-
 
                                             <div class="form-group  col-sm-6">
                                                 <input type="text" 
@@ -70,7 +69,7 @@
                                                        id="input-shipping-phone" class="form-control">
                                             </div>
                                             <div class="form-group col-sm-6">
-                                                <input type="hidden" class="form-control" id="delivery" name="type" value="{{ $address->type == 'SHIPPING' ? 'shipping' : 'BILLING' }}">
+                                                <input type="hidden" class="form-control" id="delivery" name="type" value="{{ $address->type == 'SHIPPING' ? 'SHIPPING' : 'BILLING' }}">
                                             </div>
                                         </div>
                                     </div>

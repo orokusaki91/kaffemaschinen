@@ -112,3 +112,19 @@ ul.ul-2 li {
 .login_button {
 	overflow: hidden;
 }
+
+.customer-info {
+    overflow: hidden;
+}
+
+.customer-info p {
+    margin: 0px;
+}
+
+.customer-info .shipping-address {
+    float: left;
+}
+
+.customer-info .billing-address {
+    float: left;
+}

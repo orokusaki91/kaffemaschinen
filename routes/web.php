@@ -58,11 +58,8 @@ Route::middleware(['web'])
         Route::get('/order/address/guest', ['as' => 'order.address.guest', 'uses' => 'OrderController@showGuestAddressForm']);
         Route::post('/order/address/guest', ['as' => 'order.address.guest.post', 'uses' => 'OrderController@postGuestAddressForm']);
 
-        Route::get('/order/payment/billing_address', ['as' => 'order.billing_address', 'uses' => 'OrderController@showBillingAddressForm']);
-        Route::post('/order/payment/billing_address', ['as' => 'order.billing_address.post', 'uses' => 'OrderController@postBillingAddress']);
-
-        Route::get('/order/payment/shipping_address', ['as' => 'order.shipping_address', 'uses' => 'OrderController@showShippingAddressForm']);
-        Route::post('/order/payment/shipping_address', ['as' => 'order.shipping_address.post', 'uses' => 'OrderController@postShippingAddress']);
+        Route::get('/order/address/{type}/edit', ['as' => 'order.address.edit', 'uses' => 'OrderController@editAddress']);
+        Route::put('/order/address/{type}/update', ['as' => 'order.address.update', 'uses' => 'OrderController@updateAddress']);
 
         //* ***** END KAFFEMASCHINEN CART FRONT ROUTES  *****  */
 

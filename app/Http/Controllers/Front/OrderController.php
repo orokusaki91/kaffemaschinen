@@ -75,7 +75,6 @@ class OrderController extends Controller
 				$address->first_name = request('billing_first_name');
 				$address->last_name = request('billing_last_name');
 				$address->address1 = request('billing_address');
-				$address->address2 = request('billing_address2');
 				$address->postcode = request('billing_postcode');
 				$address->city = request('billing_city');
 				$address->phone = request('billing_phone');
@@ -92,7 +91,6 @@ class OrderController extends Controller
 				$shippingAddress->first_name = request('shipping_first_name');
 				$shippingAddress->last_name = request('shipping_last_name');
 				$shippingAddress->address1 = request('shipping_address');
-				$shippingAddress->address2 = request('shipping_address2');
 				$shippingAddress->postcode = request('shipping_postcode');
 				$shippingAddress->city = request('shipping_city');
 				$shippingAddress->phone = request('shipping_phone');
@@ -210,6 +208,10 @@ class OrderController extends Controller
 
 	public function login()
 	{
+		if (Auth::check()) {
+			return redirect()->route('order.address');
+		}
+
 		return view('front.order.login');
 	}
 
@@ -219,7 +221,7 @@ class OrderController extends Controller
         $remember = (Input::has('remember_me')) ? true : false;
 
         if (Auth::attempt(['email' => $email, 'password' => $password, 'confirmed' => 1], $remember)) {
-            return redirect('order.address');
+            return redirect()->route('order.address');
         } else {
             $user = User::all()->where('email', $email)->first();
             if (count($user) != 1) {
@@ -250,20 +252,27 @@ class OrderController extends Controller
 	public function postGuestAddressForm(Request $request)
 	{
 		$this->validate($request, [
+            'is_company' => 'required',
+            'title' => 'required',
 			'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255',
+            'address' => 'required',
+            'title' => 'required',
+            'city' => 'required',
+            'email' => 'required|email|max:255|unique:users',
+            'zip' => 'required',
+            'phone' => 'required',
 		]);
 
 		$user = User::create([
-            'title' => $data['title'],
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
+            'title' => $request->title,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
             'confirmed' => 1,
             'is_company' => $request->is_company,
             'company_name' => $request->company_name,
-            'token' => base64_encode($data['email']),
+            'token' => base64_encode($request->email),
         ]);
 
         $user->save();
@@ -271,12 +280,12 @@ class OrderController extends Controller
         $address = Address::create([
             'user_id' => $user->id,
             'type' => 'BILLING',
-            'first_name' => $data['first_name'],
-            'last_name' =>$data['last_name'],
-            'address1' => $data['address'],
-            'postcode' => $data['zip'],
-            'city' => $data['city'],
-            'phone' => $data['phone'],
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address1' => $request->address,
+            'postcode' => $request->zip,
+            'city' => $request->city,
+            'phone' => $request->phone,
         ]);
 
         Session::put('guest_user', $user);
@@ -303,11 +312,78 @@ class OrderController extends Controller
 		}
 
 		if (Session::has('guest_address')) {
-			$address = Session::get('guest_address');
+			$billingAddress = Session::get('guest_address');
+			$shippingAddress = Session::get('guest_address');
         } else {
-			$address = $user->addresses;
+			$billingAddress = $user->getBillingAddress();
+			$shippingAddress = $user->getShippingAddress();
         }
 
-		return view('front.order.address', compact('user', 'address'));
+		return view('front.order.address', compact('user', 'billingAddress', 'shippingAddress'));
+	}
+
+	public function editAddress($type)
+	{
+		if (Session::has('guest_user')) {
+            $user = Session::get('guest_user');
+        } else {
+        	$user = Auth::user();
+        }
+
+        if ($type == 'billing') {
+			$address = $user->getBillingAddress();
+        } else if ($type == 'shipping') {
+			$address = $user->getShippingAddress();
+        } else {
+        	return redirect()->route('order.address');
+        }
+
+		return view('front.order.edit_address', compact('user', 'address'));
+	}
+
+	public function updateAddress(Request $request, $type)
+	{
+		if (Session::has('guest_user')) {
+            $user = Session::get('guest_user');
+        } else {
+        	$user = Auth::user();
+        }
+
+        if ($type == 'billing') {
+			$address = $user->getBillingAddress();
+
+			$this->validate($request, [
+	            'first_name' => 'required',
+	            'last_name' => 'required',
+	            'address' => 'required',
+	            'city' => 'required',
+	            'postcode' => 'required',
+	            'phone' => 'required',
+	        ]);
+        } else if ($type == 'shipping') {
+			$address = $user->getShippingAddress();
+
+			$this->validate($request, [
+	            'first_name' => 'required',
+	            'last_name' => 'required',
+	            'address' => 'required',
+	            'city' => 'required',
+	            'postcode' => 'required',
+	        ]);
+        } else {
+        	return redirect()->route('order.address');
+        }
+
+        $address->type = strtoupper($request->type);
+        $address->first_name = $request->first_name;
+        $address->last_name = $request->last_name;
+        $address->address1 = $request->address;
+        $address->postcode = $request->postcode;
+        $address->city = $request->city;
+        $address->phone = $request->phone;
+
+        $user->addresses()->save($address);
+
+        return redirect()->route('order.address');
 	}
 }

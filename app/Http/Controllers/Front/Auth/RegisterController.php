@@ -57,9 +57,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'is_company' => 'required',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
+            'address' => 'required',
+            'title' => 'required',
+            'city' => 'required',
             'email' => 'required|email|max:255|unique:users',
+            'zip' => 'required',
+            'phone' => 'required',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -92,7 +98,7 @@ class RegisterController extends Controller
         Auth::login($user);
 
         if (Session::has('cart')) {
-            return redirect()->route('order.address.guest');
+            return redirect()->route('order.address');
         } else {
             return redirect('/')->with('registration_success', 'Registrierung erfolgreich');
         }
