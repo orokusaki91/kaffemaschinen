@@ -50,7 +50,7 @@
                         <a id="prodPlus" class="prod-plus prodlist-i-plus"><i class="fa fa-angle-up"></i></a>
                         <a id="prodMinus" class="prod-minus prodlist-i-minus"><i class="fa fa-angle-down"></i></a>
                     </p>
-                    <p class="prodlist-i-addwrap">
+                    <p class="nikolabuton ">
                         <button type="submit" class="prodlist-i-add">In den Warenkorb</button>
 
                     </p>
