@@ -61,6 +61,7 @@
                 <div class="prod-cont-txt">
                     {!! $product->description !!}
                 </div>
+             
 
 
                 @if ($product->has_packaging == true)
