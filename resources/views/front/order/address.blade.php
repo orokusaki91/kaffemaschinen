@@ -10,7 +10,7 @@
 @section('content')
     <!-- Main Content - start -->
     <main>
-        <section class="container stylization maincont" style="padding-top: 50px;" id="pozadina">
+        <section class="container stylization maincont" style="" id="pozadina">
 
 
             <ul class="b-crumbs login_crumbs">
@@ -66,7 +66,7 @@
 
             <div class="cart-submit">
                 <a href="{{ url('checkout') }}" id="button-checkout" class="cart-submit-btn" style="margin-bottom: 0;">{{ __('front.weiter') }}</a>
-                <a href="{{ route('home') }}" class="cart-clear" id="continue-shopping" style="color: #583520; margin-bottom: 0;">{{ __('front.continue-shopping') }}</a>
+                <a href="{{ route('home') }}" class="cart-clear" id="continue-shopping" style="margin-bottom: 0;">{{ __('front.continue-shopping') }}</a>
             </div>
         </section>
     </main>

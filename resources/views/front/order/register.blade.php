@@ -11,7 +11,7 @@
 @section('content')
     <!-- Main Content - start -->
     <main>
-        <section class="container stylization maincont" style="padding-top: 50px;" id="pozadina">
+        <section class="container stylization maincont" style="" id="pozadina">
 
 
             <ul class="b-crumbs login_crumbs">

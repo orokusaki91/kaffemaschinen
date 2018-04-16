@@ -1209,7 +1209,7 @@ Topmenu
 
 .stylization p {
     line-height: 1.7;
-    margin: 0 0 30px;
+    margin: 3px 0 0px;
 }
 
 .stylization h1,
@@ -1218,7 +1218,7 @@ Topmenu
 .stylization h4,
 .stylization h5,
 .stylization h6 {
-    color: #583520;
+    color: #fff;
     margin: 0 0 30px;
 }
 
@@ -1248,7 +1248,7 @@ Topmenu
 
 .stylization a {
     color: #3a89cf;
-    text-decoration: none;
+	text-decoration: none;
     transition: all 0.2s;
 }
 
@@ -6076,19 +6076,20 @@ Catalog | Gallery View
     font-size: 15px;
     color: #fff;
     line-height: 100%;
-    margin: 0 0 15px;
-    padding: 11px 0 0;
-    border-bottom: 1px solid #373d54;
+    margin: 5px 0 15px;
+    padding: 5px;
     cursor: pointer;
     text-align: center;
     font-weight: 400;
     transition: all 0.2s;
     height: auto;
+	border-bottom:1px solid #583520;
 }
 
 .cart-submit .cart-clear:hover {
     text-decoration: none;
-    color: #fff;
+    color: #583520;
+	background:#fff;
     border-bottom: 1px solid #373d54;
 }
 
@@ -9470,4 +9471,91 @@ button.link-button {
     cursor: pointer;
     text-transform: none;
 }
+
+
+.steps-1 {
+	margin-left:12%;
+}
+
+.login_crumbs {
+	width:100%;
+}
+
+.col-md-3 {
+	width:30%;
+	margin-left:5%;
+
+}
+.col-md-3:nth-of-type(2) {
+	margin-left:0;
+}
+.col-md-3:nth-of-type(3) {
+	text-align:center;
+}
+.auth-lost_password a {
+	background:rgba(255,255,255,0.69);
+	padding:5px;
+}
+.auth-wrap {
+	
+}
+.auth-wrap .auth-col {
+	width:50%;
+}
+.auth-wrap .auth-col p {
+	text-align:left;
+}
+.auth-wrap .auth-col .labelcina {
+	text-align:left;
+}
+
+.customer-info p {
+	background:#e7e7e7;
+	padding:10px;
+	color:#000;
+	margin-bottom:1px;
+}
+.customer-info h1 {
+	border-bottom:1px solid #fff;
+}
+
+.customer-info h3 {
+	border-bottom:1px solid #fff;
+	margin:20px 0;
+}
+
+.billing-address a {
+	background:rgba(255,255,255,0.69);
+	padding:5px;
+	display:block;
+	margin-top:10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
