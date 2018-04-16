@@ -46,28 +46,31 @@
                 <h1>ADRESSE & LIEFERUNG</h1>
                 <p>Sehr geehrter {{ $user->last_name }}, </p>
                 <p>bitte überprüfen Sie Ihre Rechnungs- und Lieferadresse</p>
-                <div class="billing-address">
-                    <h3>Rechnungsadresse</h3>
-                    <p>{{ $user->title }} {{ $user->first_name }} {{ $user->last_name }}</p>
-                    <p>{{ $billingAddress->address1 }}</p>
-                    <p>{{ $billingAddress->postcode }} {{ $billingAddress->city }}</p>
-                        <a href="{{ url('/order/address/billing/edit') }}">Rechnungsadresse ändern</a>
-                </div>
-                @if($shippingAddress)
-                    <div class="shipping-address">
-                        <h3>Lieferadresse</h3>
+                <div class="customer-addresses">
+                    <div class="billing-address">
+                        <h3>Rechnungsadresse</h3>
                         <p>{{ $user->title }} {{ $user->first_name }} {{ $user->last_name }}</p>
                         <p>{{ $billingAddress->address1 }}</p>
                         <p>{{ $billingAddress->postcode }} {{ $billingAddress->city }}</p>
-                        <a href="{{ url('/order/address/shipping/edit') }}">Lieferadresse ändern</a>
+                            <a href="{{ url('/order/address/billing/edit') }}">Rechnungsadresse ändern</a>
                     </div>
-                @endif
+                    @if($shippingAddress)
+                        <div class="shipping-address">
+                            <h3>Lieferadresse</h3>
+                            <p>{{ $user->title }} {{ $user->first_name }} {{ $user->last_name }}</p>
+                            <p>{{ $billingAddress->address1 }}</p>
+                            <p>{{ $billingAddress->postcode }} {{ $billingAddress->city }}</p>
+                            <a href="{{ url('/order/address/shipping/edit') }}">Lieferadresse ändern</a>
+                        </div>
+                    @endif
+                </div>
+                <div class="cart-submit">
+                    <a href="{{ url('checkout') }}" id="button-checkout" class="cart-submit-btn" style="margin-bottom: 0;">{{ __('front.weiter') }}</a>
+                    <a href="{{ route('home') }}" class="cart-clear" id="continue-shopping" style="margin-bottom: 0;">{{ __('front.continue-shopping') }}</a>
+                </div>
             </div>
 
-            <div class="cart-submit">
-                <a href="{{ url('checkout') }}" id="button-checkout" class="cart-submit-btn" style="margin-bottom: 0;">{{ __('front.weiter') }}</a>
-                <a href="{{ route('home') }}" class="cart-clear" id="continue-shopping" style="margin-bottom: 0;">{{ __('front.continue-shopping') }}</a>
-            </div>
+            
         </section>
     </main>
 @stop

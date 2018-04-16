@@ -113,15 +113,74 @@ ul.ul-2 li {
 	overflow: hidden;
 }
 
-.customer-info {
-    overflow: hidden;
+.customer-info p {
+    color: #666;
 }
 
+.customer-info .billing-address a,
+.customer-info .shipping-address a {
+    background:rgba(255,255,255,0.69);
+    padding:5px;
+    display:block;
+    margin-top:10%;
+}
+
+.customer-info {
+    padding: 20px;
+    overflow: hidden;
+    background: #f1f1f1;
+}
 
 .customer-info .shipping-address {
     float: left;
+    margin-left: 50px;
 }
 
 .customer-info .billing-address {
     float: left;
+    margin-right: 30px;
 }
+
+.customer-addresses h3,
+.customer-addresses h1 {
+    color: #666;
+}
+
+#checkout-receipt td {
+    border: none;
+}
+
+#checkout-receipt {
+    margin: 11px 0px;
+    background: #fff;
+    padding: 10px 20px;
+}
+
+#checkout-receipt h1 {
+    font-size: 26px;
+}
+
+#checkout-receipt h3 {
+    font-size: 20px;
+}
+
+#checkout-receipt table {
+    margin-top: 15px;
+}
+
+#checkout-receipt td {
+    padding: 0px;
+}
+
+#checkout-receipt td. {
+    padding: 0px;
+}
+
+.t-muted {
+    color: #666;
+}
+
+#checkout-receipt .tax td {
+    padding-top: 20px;
+}
+

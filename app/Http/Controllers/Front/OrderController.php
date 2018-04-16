@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Jobs\SendOrderMail;
-use App\Models\Database\Product;
 use DB;
 use Auth;
 use Session;
+use App\Jobs\SendOrderMail;
+use App\Models\Database\Product;
 use Illuminate\Support\Facades\Input;
 use App\Models\Database\User;
 use App\Models\Database\Order;
@@ -21,84 +21,11 @@ class OrderController extends Controller
 {
 	public function place(Request $request)
 	{
-		if (!auth()->check()) {
-			$this->validate($request, [
-				'billing_terms_and_conditions' => 'required',
-				'billing_first_name' => 'required',
-				'billing_last_name' => 'required',
-				'billing_address' => 'required',
-				'billing_postcode' => 'required',
-				'billing_city' => 'required',
-				'email' => 'required|email|unique:users',
-				'is_company' => 'required',
-                'company_name' =>'required_if:is_company,1',
-				'password' => 'required|confirmed',
-				'password_confirmation' => 'required',
-				'shipping_first_name' => 'required_with:use_different_shipping_address',
-				'shipping_last_name' => 'required_with:use_different_shipping_address',
-				'shipping_address' => 'required_with:use_different_shipping_address',
-				'shipping_postcode' => 'required_with:use_different_shipping_address',
-				'shipping_city' => 'required_with:use_different_shipping_address',
-			], ['billing_agree' => __('validation.accepted')]);
-		} else {
-			$this->validate($request, [
-				'billing_terms_and_conditions' => 'required',
-				'shipping_first_name' => 'required_with:use_different_shipping_address',
-				'shipping_last_name' => 'required_with:use_different_shipping_address',
-				'shipping_address' => 'required_with:use_different_shipping_address',
-				'shipping_postcode' => 'required_with:use_different_shipping_address',
-				'shipping_city' => 'required_with:use_different_shipping_address',
-			]);
-		}
-
 		$cartItems = Session::get('cart');
 
 		DB::transaction(function () use ($cartItems) {
-			if (!auth()->check()) {
-				$user = new User;
-                $user->title = "Her";
-				$user->first_name = request('billing_first_name');
-				$user->last_name = request('billing_last_name');
-				$user->is_company = request('is_company');
-				$user->company_name = request('company_name');
-				$user->phone = request('billing_phone');
-				$user->email = request('email');
-				$user->password = bcrypt(request('password'));
-				$user->token = base64_encode(request('email'));
-				$user->save();
 
-                event(new Registered($user));
-                dispatch(new SendVerificationEmail($user));
-
-				$address = new Address;
-				$address->type = 'BILLING';
-				$address->first_name = request('billing_first_name');
-				$address->last_name = request('billing_last_name');
-				$address->address1 = request('billing_address');
-				$address->postcode = request('billing_postcode');
-				$address->city = request('billing_city');
-				$address->phone = request('billing_phone');
-
-				$user->addresses()->save($address);
-			} else {
-				$user = auth()->user();
-				$address = $user->addresses()->where('type', 'BILLING')->first();
-			}
-
-			if (request('use_different_shipping_address') == 'on') {
-				$shippingAddress = new Address;
-				$shippingAddress->type = 'SHIPPING';
-				$shippingAddress->first_name = request('shipping_first_name');
-				$shippingAddress->last_name = request('shipping_last_name');
-				$shippingAddress->address1 = request('shipping_address');
-				$shippingAddress->postcode = request('shipping_postcode');
-				$shippingAddress->city = request('shipping_city');
-				$shippingAddress->phone = request('shipping_phone');
-
-				$user->addresses()->save($shippingAddress);
-			}
-
-			//$pickupSyncedData = [];
+			$address = $user->getBillingAddress();
 
 			$deliverySyncedDataProducts = [];
 			$deliverySyncedDataPackages = [];
@@ -128,14 +55,6 @@ class OrderController extends Controller
                     }
                 }
             }
-//					else if ($item['for_delivery'] === false) {
-//						$cartItemsForPickup[] = $item;
-//						$pickupSyncedData[$id] = [
-//							'qty' => $item['qty'],
-//							'price' => $item['price'],
-//							'tax_amount' => $item['delivery_price']
-//						];
-//					}
 
 			$orders = [];
 			if (!empty($cartItemsForDelivery)) {
@@ -156,21 +75,6 @@ class OrderController extends Controller
 				$orders['deliveryOrder'] = $orderForDelivery;
 			}
 
-//			if (!empty($cartItemsForPickup)) {
-//				$orderForPickup = new Order;
-//				$orderForPickup->user_id = $user->id;
-//				$orderForPickup->billing_address_id = $address->id;
-//				$orderForPickup->shipping_address_id = isset($shippingAddress) ? $shippingAddress->id : null;
-//				$orderForPickup->payment_option = 'Abholung';
-//				$orderForPickup->order_status_id = 1;
-//				$orderForPickup->total_amount = Session::get('pickupTotal');
-//				$orderForPickup->save();
-//
-//				$orderForPickup->products()->sync($pickupSyncedData, false);
-//
-//                $orders['pickupOrder'] = $orderForPickup;
-//			}
-
 			Stripe::setApiKey(config('stripe.secret_key'));
 
 			try {
@@ -186,12 +90,6 @@ class OrderController extends Controller
 					'amount' => Session::get('total') * 100,
 					'currency' => 'chf',
 				]);
-
-//				foreach ($cartItems as $key => $data){
-//				    $product = Product::findorfail($data['id']);
-//                    $product->qty -= $data['qty'];
-//                    $product->update();
-//                }
 
                 dispatch(new SendOrderMail($orders));
 
@@ -307,8 +205,10 @@ class OrderController extends Controller
 	{
 		if (Session::has('guest_user')) {
 			$user = Session::get('guest_user');
-		} else {
+		} elseif(Auth()->check()) {
 			$user = Auth::user();
+		} else {
+			return redirect()->route('cart.view');
 		}
 
 		if (Session::has('guest_address')) {

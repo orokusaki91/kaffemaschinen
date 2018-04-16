@@ -148,11 +148,11 @@
                                         </tr>
                                     @endif
                                 @endforeach
-                                <tr class="delivery-2">
+                                <tr>
                                     <td colspan="5" style="text-align: right">Porto / Versandkosten:</td>
                                     <td class="price-1">
                                         <span class="currency-1">CHF</span> 
-                                        <span class="amount-1">0.00</span>
+                                        <span class="shipping-amount">{{ $total > 100 ? '8.50' : '0.00' }}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -216,8 +216,9 @@
                     var thatPlusDelivery = toFloat(that.text());
                     sum += thatPlusDelivery;
                 });
+                $('.shipping-amount').text(number_format(sum > 100 ? shipping : 0, 2));
                 totalPrice.text(number_format(sum > 100 ? sum : sum + shipping, 2));
-                $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
+                // $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
 
                 var idField = that.siblings('input[name="id"]')
                 var token = idField.attr('data-token');
@@ -267,8 +268,9 @@
                     var thatPlusDelivery = toFloat(that.text());
                     sum += thatPlusDelivery;
                 });
+                $('.shipping-amount').text(number_format(sum > 100 ? shipping : 0, 2));
                 totalPrice.text(number_format(sum > 100 ? sum : sum + shipping, 2));
-                $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
+                // $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
 
                 var idField = that.siblings('input[name="id"]')
                 var token = idField.attr('data-token');
