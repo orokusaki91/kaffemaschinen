@@ -61,6 +61,7 @@
                 <div class="prod-cont-txt">
                     {!! $product->description !!}
                 </div>
+                
              
 
 
@@ -91,7 +92,7 @@
                             <b class="single_prduct_price">CHF {{ number_format($product->price,2) }}</b><br>
                             <del></del>
                             @endif
-                            inkl. MwSt {{ number_format($product->pdv, 1) }}%
+                            zzgl. MwSt {{ number_format($product->pdv, 1) }}%
                         </p>
 
                         <form method="post" class="single_product_form" action="{{ route('cart.add-to-cart') }}">

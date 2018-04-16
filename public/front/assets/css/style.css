@@ -9538,8 +9538,16 @@ button.link-button {
 	text-align:left;
 }
 
+<<<<<<< HEAD
+.customer-info p {
+	background:rgba(231,231,231,0.45);
+	padding:10px;
+	color:#000;
+	margin-bottom:1px;
+=======
 .t-upcase {
     text-transform: uppercase;
+>>>>>>> 7c7fb131cdd707dd2c90d132eee3954c77ab037c
 }
 
 .t-muted {
@@ -9550,8 +9558,16 @@ button.link-button {
     font-weight: 600;
 }
 
+<<<<<<< HEAD
+.billing-address a {
+	background:rgba(255,255,255,0.5);
+	padding:5px;
+	display:block;
+	margin-top:10%;
+=======
 .prod-cont {
     color: #616161 !important;
+>>>>>>> 7c7fb131cdd707dd2c90d132eee3954c77ab037c
 }
 
 .container {
