@@ -9534,7 +9534,7 @@ button.link-button {
 }
 
 .customer-info p {
-	background:#e7e7e7;
+	background:rgba(231,231,231,0.45);
 	padding:10px;
 	color:#000;
 	margin-bottom:1px;
@@ -9549,7 +9549,7 @@ button.link-button {
 }
 
 .billing-address a {
-	background:rgba(255,255,255,0.69);
+	background:rgba(255,255,255,0.5);
 	padding:5px;
 	display:block;
 	margin-top:10%;
