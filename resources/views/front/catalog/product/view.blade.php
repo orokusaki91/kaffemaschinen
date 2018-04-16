@@ -51,9 +51,9 @@
                 <h1 class="main-ttl"><span>{{ $product->name }}</span></h1>
             <!--<h4 style="color: #fff;">Artikel Nr. {{ $product->status }}</h4>-->
                 @if(!$product->available)
-                    <h3 class="available_grid"><span style="color:#fff;" >{{ __('front.unavailable') }}</span></h3>
+                    <h3 class="available_grid"><span style="color: #666;">{{ __('front.unavailable') }}</span></h3>
                 @else
-                    <h3 class="available_grid"><span style="color:#fff;" >{{ __('front.available') }}</span></h3>
+                    <h3 class="available_grid"><span style="color: #666;">{{ __('front.available') }}</span></h3>
                 @endif
                 
                 
@@ -82,7 +82,7 @@
                     @else
 
                     <div class="prod-info">
-                        <p class="prod-price" style="color:#fff;">
+                        <p class="prod-price" style="color: #666;">
                             @if($product->discount == 1)
                             <span class="prodlist-i-price">
                                     <b class="single_prduct_price">CHF {{ number_format($product->discount_price, 2) }}</b><br>

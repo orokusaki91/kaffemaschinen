@@ -34,8 +34,10 @@
                         </a>
                     </li>
                     <li id="checkout_register">
-                        <span class="step-2 done"><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
-                            </li>
+                        <a href="{{ url(route('order.address')) }}">
+                            <span class="step-2 done"><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
+                        </a>
+                    </li>
                     <li id="checkout_control">
                         <span class="step-3 on"><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
                     </li>
@@ -46,83 +48,78 @@
     <div class="main-ttl"><span>{{ __('front.checkout') }}</span></div>
 
     @if(count($cartItems) <=  0)
-    <p>{{ __('front.product-no-found') }} <a href="{{ route('home') }}">{{ __('front.start-shopping') }}</a></p>
+        <p>{{ __('front.product-no-found') }} <a href="{{ route('home') }}">{{ __('front.start-shopping') }}</a></p>
     @else
 
     <form id="place-order-form" method="post" action="{{ route('order.place') }}">
         {{ csrf_field() }}
         <div class="row">
-            <div class="col-sm-6">
-                
+            <div class="col-sm-9">
+                <table id="cart_table" class="table table-bordered table-hover table-responsive" style="margin-top: 10px">
+                    <thead>
+                        <tr>
+                            <th class="cart-image">{{ __('front.photo') }}</th>
+                            <th>{{ __('front.product-name') }}</th>
+                            <th>{{ __('front.quantity') }}</th>
+                            <th>{{ __('front.unit-price') }}</th>
+                            {{--<th class="text-right">{{ __('front.delivery_option') }}</th>--}}
+                            <th>{{ __('front.total') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $subTotal = 0;
+                        $subTotal25 = 0;
+                        $subTotal77 = 0;
+                        $subTotalPickup = 0;
+                        $subTotalDelivery = 0;
+                        $totalTax25 = 0;
+                        $totalTax77 = 0;
+                        $shipping = 0;
+                        ?>
+                        @foreach($cartItems as $cartItem)
+                        <tr>
+                            <td class="cart-image" style="width: 100px">
+                                <a href="{{ route('product.view', $cartItem['slug'])}}">
+                                    <img alt="{{ $cartItem['name'] }}"
+                                         class="{{\App\Models\Database\Product::where('id', $cartItem['id'])->first()->main_image->filters}}"
+                                         src="{{ asset( $cartItem['image']) }}"/>
+                                </a>
+                            </td>
+                            <td>{{ $cartItem['name'] }}</td>
+                            <td>{{ $cartItem['qty'] }}</td>
+                            <td>CHF {{ number_format($cartItem['price'], 2) }}</td>
+                            <td>CHF {{ number_format($cartItem['qty'] * $cartItem['price'], 2) }}</td>
+                        </tr>
+
+                        <?php
+                        $shipping = (float)\App\Models\Database\Configuration::getConfiguration('delivery_price');
+
+                        if ($cartItem['pdv'] == '2.5') {
+                            $subTotal25 += $cartItem['qty'] * $cartItem['price'];
+                        } elseif ($cartItem['pdv'] == '7.7') {
+                            $subTotal77 += $cartItem['qty'] * $cartItem['price'];
+                        }
+
+                        ?>
+
+                        <input type="hidden" name="products[]" value="{{ $cartItem['id'] }}"/>
+                        @endforeach
+                        <?php
+                            $subTotal = ($subTotal25 + $subTotal77);
+
+                            $totalTax25 = ($subTotal25 / 100) * 2.5;
+                            $totalTax77 = ($subTotal77 / 100) * 7.7;
+                        ?>
+                    </tbody>
+                </table>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <div class="card mb-3">
-                    <div class="card-header">{{ __('front.payment-option') }}</div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                       <div style="overflow-x: auto;">
-                        <table id="cart_table" class="table table-bordered table-hover table-responsive" style="margin-top: 10px">
-                            <thead>
-                                <tr>
-                                    <th class="text-left">{{ __('front.product-name') }}</th>
-                                    <th class="text-right">{{ __('front.quantity') }}</th>
-                                    <th class="text-right">{{ __('front.unit-price') }}</th>
-                                    {{--<th class="text-right">{{ __('front.delivery_option') }}</th>--}}
-                                    <th class="text-right">{{ __('front.total') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $subTotal = 0;
-                                $subTotal25 = 0;
-                                $subTotal77 = 0;
-                                $subTotalPickup = 0;
-                                $subTotalDelivery = 0;
-                                $totalTax25 = 0;
-                                $totalTax77 = 0;
-                                $shipping = 0;
-                                ?>
-                                @foreach($cartItems as $cartItem)
-                                <tr>
-                                    <td class="text-left">
-                                        {{ $cartItem['name'] }}
-                                    </td>
-                                    <td class="text-right">{{ $cartItem['qty'] }}</td>
-                                    <td class="text-right">
-                                    CHF {{ number_format($cartItem['price'],2) }}</td>
-
-                                    {{--<td class="text-center">--}}
-                                        {{--{{ $cartItem['for_delivery'] ? __('front.delivery') : __('front.pick_up') }}--}}
-                                    {{--</td>--}}
-
-                                    <td class="text-right">
-                                    CHF {{ number_format($cartItem['qty'] * $cartItem['price'], 2) }}</td>
-                                </tr>
-
-                                <?php
-                                $shipping = (float)\App\Models\Database\Configuration::getConfiguration('delivery_price');
-
-                                if ($cartItem['pdv'] == '2.5') {
-                                    $subTotal25 += $cartItem['qty'] * $cartItem['price'];
-                                } elseif ($cartItem['pdv'] == '7.7') {
-                                    $subTotal77 += $cartItem['qty'] * $cartItem['price'];
-                                }
-
-                                ?>
-
-                                <input type="hidden" name="products[]" value="{{ $cartItem['id'] }}"/>
-                                @endforeach
-                                <?php
-                                    $subTotal = ($subTotal25 + $subTotal77);
-
-                                    $totalTax25 = ($subTotal25 / 100) * 2.5;
-                                    $totalTax77 = ($subTotal77 / 100) * 7.7;
-                                ?>
-                            </tbody>
-                        </table>
-                        </div>
-                        <table class="table table-bordered table-hover table-responsive" style="background: #fff;">
+                    <div class="card-body" id="checkout-receipt">
+                        <h1 class="t-upcase text-center">Kassenzettel</h1>
+                        {{-- <h3 class="t-savings text-center">Ich spare CHF 9,95!</h3> --}}
+                        <table class="table table-responsive" style="background: #fff;">
                             @php 
                             $total = $subTotal > 100 ? $subTotal : $subTotal + $shipping;
                             $deliveryTotal = $subTotalDelivery + $shipping;
@@ -133,35 +130,29 @@
                             Session::put('totalTax25', $totalTax25);
                             Session::put('totalTax77', $totalTax77);
                             @endphp
-
+                            <tr>
+                                <td colspan="4" class="hidden-xs"><strong>Subtotal:</strong></td>
+                                <td class="text-right total t-bold" data-total="{{ $subTotal }}">
+                                CHF {{ number_format($subTotal, 2) }}</td>
+                            </tr>
                             @if($subTotal < 100)
-                            <tr class=" shipping-row">
-                                <td colspan="4" class="text-right  hidden-xs"><strong>{{ __('front.shipping-option') }}:</strong></td>
-                                <td class="text-right shipping-cost" data-shipping-cost="{{ $shipping }}">CHF {{ number_format($shipping, 2) }}</td>
+                            <tr class="shipping-row">
+                                <td colspan="4" class="hidden-xs"><strong>{{ __('front.shipping-option') }}:</strong></td>
+                                <td class="text-right shipping-cost t-bold" data-shipping-cost="{{ $shipping }}">CHF {{ number_format($shipping, 2) }}</td>
                             </tr>
                             @endif
-                            {{--
-                            <tr>
-                                <td colspan="4" class="text-right  hidden-xs"><strong>{{ __('front.tax-amount') }}:</strong></td>
-                                <td class="text-right tax-amount" data-tax-amount="{{ $totalTax }}">
-                                CHF {{ number_format($totalTax,2) }}</td>
+                            <tr class="t-muted tax">
+                                <td colspan="4" class="hidden-xs "><strong>{{ __('front.contain_vat', ['vat' => '2.5']) }}</strong></td>
+                                <td class="text-right t-bold">{{ 'CHF ' . number_format($totalTax25, 2) }}</td>
                             </tr>
-                            --}}
-                            <tr>
-                                <td colspan="4" class="text-right hidden-xs"><strong>{{ __('front.total') }}:</strong></td>
-                                <td class="text-right total" data-total="{{ $total }}">
-                                CHF {{ number_format($total, 2) }}</td>
+                            <tr class="t-muted">
+                                <td colspan="4" class="hidden-xs"><strong>{{ __('front.contain_vat', ['vat' => '7.7']) }}</strong></td>
+                                <td class="text-right t-bold">{{ 'CHF ' . number_format($totalTax77, 2) }}</td>
                             </tr>
-                            <tr>
-                                <td colspan="4" class="text-right hidden-xs"><strong>{{ __('front.contain_vat', ['vat' => '2.5']) }}</strong></td>
-                                <td class="text-right">{{ 'CHF ' . number_format($totalTax25, 2) }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" class="text-right hidden-xs"><strong>{{ __('front.contain_vat', ['vat' => '7.7']) }}</strong></td>
-                                <td class="text-right">{{ 'CHF ' . number_format($totalTax77, 2) }}</td>
-                            </tr>
+                            
                         </table>
-                        {{-- <em class="pull-right" style="margin-top: -15px; font-size: 13px;">{{ __('front.with_vat') }}</em> --}}
+                        <h3 class="text-center" style="margin-top: 15px;" >{{ __('front.total') }} inkl. MwSt</h3>
+                        <h1 class="total t-upcase t-bold text-center" data-total="{{ $total }}">CHF {{ number_format($total, 2) }}</h1>
                     </div>
                 </div>
 
@@ -175,8 +166,7 @@
 
                             <div class="buttons clearfix">
                                 <div class="float-right" style="margin:15px 0; color: #fff; font-size: 13px;">
-                                    <input type="checkbox" name="billing_terms_and_conditions" id="agree" />
-                                    Ich habe die <a href="{{ $termConditionPageUrl }}" target="_blank" class="agree"><b>AGB's</b></a> gelesen und akzeptiert.                                    &nbsp;
+                                    Mit meiner Bestellung erkläre ich mich mit den Datenschutzbestimmungen und den <a href="{{ $termConditionPageUrl }}">AGB's</a> von centrocaffe.ch einverstanden.
                                 </div>
                             </div>
 

@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public function getBillingAddress()
     {
-        $address = $this->addresses()->where('type', '=', 'Billing')->first();
+        $address = $this->addresses()->where('type', '=', 'BILLING')->first();
         return $address;
     }
 }
