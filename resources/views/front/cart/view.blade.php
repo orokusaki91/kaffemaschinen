@@ -169,7 +169,7 @@
                         </li>
                     </ul>
                     <div class="cart-submit">
-                        <button type="submit" id="button-checkout" class="cart-submit-btn" style="margin-bottom: 0;">{{ __('front.weiter') }}</button>
+                        <button type="submit" id="button-checkout" class="cart-submit-btn" style="margin-bottom: 0;">Weiter</button>
                         <a href="{{ route('home') }}" class="cart-clear" id="continue-shopping" style="color: #583520; margin-bottom: 0;">{{ __('front.continue-shopping') }}</a>
                     </div>
                 </form>

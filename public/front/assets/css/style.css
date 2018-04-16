@@ -6107,8 +6107,7 @@ Catalog | Gallery View
 
 .cart-submit .cart-clear:hover {
     text-decoration: none;
-    color: #583520;
-	background:#fff;
+    color: #000;
     border-bottom: 1px solid #373d54;
 }
 

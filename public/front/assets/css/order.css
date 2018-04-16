@@ -108,21 +108,25 @@ ul.ul-2 li {
     font-size: 0px;
 }
 
-
 .login_button {
 	overflow: hidden;
 }
 
-.customer-info p {
+.customer-info p,
+.customer-info h1 {
+    margin: 0px;
     color: #666;
+}
+
+.customer-hello {
+    font-size: 18px;
 }
 
 .customer-info .billing-address a,
 .customer-info .shipping-address a {
-    background:rgba(255,255,255,0.69);
-    padding:5px;
     display:block;
     margin-top:10%;
+    text-decoration: underline;
 }
 
 .customer-info {
@@ -141,9 +145,22 @@ ul.ul-2 li {
     margin-right: 30px;
 }
 
+.customer-addresses {
+    margin: 25px 0px;
+    overflow: hidden;
+}
+
 .customer-addresses h3,
 .customer-addresses h1 {
     color: #666;
+}
+
+.customer-info h1 {
+    margin: 0px;
+}
+
+.customer-info h3 {
+    margin: 0px 0px 10px 0px;
 }
 
 #checkout-receipt td {
