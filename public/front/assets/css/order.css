@@ -193,11 +193,22 @@ ul.ul-2 li {
     padding: 0px;
 }
 
-.t-muted {
-    color: #666;
-}
-
 #checkout-receipt .tax td {
     padding-top: 20px;
 }
 
+.borderless td {
+    border: 0 !important;
+}
+
+.no-bottom-padding td {
+    padding: 15px 20px 0px 0px !important;
+}
+
+.no-top-padding td {
+    padding: 0px 20px 15px 0px !important;
+}
+
+.has-error {
+    color: #fe3469;
+}

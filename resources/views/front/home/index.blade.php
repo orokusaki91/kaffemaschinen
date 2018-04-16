@@ -5,6 +5,10 @@
 @section('meta_title','Home Page')
 @section('meta_description','Home Page')
 
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
+@stop
+
 @section('content')
 <!-- Main Content - start -->
 <main>

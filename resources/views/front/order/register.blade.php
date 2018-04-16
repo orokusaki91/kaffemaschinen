@@ -82,7 +82,7 @@
                             <input id="password" placeholder="{{ __('front.account-zip') }}*" type="text" name="zip" value="{{ old('zip') }}" required>
                         </p>
                         <p>
-                            <input id="password" placeholder="{{ __('front.phone') }} P*" type="text" name="phone" value="{{ old('phone') }}" required>
+                            <input id="password" placeholder="{{ __('front.phone') }} P" type="text" name="phone" value="{{ old('phone') }}" required>
                         </p>
                         <p>
                             <input id="password" placeholder="E-mail*" type="email" name="email" value="{{ old('email') }}" required>
@@ -99,7 +99,7 @@
                             
                         </div>
                         <p class="auth-submit">
-                            <input type="submit" value="{{ __('front.account-register') }}">
+                            <input type="submit" value="Weiter">
                         </p>
                     </form>
                 </div>

@@ -12,13 +12,15 @@ class OrderMail extends Mailable
     use Queueable, SerializesModels;
 
     protected $orders;
+    protected $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($orders)
+    public function __construct($orders, $user)
     {
         $this->orders = $orders;
+        $this->user = $user;
     }
 
     /**
@@ -26,10 +28,10 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        $email = $this->view('front.emails.orderTXT')->with('orders', $this->orders);
+        $email = $this->view('front.emails.orderTXT', with(['orders' => $this->orders, 'user' => $this->user]));
         $email->from('sale@centrocaffe.ch');
 
-        $pdf = PDF::loadView('front.emails.orderPDF', ['orders' => $this->orders]);
+        $pdf = PDF::loadView('front.emails.orderPDF', ['orders' => $this->orders, 'user' => $this->user]);
         $name = time() . '.pdf';
         $pdf->save(storage_path().'/app/email/'. $name);
 

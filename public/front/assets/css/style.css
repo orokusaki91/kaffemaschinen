@@ -9547,6 +9547,11 @@ button.link-button {
     font-weight: 600;
 }
 
+.t-savings {
+    color: #fe3469;
+    font-size: 16px !important;
+}
+
 .container {
 	padding-top:0 !important;
 }

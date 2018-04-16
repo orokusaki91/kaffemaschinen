@@ -32,11 +32,11 @@
                                                             <th>{{ __('front.account-shipping-address') }}</th>
                                                             <th>
                                                                 <a href="{{ route('my-account.address.edit', $address->id) }}" style="color: cornflowerblue">Bearbeiten</a> | 
-                                                                <form action="{{ route('my-account.address.destroy', $address->id) }}" method="POST" style="display: inline-block;">
+                                                                {{-- <form action="{{ route('my-account.address.destroy', $address->id) }}" method="POST" style="display: inline-block;">
                                                                     {{ csrf_field() }}
                                                                     <input type="hidden" name="_method" value="DELETE" />
                                                                     <button style="color: red" class="link-button">Löschen</button>
-                                                                </form>
+                                                                </form> --}}
                                                             </th>
                                                         @else
                                                             <th>{{ __('front.account-billing-address') }}</th>

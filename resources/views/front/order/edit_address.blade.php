@@ -95,7 +95,7 @@
                             <div class="row">
                                 <div class="form-group col-sm-6">
                                     
-                                    <input type="text" name="phone" value="{{ $address->phone }}" placeholder="{{ __('front.phone') }}{{ $address->type == 'BILLING' ? '*' : '' }}"
+                                    <input type="text" name="phone" value="{{ $address->phone }}" placeholder="{{ __('front.phone') }}"
                                            id="input-shipping-phone" class="form-control">
                                 </div>
                                 <div class="form-group col-sm-6">

@@ -51,6 +51,9 @@
         <p>{{ __('front.product-no-found') }} <a href="{{ route('home') }}">{{ __('front.start-shopping') }}</a></p>
     @else
 
+    <div class="help-block">
+        <span class="has-error"></span>
+    </div>
     <form id="place-order-form" method="post" action="{{ route('order.place') }}">
         {{ csrf_field() }}
         <div class="row">
@@ -68,6 +71,7 @@
                     </thead>
                     <tbody>
                         <?php
+                        $discount = 0;
                         $subTotal = 0;
                         $subTotal25 = 0;
                         $subTotal77 = 0;
@@ -118,10 +122,16 @@
                 <div class="card mb-3">
                     <div class="card-body" id="checkout-receipt">
                         <h1 class="t-upcase text-center">Kassenzettel</h1>
-                        {{-- <h3 class="t-savings text-center">Ich spare CHF 9,95!</h3> --}}
+                        @if(Auth::check())
+                        @php 
+                            $discount = $subTotal * 2 / 100;
+                        @endphp
+                            <h3 class="t-savings text-center">Sie sparen CHF {{ number_format($discount, 2) }}!</h3>
+                        @endif
                         <table class="table table-responsive" style="background: #fff;">
-                            @php 
-                            $total = $subTotal > 100 ? $subTotal : $subTotal + $shipping;
+                            @php
+                            $subTotalWithDiscount = $subTotal - $discount;
+                            $total = $subTotalWithDiscount > 100 ? $subTotalWithDiscount : $subTotalWithDiscount + $shipping;
                             $deliveryTotal = $subTotalDelivery + $shipping;
                             $pickupTotal = $subTotalPickup;
                             Session::put('total', $total);
@@ -135,6 +145,12 @@
                                 <td class="text-right total t-bold" data-total="{{ $subTotal }}">
                                 CHF {{ number_format($subTotal, 2) }}</td>
                             </tr>
+                            @if(Auth::check())
+                            <tr class="shipping-row">
+                                <td colspan="4" class="hidden-xs"><strong>Rabatt:</strong></td>
+                                <td class="text-right auth-discount t-bold" data-shipping-cost="{{ $shipping }}">CHF {{ number_format($discount, 2) }}</td>
+                            </tr>
+                            @endif
                             @if($subTotal < 100)
                             <tr class="shipping-row">
                                 <td colspan="4" class="hidden-xs"><strong>{{ __('front.shipping-option') }}:</strong></td>
@@ -163,7 +179,6 @@
                     <div class="card-body">
                         <div class="form-group">
                             <textarea name="comment" rows="3" class="form-control checkout-textarea"></textarea>
-
                             <div class="buttons clearfix">
                                 <div class="float-right" style="margin:15px 0; color: #fff; font-size: 13px;">
                                     Mit meiner Bestellung erkläre ich mich mit den Datenschutzbestimmungen und den <a href="{{ $termConditionPageUrl }}">AGB's</a> von centrocaffe.ch einverstanden.
@@ -172,8 +187,9 @@
 
                             <div class="payment float-right clearfix">
                                 <input type="submit" class="checkout-submit"
-                                data-loading-text="Loading..." id="place-order-button" 
-                                value="{{ __('front.place-order') }}">
+                                        data-loading-text="Loading..." 
+                                        id="place-order-button" 
+                                        value="{{ __('front.place-order') }}">
                                 <input type="hidden" name="stripeToken" id="stripeToken">
                                 <input type="hidden" name="stripeEmail" id="stripeEmail">
                             </div>
@@ -288,41 +304,23 @@
             var token = $('input[name="_token"]').val();
             var form = $('#place-order-form');
             var data = form.serialize();
+            var buttonPlaceOrder = $('#place-order-button').attr('disabled', true);
             // fire ajax post request
             $.post(url, data)
             .done(function (data) {
                 window.location.href = getUrl();
             })
             .fail(function(data, textStatus) {
-                var errors = data.responseJSON.errors;
-                console.log(errors);
-                if (!jQuery.isEmptyObject(errors)) {
-                    $('ul.billing_errors').remove();
-                    $('ul.shipping_errors').remove();
-                    var billingErrors = $('<ul></ul>', {
-                        class: 'billing_errors'
-                    }).insertBefore('.billing-address-wrapper');
-                    var shippingErrors = $('<ul></ul>', {
-                        class: 'shipping_errors'
-                    }).insertBefore('.shipping-address-wrapper');
-                        // error.replace(key, $('input[name="' + mainFieldName + '[' + secondaryFieldName + ']]"').siblings('label').text())
-                        for (var key in errors) {
-                            var error = errors[key][0];
-                            if (errors[key][0].indexOf('billing') >= 0) {
-                                billingErrors.addClass('alert').addClass('alert-danger');
-                                $('<li></li>', {
-                                    text: error.replace('billing', '')
-                                }).appendTo(billingErrors);
-                            } 
-                            if(errors[key][0].indexOf('shipping') >= 0) {
-                                shippingErrors.addClass('alert').addClass('alert-danger');
-                                $('<li></li>', {
-                                    text: error.replace('shipping', '')
-                                }).appendTo(shippingErrors);
-                            }
-                        }
-                    }
-                });
+                buttonPlaceOrder.attr('disabled', false);
+
+                // display the error
+                var errorEl = $('span.has-error');
+                errorEl.text(data.responseJSON.status);
+
+                $('html, body').animate({
+                    scrollTop: (errorEl.offset().top - 30)
+                }, 1500);
+            });
         }
     });
     $('#place-order-form').on('submit', function (e) {

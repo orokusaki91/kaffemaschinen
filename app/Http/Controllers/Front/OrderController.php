@@ -21,41 +21,49 @@ class OrderController extends Controller
 {
 	public function place(Request $request)
 	{
+		if (Session::has('guest_user')) {
+			$user = Session::get('guest_user');
+		} elseif(Auth()->check()) {
+			$user = Auth::user();
+		} else {
+			return redirect()->route('checkout.index');
+		}
+
 		$cartItems = Session::get('cart');
 
-		DB::transaction(function () use ($cartItems) {
+		DB::beginTransaction();
 
-			$address = $user->getBillingAddress();
+		$address = $user->getBillingAddress();
+		$deliverySyncedDataProducts = [];
+		$deliverySyncedDataPackages = [];
 
-			$deliverySyncedDataProducts = [];
-			$deliverySyncedDataPackages = [];
-
-			foreach ($cartItems as $id => $item) {
-				$type = explode(':', $id)[0];
-				$itemId = explode(':', $id)[1];
-				if ($type == 'product') {
-                    if (array_key_exists('for_delivery', $item)) {
-                        if ($item['for_delivery'] === true) {
-                            $cartItemsForDelivery[] = $item;
-                            $deliverySyncedDataProducts[$itemId] = [
-                                'qty' => $item['qty'],
-                                'price' => $item['price'],
-                            ];
-                        }
+		foreach ($cartItems as $id => $item) {
+			$type = explode(':', $id)[0];
+			$itemId = explode(':', $id)[1];
+			if ($type == 'product') {
+                if (array_key_exists('for_delivery', $item)) {
+                    if ($item['for_delivery'] === true) {
+                        $cartItemsForDelivery[] = $item;
+                        $deliverySyncedDataProducts[$itemId] = [
+                            'qty' => $item['qty'],
+                            'price' => $item['price'],
+                        ];
                     }
-                } elseif ($type == 'package') {
-                    if (array_key_exists('for_delivery', $item)) {
-                        if ($item['for_delivery'] === true) {
-                            $cartItemsForDelivery[] = $item;
-                            $deliverySyncedDataPackages[$itemId] = [
-                                'qty' => $item['qty'],
-                                'price' => $item['price'],
-                            ];
-                        }
+                }
+            } elseif ($type == 'package') {
+                if (array_key_exists('for_delivery', $item)) {
+                    if ($item['for_delivery'] === true) {
+                        $cartItemsForDelivery[] = $item;
+                        $deliverySyncedDataPackages[$itemId] = [
+                            'qty' => $item['qty'],
+                            'price' => $item['price'],
+                        ];
                     }
                 }
             }
+        }
 
+		try {
 			$orders = [];
 			if (!empty($cartItemsForDelivery)) {
 				$orderForDelivery = new Order;
@@ -74,39 +82,50 @@ class OrderController extends Controller
 
 				$orders['deliveryOrder'] = $orderForDelivery;
 			}
+		} catch (Exception $e) {
+            DB::rollback();
 
-			Stripe::setApiKey(config('stripe.secret_key'));
+			return response()->json([
+				'status' => 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.'
+			]);
+		}
 
-			try {
-				$customer = Customer::create([
-					'email' => request('stripeEmail'),
-					'source' => request('stripeToken'),
-				]);
-				$user->stripe_id = $customer->id;
-				$user->save();
+		Stripe::setApiKey(config('stripe.secret_key'));
 
-				Charge::create([
-					'customer' => $user->stripe_id,
-					'amount' => Session::get('total') * 100,
-					'currency' => 'chf',
-				]);
+		try {
+			$customer = Customer::create([
+				'email' => request('stripeEmail'),
+				'source' => request('stripeToken'),
+			]);
+			$user->stripe_id = $customer->id;
+			$user->save();
 
-                dispatch(new SendOrderMail($orders));
+			Charge::create([
+				'customer' => $user->stripe_id,
+				'amount' => Session::get('total') * 100,
+				'currency' => 'chf',
+			]);
 
-				Session::forget('cart');
-				Session::flash('order_made', __('front.order_successfully_made'));
+			dispatch(new SendOrderMail($orders, $user));
 
-			} catch (\Exception $e) {
-				return response()->json([
-					'status' => $e->getMessage()
-				], 422);
-			}
-		});
+			DB::commit();
+			Session::forget('cart');
+			Session::flash('order_made', __('front.order_successfully_made'));
+	        
+	        return redirect()->route('home');
+
+		} catch (\Exception $e) {
+            DB::rollback();
+
+			return response()->json([
+				'status' => $e->getMessage()
+			], 422);
+		}
 	}
 
 	public function login()
 	{
-		if (Auth::check()) {
+		if (Auth::check() || Session::has('guest_user')) {
 			return redirect()->route('order.address');
 		}
 
@@ -159,7 +178,6 @@ class OrderController extends Controller
             'city' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'zip' => 'required',
-            'phone' => 'required',
 		]);
 
 		$user = User::create([
@@ -187,7 +205,7 @@ class OrderController extends Controller
         ]);
 
         Session::put('guest_user', $user);
-        Session::put('guest_address', $address);
+        $user->addresses()->save($address);
 
         if ($request->subscribe){
             $email = $request->email;
@@ -211,13 +229,8 @@ class OrderController extends Controller
 			return redirect()->route('cart.view');
 		}
 
-		if (Session::has('guest_address')) {
-			$billingAddress = Session::get('guest_address');
-			$shippingAddress = Session::get('guest_address');
-        } else {
-			$billingAddress = $user->getBillingAddress();
-			$shippingAddress = $user->getShippingAddress();
-        }
+		$billingAddress = $user->getBillingAddress();
+		$shippingAddress = $user->getShippingAddress();
 
 		return view('front.order.address', compact('user', 'billingAddress', 'shippingAddress'));
 	}
@@ -230,9 +243,9 @@ class OrderController extends Controller
         	$user = Auth::user();
         }
 
-        if ($type == 'billing') {
+		if ($type == 'billing') {
 			$address = $user->getBillingAddress();
-        } else if ($type == 'shipping') {
+		} elseif ($type == 'shipping') {
 			$address = $user->getShippingAddress();
         } else {
         	return redirect()->route('order.address');
@@ -249,30 +262,20 @@ class OrderController extends Controller
         	$user = Auth::user();
         }
 
-        if ($type == 'billing') {
+		if ($type == 'billing') {
 			$address = $user->getBillingAddress();
-
-			$this->validate($request, [
-	            'first_name' => 'required',
-	            'last_name' => 'required',
-	            'address' => 'required',
-	            'city' => 'required',
-	            'postcode' => 'required',
-	            'phone' => 'required',
-	        ]);
-        } else if ($type == 'shipping') {
+		} elseif ($type == 'shipping') {
 			$address = $user->getShippingAddress();
-
-			$this->validate($request, [
-	            'first_name' => 'required',
-	            'last_name' => 'required',
-	            'address' => 'required',
-	            'city' => 'required',
-	            'postcode' => 'required',
-	        ]);
         } else {
         	return redirect()->route('order.address');
         }
+
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+        ]);
 
         $address->type = strtoupper($request->type);
         $address->first_name = $request->first_name;

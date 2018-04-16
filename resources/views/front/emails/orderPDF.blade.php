@@ -150,7 +150,7 @@
                         @endif
                         <th style="text-align:right; border:none;">
                             <div id="nobold">
-                                <p>Kunden-Nr.: {{ auth()->user()->id }}</p>
+                                <p>Kunden-Nr.: {{ $user->id }}</p>
                                 <p id="">Bestell-Nr.: {{ $orderNumber }}</p>
                                 <p id="">{{ strftime("%a, %d. %m. %Y") }}</p>
                             </div>

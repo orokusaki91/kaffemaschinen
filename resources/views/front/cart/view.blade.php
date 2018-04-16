@@ -148,13 +148,26 @@
                                         </tr>
                                     @endif
                                 @endforeach
-                                <tr>
-                                    <td colspan="5" style="text-align: right">Porto / Versandkosten:</td>
-                                    <td class="price-1">
-                                        <span class="currency-1">CHF</span> 
-                                        <span class="shipping-amount">{{ $total > 100 ? '8.50' : '0.00' }}</span>
-                                    </td>
-                                </tr>
+                                @if(Auth::check())
+                                @php
+                                    $discount = $total * 2 / 100;
+                                    $total = $total - ($discount);
+                                @endphp
+                                    <tr class="borderless no-bottom-padding">
+                                        <td colspan="5" style="text-align: right">Rabatt 2%:</td>
+                                        <td class="price-1">
+                                            <span class="currency-1">CHF</span> 
+                                            <span class="auth-discount">{{ number_format($discount, 2) }}</span>
+                                        </td>
+                                    </tr>
+                                @endif
+                                    <tr class="{{ Auth::check() ? 'no-top-padding' : '' }}">
+                                        <td colspan="5" style="text-align: right">Porto / Versandkosten:</td>
+                                        <td class="price-1">
+                                            <span class="currency-1">CHF</span> 
+                                            <span class="shipping-amount">{{ $total > 100 ? '0.00' : '8.50' }}</span>
+                                        </td>
+                                    </tr>
                             </tbody>
                         </table>
                     </div>
@@ -216,7 +229,10 @@
                     var thatPlusDelivery = toFloat(that.text());
                     sum += thatPlusDelivery;
                 });
-                $('.shipping-amount').text(number_format(sum > 100 ? shipping : 0, 2));
+                var discount = sum * 2 / 100;
+                sum = $('.auth-discount').length > 0 ? sum - discount : sum;
+                $('.auth-discount').text(number_format(discount, 2));
+                $('.shipping-amount').text(number_format(sum > 100 ? 0 : shipping, 2));
                 totalPrice.text(number_format(sum > 100 ? sum : sum + shipping, 2));
                 // $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
 
@@ -268,7 +284,10 @@
                     var thatPlusDelivery = toFloat(that.text());
                     sum += thatPlusDelivery;
                 });
-                $('.shipping-amount').text(number_format(sum > 100 ? shipping : 0, 2));
+                $()
+                sum = $('.auth-discount').length > 0 ? sum - (sum * 2 / 100) : sum;
+                $('.auth-discount').text(number_format(discount, 2));
+                $('.shipping-amount').text(number_format(sum > 100 ? 0 : shipping, 2));
                 totalPrice.text(number_format(sum > 100 ? sum : sum + shipping, 2));
                 // $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
 

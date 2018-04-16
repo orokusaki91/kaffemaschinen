@@ -65,7 +65,6 @@ class RegisterController extends Controller
             'city' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'zip' => 'required',
-            'phone' => 'required',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -125,6 +124,17 @@ class RegisterController extends Controller
         Address::create([
             'user_id' => $user->id,
             'type' => 'BILLING',
+            'first_name' => $data['first_name'],
+            'last_name' =>$data['last_name'],
+            'address1' => $data['address'],
+            'postcode' => $data['zip'],
+            'city' => $data['city'],
+            'phone' => $data['phone'],
+        ]);
+
+        Address::create([
+            'user_id' => $user->id,
+            'type' => 'SHIPPING',
             'first_name' => $data['first_name'],
             'last_name' =>$data['last_name'],
             'address1' => $data['address'],

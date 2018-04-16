@@ -84,13 +84,13 @@
                     <div class="prod-info">
                         <p class="prod-price" style="color: #666;">
                             @if($product->discount == 1)
-                            <span class="prodlist-i-price">
-                                    <b class="single_prduct_price">CHF {{ number_format($product->discount_price, 2) }}</b><br>
-                                    <span style="text-decoration:line-through">CHF {{ number_format($product->price,2) }}</span><span class="price-off">-{{ number_format(100-($product->discount_price/$product->price*100), 0) }}%</span><br>
-                            </span>
+                                <span class="prodlist-i-price">
+                                        <b class="single_prduct_price">CHF {{ number_format($product->discount_price, 2) }}</b><br>
+                                        <span style="text-decoration:line-through">CHF {{ number_format($product->price,2) }}</span><span class="price-off">-{{ number_format(100-($product->discount_price/$product->price*100), 0) }}%</span><br>
+                                </span>
                             @else
-                            <b class="single_prduct_price">CHF {{ number_format($product->price,2) }}</b><br>
-                            <del></del>
+                                <b class="single_prduct_price">CHF {{ number_format($product->price,2) }}</b><br>
+                                <del></del>
                             @endif
                             zzgl. MwSt {{ number_format($product->pdv, 1) }}%
                         </p>
@@ -260,34 +260,34 @@
 <script>
     $('.prod-qty').on('change', function() {
         var $this = $(this);
-        var max = parseInt($this.data('max'));
-
-        if ($this.val() > max) {
-            $this.val(max);
+        var $qnt = $('.prod-qty', $this.parent());
+        var value = parseInt($qnt.val());
+        if (value < 1){
+            value = 1;
         }
+        $qnt.val(value);
     });
 
     $('.prod-plus').click(function() {
         var $this = $(this);
         var $qnt = $('.prod-qty', $this.parent());
         var value = parseInt($qnt.val());
-
-        var max = parseInt($qnt.data('max'));
-
-        if (value < 0)
-            value = 0;
-        if (value < max)
+        if (value < 1){
+            value = 1;
+        } else {
             value += 1;
+        }
         $qnt.val(value);
     });
     $('.prod-minus').click(function() {
         var $this = $(this);
         var $qnt = $('.prod-qty', $this.parent());
         var value = parseInt($qnt.val());
-        if (value > 0)
+        if (value > 1) {
             value -= 1;
-        if (value < 0)
-            value = 0;
+        } else {
+            value = 1;
+        }
         $qnt.val(value);
     });
 </script>
