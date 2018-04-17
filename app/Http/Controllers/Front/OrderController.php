@@ -21,10 +21,10 @@ class OrderController extends Controller
 {
 	public function place(Request $request)
 	{
-		if (Session::has('guest_user')) {
-			$user = Session::get('guest_user');
-		} elseif(Auth()->check()) {
+		if (Auth::check()) {
 			$user = Auth::user();
+		} elseif(Session::has('guest_user')) {
+			$user = Session::get('guest_user');
 		} else {
 			return redirect()->route('checkout.index');
 		}
@@ -125,14 +125,26 @@ class OrderController extends Controller
 
 	public function login()
 	{
-		if (Auth::check() || Session::has('guest_user')) {
-			return redirect()->route('order.address');
+		if (Session::has('cart') && Session::get('cart')->count() > 0) {
+			if (Auth::check() || Session::has('guest_user')) {
+				return redirect()->route('order.address');
+			}
+		} else {
+			return redirect()->route('cart.view');
 		}
 
 		return view('front.order.login');
 	}
 
 	public function postLogin(Request $request) {
+		if (Session::has('cart') && Session::get('cart')->count() > 0) {
+			if (Auth::check() || Session::has('guest_user')) {
+				return redirect()->route('order.address');
+			}
+		} else {
+			return redirect()->route('cart.view');
+		}
+
         $email = $request->input('email');
         $password = $request->input('password');
         $remember = (Input::has('remember_me')) ? true : false;
@@ -158,16 +170,39 @@ class OrderController extends Controller
 
 	public function register()
 	{
+		if (Auth::check()) {
+			if (Session::has('cart') && Session::get('cart')->count() > 0) {
+				return redirect()->route('order.address');
+			} else {
+				return redirect()->route('cart.view');
+			}
+		}
+
 		return view('front.order.register');
 	}
 
 	public function showGuestAddressForm()
 	{
+		if (Auth::check()) {
+			if (Session::has('cart') && Session::get('cart')->count() > 0) {
+				return redirect()->route('order.address');
+			} else {
+				return redirect()->route('cart.view');
+			}
+		}
 		return view('front.order.guest_address');
 	}
 
 	public function postGuestAddressForm(Request $request)
 	{
+		if (Auth::check()) {
+			if (Session::has('cart') && Session::get('cart')->count() > 0) {
+				return redirect()->route('order.address');
+			} else {
+				return redirect()->route('cart.view');
+			}
+		}
+
 		$this->validate($request, [
             'is_company' => 'required',
             'title' => 'required',
@@ -221,10 +256,15 @@ class OrderController extends Controller
 
 	public function showOrderAddress()
 	{
-		if (Session::has('guest_user')) {
-			$user = Session::get('guest_user');
-		} elseif(Auth()->check()) {
-			$user = Auth::user();
+		if (Session::has('cart') && Session::get('cart')->count() > 0) {
+			if (Auth::check()) {
+				$user = Auth::user();
+			} elseif (Session::has('guest_user')) {
+				$user = Session::get('guest_user');
+			} else {
+
+				return redirect()->route('order.login');
+			}
 		} else {
 			return redirect()->route('cart.view');
 		}
@@ -237,17 +277,19 @@ class OrderController extends Controller
 
 	public function editAddress($type)
 	{
-		if (Session::has('guest_user')) {
-            $user = Session::get('guest_user');
-        } else {
+		if (Auth::check()) {
         	$user = Auth::user();
-        }
+		} else if (Session::has('guest_user')) {
+            $user = Session::get('guest_user');
+		}
 
-		if ($type == 'billing') {
-			$address = $user->getBillingAddress();
-		} elseif ($type == 'shipping') {
-			$address = $user->getShippingAddress();
-        } else {
+		if (Session::has('cart') && Session::get('cart')->count() > 0 && $user) {
+			if ($type == 'billing') {
+				$address = $user->getBillingAddress();
+			} else {
+				$address = $user->getShippingAddress();
+	        }
+		} else {
         	return redirect()->route('order.address');
         }
 
@@ -256,17 +298,19 @@ class OrderController extends Controller
 
 	public function updateAddress(Request $request, $type)
 	{
-		if (Session::has('guest_user')) {
-            $user = Session::get('guest_user');
-        } else {
+		if (Auth::check()) {
         	$user = Auth::user();
-        }
+		} else if (Session::has('guest_user')) {
+            $user = Session::get('guest_user');
+		}
 
-		if ($type == 'billing') {
-			$address = $user->getBillingAddress();
-		} elseif ($type == 'shipping') {
-			$address = $user->getShippingAddress();
-        } else {
+		if ($user) {
+			if ($type == 'billing') {
+				$address = $user->getBillingAddress();
+			} else {
+				$address = $user->getShippingAddress();
+	        }
+		} else {
         	return redirect()->route('order.address');
         }
 

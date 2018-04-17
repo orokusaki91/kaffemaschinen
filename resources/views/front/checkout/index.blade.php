@@ -202,6 +202,13 @@
     </form>
     @endif
 </div>
+<div id="loading" class="is-hidden">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="loading-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+</div>
 </main>
 @endsection
 @push('scripts')
@@ -304,13 +311,16 @@
             var token = $('input[name="_token"]').val();
             var form = $('#place-order-form');
             var data = form.serialize();
+            // add loading class
+            $('#loading').removeClass('is-hidden');
             var buttonPlaceOrder = $('#place-order-button').attr('disabled', true);
             // fire ajax post request
             $.post(url, data)
-            .done(function (data) {
+            .done(function (data) {                
                 window.location.href = getUrl();
             })
             .fail(function(data, textStatus) {
+                $('#loading').addClass('is-hidden');
                 buttonPlaceOrder.attr('disabled', false);
 
                 // display the error

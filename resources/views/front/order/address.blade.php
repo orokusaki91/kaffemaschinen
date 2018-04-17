@@ -19,9 +19,14 @@
                         Home
                     </a>
                 </li>
+                 <li>
+                    <a href="{{ route('cart.view') }}">
+                        Warenkorb
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('register') }}">
-                        Registrierung
+                        Adresse & Lieferung
                     </a>
                 </li>
             </ul>
@@ -69,8 +74,6 @@
                     <a href="{{ route('home') }}" class="cart-clear" id="continue-shopping" style="margin-bottom: 0; color: #666;">{{ __('front.continue-shopping') }}</a>
                 </div>
             </div>
-
-            
         </section>
     </main>
 @stop

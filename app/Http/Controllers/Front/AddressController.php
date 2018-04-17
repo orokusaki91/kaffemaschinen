@@ -27,16 +27,16 @@ class AddressController extends Controller
         return redirect()->route('my-account.address.index');
     }
 
-    public function destroy($id)
-    {
-        $address = Auth::user()->addresses()->findOrFail($id);
-        if ($address->type == 'BILLING') {
-            return redirect()->back();
-        }
+    // public function destroy($id)
+    // {
+    //     $address = Auth::user()->addresses()->findOrFail($id);
+    //     if ($address->type == 'BILLING') {
+    //         return redirect()->back();
+    //     }
 
-        $address->delete();
-        return redirect()->back();
-    }
+    //     $address->delete();
+    //     return redirect()->back();
+    // }
 
     public function edit($id)
     {
