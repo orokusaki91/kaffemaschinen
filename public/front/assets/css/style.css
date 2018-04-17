@@ -2335,7 +2335,7 @@ Catalog | Gallery View
     right: -1px;
     opacity: 1;
     transition: all 0.3s;
-    z-index: 5000;
+    z-index: 1;
 }
 
 .prod-items .prod-i:hover .prod-i-top:after {
