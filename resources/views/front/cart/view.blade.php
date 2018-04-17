@@ -31,13 +31,13 @@
             <div class="steps-1">
                 <ul class="ul-2">
                     <li id="checkout_cart">
-                        <span class="step-1  on"><span class="number-1">1</span><span class="text-1">Warenkorb</span></span>
+                        <span class="step-1 on"><span class="number-1">1</span><span class="text-1">Warenkorb</span></span>
                             </li>
                     <li id="checkout_register">
-                        <span class="step-2 "><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
+                        <span class="step-2"><span class="number-1">2</span><span class="text-1">Adresse &amp; Lieferung</span></span>
                             </li>
                     <li id="checkout_control">
-                        <span class="step-3 "><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
+                        <span class="step-3"><span class="number-1">3</span><span class="text-1">Zahlung</span></span>
                     </li>
                 </ul>
                 <div class="clear"></div>
