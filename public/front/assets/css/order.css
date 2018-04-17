@@ -416,8 +416,37 @@ ul.ul-2 li {
 }
 
 }
+@media only screen and (max-width: 480px) {
+	 .steps-1 {
+			margin-left:0%;
+			
+		}
+		.steps-1 .step-1 {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 170px;
+		z-index: 10;
+}
 
 
+	.steps-1 .step-2 {
+		position: absolute;
+		top: 0px;
+		left: 138px;
+		width: 270px;
+		z-index: 8;
+}
+
+	.steps-1 .step-3 {
+		position: absolute;
+		top: 0px;
+		left: 380px;
+		width: 200px;
+		z-index: 6;
+		display: inline-block;
+}
+ }
 
 
 
