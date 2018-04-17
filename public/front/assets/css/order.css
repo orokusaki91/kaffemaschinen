@@ -128,11 +128,16 @@ ul.ul-2 li {
     margin-top:10%;
     text-decoration: underline;
 }
+.customer-info .billing-address a:hover, .customer-info .shipping-address a:hover {
+	color:#583520;
+	text-decoration:none;
+}
 
 .customer-info {
     padding: 20px;
     overflow: hidden;
     background: #f1f1f1;
+	box-shadow:3px 2px 5px #333;
 }
 
 .customer-info .shipping-address {
@@ -146,17 +151,21 @@ ul.ul-2 li {
 }
 
 .customer-addresses {
-    margin: 25px 0px;
+    margin: 45px 0px;
     overflow: hidden;
 }
 
 .customer-addresses h3,
 .customer-addresses h1 {
-    color: #666;
+    color: #333;
 }
+
+
 
 .customer-info h1 {
     margin: 0px;
+	margin-bottom:15px;
+	color:#333;
 }
 
 .customer-info h3 {
@@ -168,13 +177,17 @@ ul.ul-2 li {
 }
 
 #checkout-receipt {
-    margin: 11px 0px;
+    margin: 11px 0px 50px;
     background: #fff;
     padding: 10px 20px;
+	box-shadow:3px 2px 5px #333;
 }
 
 #checkout-receipt h1 {
     font-size: 26px;
+}
+#checkout-receipt h1:nth-of-type(2){
+	color:red;
 }
 
 #checkout-receipt h3 {
@@ -189,7 +202,7 @@ ul.ul-2 li {
     padding: 0px;
 }
 
-#checkout-receipt td. {
+#checkout-receipt td {
     padding: 0px;
 }
 
