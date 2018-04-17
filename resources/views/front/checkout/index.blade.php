@@ -317,7 +317,7 @@
             // fire ajax post request
             $.post(url, data)
             .done(function (data) {                
-                window.location.href = getUrl();
+                window.location.href = getUrl('/');
             })
             .fail(function(data, textStatus) {
                 $('#loading').addClass('is-hidden');

@@ -112,7 +112,9 @@ class OrderController extends Controller
 			Session::forget('cart');
 			Session::flash('order_made', __('front.order_successfully_made'));
 	        
-	        return redirect()->route('home');
+	        return response()->json([
+				'status' => true
+			]);
 
 		} catch (\Exception $e) {
             DB::rollback();
