@@ -51,6 +51,7 @@ class AddressController extends Controller
         $address = $user->addresses()->findOrFail($id);
 
         $this->validate($request, [
+            'title' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
@@ -59,6 +60,7 @@ class AddressController extends Controller
         ]);
 
         $address->type = strtoupper($request->type);
+        $address->title = $request->title;
         $address->first_name = $request->first_name;
         $address->last_name = $request->last_name;
         $address->address1 = $request->address;
@@ -79,29 +81,30 @@ class AddressController extends Controller
             ->with('user', $user);
     }
 
-    public function store(Request $request)
-    {
-        $user = Auth::user();
+    // public function store(Request $request)
+    // {
+    //     $user = Auth::user();
 
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
-        ]);
+    //     $this->validate($request, [
+    //         'first_name' => 'required',
+    //         'first_name' => 'required',
+    //         'last_name' => 'required',
+    //         'address' => 'required',
+    //         'city' => 'required',
+    //         'postcode' => 'required',
+    //     ]);
 
-        $address = new Address;
-        $address->type = strtoupper($request->type);
-        $address->first_name = $request->first_name;
-        $address->last_name = $request->last_name;
-        $address->address1 = $request->address;
-        $address->postcode = $request->postcode;
-        $address->city = $request->city;
-        $address->phone = $request->phone;
+    //     $address = new Address;
+    //     $address->type = strtoupper($request->type);
+    //     $address->first_name = $request->first_name;
+    //     $address->last_name = $request->last_name;
+    //     $address->address1 = $request->address;
+    //     $address->postcode = $request->postcode;
+    //     $address->city = $request->city;
+    //     $address->phone = $request->phone;
 
-        $user->addresses()->save($address);
+    //     $user->addresses()->save($address);
 
-        return redirect()->route('my-account.address.index');
-    }
+    //     return redirect()->route('my-account.address.index');
+    // }
 }

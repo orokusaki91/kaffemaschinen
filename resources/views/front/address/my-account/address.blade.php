@@ -10,9 +10,7 @@
         <div class="container">
             <div class="bat">
                 <div class="row">
-
                     @include('front.user.my-account.sidebar')
-
                     <div class="col-sm-7 profile-info">
                         <h3 class="main-ttl">
                             <span>{{ __('front.address') }}</span>
@@ -31,7 +29,7 @@
                                                         @if($address->type == "SHIPPING")
                                                             <th>{{ __('front.account-shipping-address') }}</th>
                                                             <th>
-                                                                <a href="{{ route('my-account.address.edit', $address->id) }}" style="color: cornflowerblue">Bearbeiten</a> | 
+                                                                <a href="{{ route('my-account.address.edit', $address->id) }}" style="color: cornflowerblue">Bearbeiten</a>
                                                                 {{-- <form action="{{ route('my-account.address.destroy', $address->id) }}" method="POST" style="display: inline-block;">
                                                                     {{ csrf_field() }}
                                                                     <input type="hidden" name="_method" value="DELETE" />
@@ -47,6 +45,10 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <tr>
+                                                        <td style="font-weight: 700">Anrede</td>
+                                                        <td>{{ $address->title }}</td>
+                                                    </tr>
                                                     <tr>
                                                         <td style="font-weight: 700">{{ __('front.account-first-name') }}</td>
                                                         <td>{{ $address->first_name }}</td>
@@ -112,11 +114,11 @@
                                         id="name" class="form-control checkout-input">
                                     </div>
 
-                                    {{-- <div class="form-group">
+                                    <div class="form-group">
                                         <label class="control-label" for="input-shipping-address-2">{{ __('front.account-Address 2') }}</label>
                                         <input type="text" name="address2" value="" placeholder="{{ __('front.account-Address 2') }}"
                                         id="name" class="form-control checkout-input">
-                                    </div> --}}
+                                    </div>
 
                                     <div class="row">
                                         <div class="form-group col-sm-6">

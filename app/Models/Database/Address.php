@@ -11,6 +11,7 @@ class Address extends BaseModel
     protected $dates = ['deleted_at'];  
     protected $fillable = [
         'user_id',
+        'title',
         'type',
         'first_name',
         'last_name',

@@ -125,6 +125,7 @@
                         <th style="border:none;">
                             @if(isset($billing))
                             <div class="left_info">
+                                <p>Rechnungadresse:</p>
                                 {!! $orders['deliveryOrder']->user->is_company ? '<p>'.$orders['deliveryOrder']->user->company_name.'</p>' : '' !!}
                                 <p>{{ $full_name }}</p>
                                 <p>{{ $billing->address1 }}</p>
