@@ -73,7 +73,7 @@
                         </p>
 
                         <p>
-                            <input id="reg_email" placeholder="Adresse" type="text" name="address" value="{{ old('address') }}" required>
+                            <input id="reg_email" placeholder="Adresse*" type="text" name="address" value="{{ old('address') }}" required>
                         </p>
                         <p>
                             <input id="password" placeholder="{{ __('front.account-city') }}*" type="text" name="city" value="{{ old('city') }}" required>
@@ -82,7 +82,7 @@
                             <input id="password" placeholder="{{ __('front.account-zip') }}*" type="text" name="zip" value="{{ old('zip') }}" required>
                         </p>
                         <p>
-                            <input id="password" placeholder="{{ __('front.phone') }} P*" type="text" name="phone" value="{{ old('phone') }}" required>
+                            <input id="password" placeholder="{{ __('front.phone') }} P" type="text" name="phone" value="{{ old('phone') }}" required>
                         </p>
                         <p>
                             <input id="password" placeholder="E-mail*" type="email" name="email" value="{{ old('email') }}" required>

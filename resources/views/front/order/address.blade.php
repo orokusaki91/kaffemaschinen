@@ -56,14 +56,14 @@
                 <div class="customer-addresses">
                     <div class="billing-address">
                         <h3 class="t-bold">Rechnungsadresse</h3>
-                        <p>{{ $user->title }} {{ $billingAddress->first_name }} {{ $billingAddress->last_name }}</p>
+                        <p>{{ $billingAddress->title }} {{ $billingAddress->first_name }} {{ $billingAddress->last_name }}</p>
                         <p>{{ $billingAddress->address1 }}</p>
                         <p>{{ $billingAddress->postcode }} {{ $billingAddress->city }}</p>
                             <a href="{{ url('/order/address/billing/edit') }}">Rechnungsadresse ändern</a>
                     </div>
                     <div class="shipping-address">
                         <h3 class="t-bold">Lieferadresse</h3>
-                        <p>{{ $user->title }} {{ $shippingAddress->first_name }} {{ $shippingAddress->last_name }}</p>
+                        <p>{{ $shippingAddress->title }} {{ $shippingAddress->first_name }} {{ $shippingAddress->last_name }}</p>
                         <p>{{ $shippingAddress->address1 }}</p>
                         <p>{{ $shippingAddress->postcode }} {{ $shippingAddress->city }}</p>
                         <a href="{{ url('/order/address/shipping/edit') }}">Lieferadresse ändern</a>

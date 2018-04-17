@@ -228,8 +228,11 @@ class OrderController extends Controller
 
         $user->save();
 
+        Session::put('guest_user', $user);
+
         $address = Address::create([
             'user_id' => $user->id,
+            'title' => $request->title,
             'type' => 'BILLING',
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -239,7 +242,20 @@ class OrderController extends Controller
             'phone' => $request->phone,
         ]);
 
-        Session::put('guest_user', $user);
+        $user->addresses()->save($address);
+
+        $address = Address::create([
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'type' => 'Shipping',
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address1' => $request->address,
+            'postcode' => $request->zip,
+            'city' => $request->city,
+            'phone' => $request->phone,
+        ]);
+
         $user->addresses()->save($address);
 
         if ($request->subscribe){
@@ -259,10 +275,9 @@ class OrderController extends Controller
 		if (Session::has('cart') && Session::get('cart')->count() > 0) {
 			if (Auth::check()) {
 				$user = Auth::user();
-			} elseif (Session::has('guest_user')) {
+			} elseif (Session::has('guest_user')) {				
 				$user = Session::get('guest_user');
-			} else {
-
+			} else {				
 				return redirect()->route('order.login');
 			}
 		} else {
@@ -315,6 +330,7 @@ class OrderController extends Controller
         }
 
         $this->validate($request, [
+            'title' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
@@ -322,6 +338,7 @@ class OrderController extends Controller
         ]);
 
         $address->type = strtoupper($request->type);
+        $address->title = $request->title;
         $address->first_name = $request->first_name;
         $address->last_name = $request->last_name;
         $address->address1 = $request->address;

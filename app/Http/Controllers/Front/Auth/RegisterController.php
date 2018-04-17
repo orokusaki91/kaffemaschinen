@@ -96,7 +96,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        if (Session::has('cart')) {
+        if (Session::has('cart') && Session::get('cart')->count() > 0) {
             return redirect()->route('order.address');
         } else {
             return redirect('/')->with('registration_success', 'Registrierung erfolgreich');
@@ -123,6 +123,7 @@ class RegisterController extends Controller
 
         Address::create([
             'user_id' => $user->id,
+            'title' => $data['title'],
             'type' => 'BILLING',
             'first_name' => $data['first_name'],
             'last_name' =>$data['last_name'],
@@ -134,9 +135,10 @@ class RegisterController extends Controller
 
         Address::create([
             'user_id' => $user->id,
+            'title' => $data['title'],
             'type' => 'SHIPPING',
             'first_name' => $data['first_name'],
-            'last_name' =>$data['last_name'],
+            'last_name' => $data['last_name'],
             'address1' => $data['address'],
             'postcode' => $data['zip'],
             'city' => $data['city'],
