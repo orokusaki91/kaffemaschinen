@@ -38,4 +38,12 @@ function getForegroundColor($backgroundColor)
     return $coefficient > 176 ? "#000000" : "#ffffff";
 }
 
+function getStripePublishableKey() {
+    if (app()->environment('local')) {
+        return config('development.stripe.publishable_key');
+    } else if (app()->environment('production')) {
+        return config('stripe.publishable_key');
+    }
+}
+
 ?>

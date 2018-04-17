@@ -62,10 +62,6 @@
                                                         <td>{{ $address->address1 }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="font-weight: 700">{{ __('front.account-Address 2') }}</td>
-                                                        <td>{{ $address->address2 }}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td style="font-weight: 700">{{ __('front.account-city') }}</td>
                                                         <td>{{ $address->city }}</td>
                                                     </tr>

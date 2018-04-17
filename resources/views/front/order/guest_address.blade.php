@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
 
-@section('meta_title', 'Registration')
+@section('meta_title', 'Als Gast bestellen')
 @section('meta_description', 'Mein Account Management System für Centrocaffe')
 
 @section('styles')
@@ -21,9 +21,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('register') }}">
-                        Registrierung
+                    <a href="{{ route('cart.view') }}">
+                        Warenkorb
                     </a>
+                </li>
+                <li>
+                    <a href="{{ route('order.login') }}">
+                        Adresse & Lieferung
+                    </a>
+                </li>
+                <li>
+                    Als Gast bestellen
                 </li>
             </ul>
             <div class="steps-1">
@@ -44,7 +52,7 @@
             </div>
             <div class="auth-wrap">
                 <div class="auth-col">
-                    <h1 class="main-ttl"><span>{{ __('front.account-register') }}</span></h1>
+                    <h1 class="main-ttl"><span>Als Gast bestellen</span></h1>
                     <form class="register" role="form" method="POST" action="{{ url('order/address/guest') }}">
                         {{ csrf_field() }}
                         <p>
@@ -93,7 +101,7 @@
                             
                         </div>
                         <p class="auth-submit">
-                            <input type="submit" value="{{ __('front.account-register') }}">
+                            <input type="submit" value="Speichern und Weiter">
                         </p>
                     </form>
                 </div>

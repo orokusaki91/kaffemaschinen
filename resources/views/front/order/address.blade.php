@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
 
-@section('meta_title', 'Registration')
+@section('meta_title', 'Adresse & Lieferung')
 @section('meta_description', 'Mein Account Management System für Centrocaffe')
 
 @section('styles')
@@ -19,15 +19,13 @@
                         Home
                     </a>
                 </li>
-                 <li>
+                <li>
                     <a href="{{ route('cart.view') }}">
                         Warenkorb
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('register') }}">
-                        Adresse & Lieferung
-                    </a>
+                    Adresse & Lieferung
                 </li>
             </ul>
             <div class="steps-1">

@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
 
-@section('meta_title', 'Registration')
+@section('meta_title', 'Registrierung')
 @section('meta_description', 'Mein Account Management System für Centrocaffe')
 
 @section('styles')
@@ -12,8 +12,6 @@
     <!-- Main Content - start -->
     <main>
         <section class="container stylization maincont" style="" id="pozadina">
-
-
             <ul class="b-crumbs login_crumbs">
                 <li>
                     <a href="{{ route('home') }}">
@@ -21,9 +19,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('register') }}">
-                        Registrierung
+                    <a href="{{ route('cart.view') }}">
+                        Warenkorb
                     </a>
+                </li>
+                <li>
+                    <a href="{{ route('order.login') }}">
+                        Adresse & Lieferung
+                    </a>
+                </li>
+                <li>
+                    Registrierung
                 </li>
             </ul>
             <div class="steps-1">
@@ -99,7 +105,7 @@
                             
                         </div>
                         <p class="auth-submit">
-                            <input type="submit" value="Weiter">
+                            <input type="submit" value="Speichern und Weiter">
                         </p>
                     </form>
                 </div>

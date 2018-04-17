@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use DB;
+use PDF;
 use Auth;
 use Session;
 use App\Jobs\SendOrderMail;
@@ -80,6 +81,8 @@ class OrderController extends Controller
 				$orderForDelivery->products()->sync($deliverySyncedDataProducts, false);
 				$orderForDelivery->packages()->sync($deliverySyncedDataPackages, false);
 
+				$orderForDelivery->setSubtotal(Session::get('subtotal'));
+
 				$orders['deliveryOrder'] = $orderForDelivery;
 			}
 		} catch (Exception $e) {
@@ -89,8 +92,6 @@ class OrderController extends Controller
 				'status' => 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.'
 			]);
 		}
-
-		Stripe::setApiKey(config('stripe.secret_key'));
 
 		try {
 			$customer = Customer::create([
@@ -351,5 +352,12 @@ class OrderController extends Controller
         $user->addresses()->save($address);
 
         return redirect()->route('order.address');
+	}
+
+	public function getPdf()
+	{
+        $pdf = PDF::loadView('front.emails.orderPDF');
+        return $pdf->stream();
+        // return view('front.emails.orderPDF');
 	}
 }

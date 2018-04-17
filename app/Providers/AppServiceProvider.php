@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Stripe\Stripe;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -17,6 +18,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (app()->environment('local')) {
+            Stripe::setApiKey(config('development.stripe.secret_key'));
+        } elseif (app()->environment('production')) {
+            Stripe::setApiKey(config('stripe.secret_key'));
+        }
+        
         Schema::defaultStringLength(191);
         
         $popup = Popup::where('active', 1)->first();

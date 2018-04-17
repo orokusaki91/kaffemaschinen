@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
 
-@section('meta_title','Checkout Page')
+@section('meta_title','Zahlung')
 @section('meta_description','Checkout Page')
 
 @section('styles')
@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li>
-                        Zur Kasse
+                    Zur Kasse
                 </li>
             </ul>
 
@@ -52,7 +52,7 @@
     @else
 
     <div class="help-block">
-        <span class="has-error"></span>
+        <span class="payment-error"></span>
     </div>
     <form id="place-order-form" method="post" action="{{ route('order.place') }}">
         {{ csrf_field() }}
@@ -134,6 +134,7 @@
                             $total = $subTotalWithDiscount > 100 ? $subTotalWithDiscount : $subTotalWithDiscount + $shipping;
                             $deliveryTotal = $subTotalDelivery + $shipping;
                             $pickupTotal = $subTotalPickup;
+                            Session::put('subtotal', $subTotal);
                             Session::put('total', $total);
                             Session::put('deliveryTotal', $deliveryTotal);
                             Session::put('pickupTotal', $pickupTotal);
@@ -298,7 +299,7 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
     let stripe = StripeCheckout.configure({
-        key: '{{ config('stripe.publishable_key') }}',
+        key: '{{ getStripePublishableKey() }}',
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
         locale: 'auto',
         token: function (token) {
@@ -311,9 +312,11 @@
             var token = $('input[name="_token"]').val();
             var form = $('#place-order-form');
             var data = form.serialize();
+            var errorEl = $('span.payment-error');
             // add loading class
             $('#loading').removeClass('is-hidden');
             var buttonPlaceOrder = $('#place-order-button').attr('disabled', true);
+            errorEl.removeClass('has-error');
             // fire ajax post request
             $.post(url, data)
             .done(function (data) {                
@@ -321,10 +324,10 @@
             })
             .fail(function(data, textStatus) {
                 $('#loading').addClass('is-hidden');
+                errorEl.addClass('has-error');
                 buttonPlaceOrder.attr('disabled', false);
 
                 // display the error
-                var errorEl = $('span.has-error');
                 errorEl.text(data.responseJSON.status);
 
                 $('html, body').animate({

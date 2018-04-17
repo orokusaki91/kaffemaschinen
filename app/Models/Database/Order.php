@@ -13,6 +13,18 @@ class Order extends BaseModel
         'order_status_id'
     ];
 
+    public $subtotal;
+
+    public function getSubtotal()
+    {
+         return $this->subtotal;
+    }
+
+    public function setSubtotal($value)
+    {
+         $this->subtotal = $value;
+    }
+
     public function products()
     {
         return $this->morphedByMany(Product::class, 'orderable', 'order_items')->withTrashed()->withPivot('price', 'qty');

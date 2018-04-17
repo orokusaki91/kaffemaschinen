@@ -212,3 +212,5 @@ Route::middleware(['web'])
 
         Route::get('/verifyemail/{token}', 'RegisterController@verify');
     });
+
+    // Route::get('pdf', 'Front\OrderController@getPdf');
