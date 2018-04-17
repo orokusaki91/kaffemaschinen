@@ -19,9 +19,14 @@
                         Home
                     </a>
                 </li>
+                 <li>
+                    <a href="{{ route('cart.view') }}">
+                        Warenkorb
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('register') }}">
-                        Registrierung
+                        Adresse & Lieferung
                     </a>
                 </li>
             </ul>
