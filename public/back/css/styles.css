@@ -433,12 +433,16 @@ footer {
 }
 
 
-
-
-
-
-
-
+@media (min-width: 576px) {
+   .list-group {
+		height:auto;
+	}
+}
+@media (max-width: 576px) {
+ 	.list-group {
+		height:auto;
+	}
+}
 
 
 

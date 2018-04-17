@@ -676,6 +676,11 @@ Header
     text-align: left;
     background: #995f31 url(../img/bar.png) no-repeat 18px 15px;
     display: none;
+	height:50px;
+}
+
+.mainmenu-show .topmenu .mainmenu {
+	margin-top:0;
 }
 
 .topmenu .mainmenu-btn:after {

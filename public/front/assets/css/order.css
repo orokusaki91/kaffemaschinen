@@ -414,6 +414,20 @@ ul.ul-2 li {
 
 }
 @media only screen and (max-width: 480px) {
+	 #cart_table {
+	 	max-width:450px;
+	 }
+	#cart_table thead th {
+		text-transform: uppercase;
+		font-size: 12px;
+		border: none;
+		font-weight:bold;
+		border-bottom: 1px solid #e0e4f6;
+		border-right:1px solid #fff;
+		text-align:center;
+		padding:5px;
+		color:#373d54;
+	}
 	 .steps-1 {
 			margin-left:0%;
 			
@@ -422,7 +436,7 @@ ul.ul-2 li {
 		position: absolute;
 		top: 0px;
 		left: 0px;
-		width: 170px;
+		width: 150px;
 		z-index: 10;
 }
 
@@ -430,19 +444,55 @@ ul.ul-2 li {
 	.steps-1 .step-2 {
 		position: absolute;
 		top: 0px;
-		left: 138px;
-		width: 270px;
+		left: 123px;
+		width: 200px;
 		z-index: 8;
 }
 
 	.steps-1 .step-3 {
 		position: absolute;
 		top: 0px;
-		left: 380px;
-		width: 200px;
+		left: 294px;
+		width: 115px;
 		z-index: 6;
 		display: inline-block;
 }
+	.steps-1 .step-1 .number-1 {
+    margin-left: 0px;
+	font-size:13px;
+}
+	.steps-1 .step-2 .number-1 {
+    margin-left: 10px;
+	font-size:13px;
+}
+	.steps-1 .step-3 .number-1 {
+    margin-left: 10px;
+	font-size:13px;
+}
+	.steps-1 .step-1 .text-1 {
+    margin-left: 0px;
+	font-size:13px;
+}
+
+	.steps-1 .step-2 .text-1 {
+    margin-left: -5px;
+	font-size:13px;
+}
+
+	.steps-1 .step-3 .text-1 {
+    margin-left: 0px;
+	font-size:13px;
+}
+
+.customer-info .shipping-address {
+	margin-left:0;
+	margin-top:25px;
+}
+
+.stylization h1 {
+	font-size:28px;
+}
+
  }
 
 
