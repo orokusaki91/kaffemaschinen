@@ -3,13 +3,20 @@
 @section('meta_title','Impressum')
 @section('meta_description','Impressum')
 
-@section('styles')
-    {{-- <link rel="stylesheet" href="{{ asset('front/assets/css/order.css?ver=' . str_random(10)) }}"> --}}
-@endsection
-
 @section('content')
 <main>
 	<div class="container">
+        <ul class="b-crumbs">
+            <li>
+                <a href="{{ route('home') }}">
+                    Home
+                </a>
+            </li>
+            <li>
+                Impressum
+            </li>
+        </ul>
+
 		<div class="impressum">
         	<div class="impressum_pocetak">
         	<h3>Kontaktadresse</h3>
@@ -20,7 +27,6 @@
                 <p>info@centrocaffe.ch</p>
             </div>
           
-      
             <h3>Haftungsausschluss</h3>
                 <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der  inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und  Vollständigkeit der Informationen.</p>
                 <p>Haftungsansprüche gegen den Autor wegen Schäden materieller  oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw.  Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der  Verbindung oder durch technische Störungen entstanden sind, werden  ausgeschlossen.</p>

@@ -10,8 +10,7 @@
 @section('content')
 <main>
 	<div class="container">
-	AGB's
-
+		AGB's
 	</div>
 </main>
 @stop

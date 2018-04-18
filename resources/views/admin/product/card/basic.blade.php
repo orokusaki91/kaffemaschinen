@@ -71,7 +71,7 @@
     </div>
     <div class="col-lg-3 col-sm-12">
         <div class="form-group">
-            <label for="new_product">{{ __('lang.available').' / '.__('lang.unavailable') }}</label>
+            <label for="new_product">{{ __('lang.unavailable') }}</label>
             <div class="checkbox">
                 <label style="margin-left: 20px;">
                     <input id="available_toggle" name="available_toggle" type="checkbox" data-toggle="toggle" data-on="{{ __('front.yes') }}" data-off="{{ __('front.no') }}" @if ($model['available'] === 1) checked @endif>
@@ -83,7 +83,7 @@
     <div class="col-lg-5 col-sm-12">
         <div class="form-group">
             <label for="unavailable_text" >{{ __('lang.message') }}</label>
-            <input type="text" class="form-control" id="unavailable_text" name="unavailable_text" {{ $model['available'] ? 'disabled' : '' }} value="{{ $model['unavailable_text'] }}">
+            <input type="text" class="form-control" id="unavailable_text" name="unavailable_text" {{ !$model['available'] ? 'disabled' : '' }} value="{{ $model['unavailable_text'] }}">
         </div>
     </div>
 </div>

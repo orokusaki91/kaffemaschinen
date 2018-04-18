@@ -14,6 +14,8 @@
 <main>
     <section class="container" id="pozadina" style="margin-top: 50px;">
         <!-- Slider -->
+        @php
+        @endphp
         <div class="fr-slider-wrap">
             <div class="fr-slider">
                 <ul class="slides">
