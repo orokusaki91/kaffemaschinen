@@ -7,7 +7,7 @@
         <div class="row">
              <div class="f-menu">
                 <ul class="nav nav-pills nav-stacked">
-                    <li><a href="http://centrocaffe.ch/">centrocaffe.ch</a></li>
+                    <li><a href="http://centrocaffe.ch/">www.centrocaffe.ch</a></li>
                     <li><a href="#">Althardstrasse 160</a></li>
                     <li><a href="#"></i>CH-8105 Regensdorf</a></li>
                 </ul>
@@ -15,8 +15,8 @@
             
              <div class="f-menu">
                 <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">AGB's</a></li>
-                    <li><a href="#">Impressum</a></li>
+                    <li><a href="{{ url('agb') }}">AGB's</a></li>
+                    <li><a href="{{ url('impressum') }}">Impressum</a></li>
                     <li><a href="{{ route('contact') }}"><i class="fa fa-envelope-open-o" aria-hidden="true"></i>Kontakt</a></li>
                 </ul>
             </div>

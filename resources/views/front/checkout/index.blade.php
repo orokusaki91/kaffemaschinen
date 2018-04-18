@@ -10,7 +10,7 @@
 @section('content')
 <main>
 <div class="container">
-               <ul class="b-crumbs">
+            <ul class="b-crumbs">
                 <li>
                     <a href="{{ route('home') }}">
                         Home
@@ -81,12 +81,13 @@
                         $totalTax77 = 0;
                         $shipping = 0;
                         ?>
-                        @foreach($cartItems as $cartItem)
+                        {{-- {{dd($cartItems)}} --}}
+                        @foreach($cartItems as $key => $cartItem)
                         <tr>
                             <td class="cart-image" style="width: 100px">
-                                <a href="{{ route('product.view', $cartItem['slug'])}}">
+                                <a href="{{ "package" == substr($key, 0, 7) ? '#' : route('product.view', $cartItem['slug']) }}">
                                     <img alt="{{ $cartItem['name'] }}"
-                                         class="{{\App\Models\Database\Product::where('id', $cartItem['id'])->first()->main_image->filters}}"
+                                         class="{{ "package" == substr($key, 0, 7) ? asset('front/assets/img/package-default.png') : \App\Models\Database\Product::where('id', $cartItem['id'])->first()->main_image->filters}}"
                                          src="{{ asset( $cartItem['image']) }}"/>
                                 </a>
                             </td>

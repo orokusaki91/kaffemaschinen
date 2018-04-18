@@ -168,13 +168,13 @@
     <div class="wrapper order-pdf">
         <div class="header">
             <div class="info company-info">
-                <p>Brock GmbH</p>
-                <p>Birmensdorferstrasse 430</p>
-                <p>CH-8055 Zürich</p>
-                <p>Tel. +41 (0) 44 450 21 02</p>
+                <p>Centrocaffè Fruci</p>
+                <p>Althardstasse 160</p>
+                <p>CH-8105 Regensdorf</p>
+                {{-- <p>Tel. +41 (0) 44 450 21 02</p> --}}
                 <p><a href="mailto:shop@centrocaffe.ch">shop@centrocaffe.ch</a></p>
                 <p><a href="http://centrocaffe.ch/" target="_blank">www.centrocaffe.ch</a></p>
-                <p>MwSt-Nr. CHE-115.174.365</p>
+                {{-- <p>MwSt-Nr. CHE-115.174.365</p> --}}
             </div>
             <div id="nobold" class="customer-data" style="text-align: right;">
                 <p>Kunden-Nr.: {{ $user->id }}</p>
