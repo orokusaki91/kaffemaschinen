@@ -5254,11 +5254,10 @@ Catalog | Gallery View
 
 .prod-cont .prod-price {
     font-size: 14px;
-    color: #fff !important;
+    color: #f00 !important;
     display: block;
     margin: 15px auto;
     text-align: right;
-	box-shadow:2px 2px 5px #333;
 	padding:5px;
 	border-radius:6px;
 }
@@ -5266,7 +5265,7 @@ Catalog | Gallery View
 .prod-cont .prod-price b {
     font-weight: bold;
     font-size: 20px;
-    color: red !important;
+    color: #000 !important;
 }
 
 .prod-cont .prod-price del {
