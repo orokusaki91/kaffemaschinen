@@ -446,12 +446,32 @@ footer {
 
 
 
+.product-list > .product-item-wrapper > .product-item > img {
+	width:50% !important;
+}
 
+.autocomplete > .autocomplete-drop {
+	z-index:9999;
+	display:block;
+}
 
+.autocomplete > .autocomplete-drop > .autocomplete-item {
+	display:block;
+	font-size:11px !important;
+}
 
+.autocomplete > .autocomplete-drop > .autocomplete-item > .autocomplete-item-price {	
+    float: left !important;
+    height: 56px !important;
+    width:auto !important;
+    line-height: 56px !important;
+    font-size: 10px !important;
+    color: red;
+    padding-right: 8px;
+}
 
-
-
-
-
+.autocomplete > .autocomplete-drop > .autocomplete-item > .autocomplete-item-info > .line {
+	line-height:none !important;
+	height:auto !important;
+}
 
