@@ -9498,6 +9498,17 @@ Media
 .form-group label {
 	font-weight:bold;
 	letter-spacing:1px;
+	color:#fff;
+	margin-left:15px;
+}
+.form-group label:nth-of-type(1) {
+	padding-left:0;
+	margin-left:0;
+	padding:5px;
+	color:#fff;
+	margin-bottom:5px;
+	padding-bottom:0;
+	border-bottom:1px solid red;
 }
 
 .buttons .clearfix .float-right {
@@ -9621,6 +9632,14 @@ button.link-button {
 	padding:10px;
 }
 
+.crvena_zvezdica p {
+	color:#fff;
+	font-weight:bold;
+}
+.crvenazvezdica {
+	color:red;
+	font-weight:bold;
+}
 
 
 

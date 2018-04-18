@@ -103,7 +103,11 @@
                         <p class="auth-submit">
                             <input type="submit" value="Speichern und Weiter">
                         </p>
+                        <div class="crvena_zvezdica">
+                        	<p><span class="crvenazvezdica">*</span> Lorem ipsum</p>
+                        </div>
                     </form>
+                    
                 </div>
             </div>
         </section>

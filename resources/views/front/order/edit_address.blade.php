@@ -56,10 +56,10 @@
                         <div class="radio shipping-address-wrapper">
                             <div class="row">
                                 <div class="form-group col-sm-6">
-                                    <label for="title">{{ __('front.account-title') }}*<span class="required"></span></label>
+                                    <label for="title">{{ __('front.account-title') }}*<span class="required"></span></label><br>
                                     <label class="radio-inline">
                                         <input class="herr_frau" type="radio" name="title" value="Herr" {{ $address->title == 'Herr' ? 'checked' : '' }}>Herr
-                                    </label>
+                                    </label><br>
                                     <label class="radio-inline">
                                         <input class="herr_frau" type="radio" name="title" value="Frau" {{ $address->title == 'Frau' ? 'checked' : '' }}>Frau
                                     </label>       
@@ -125,6 +125,9 @@
                 <div class="row space">
                     <button type="submit" class="new_address_button">Speichern</button>
                 </div>
+                <div class="crvena_zvezdica">
+                 <p><span class="crvenazvezdica">*</span> Lorem ipsum</p>
+                 </div>
             </form>
         </section>
     </main>

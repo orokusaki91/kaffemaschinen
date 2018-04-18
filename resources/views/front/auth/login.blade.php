@@ -64,6 +64,7 @@
                         <p class="auth-lost_password">
                             <a href="/forgot-password">{{ __('front.account-lost-your-password') }}</a>
                         </p>
+                        
                     </form>
                     </div>
                 </div>
