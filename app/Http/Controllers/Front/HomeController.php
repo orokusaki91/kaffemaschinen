@@ -37,4 +37,14 @@ class HomeController extends Controller
             ->with('sliders', $sliders);
 
     }
+
+    public function getAGB()
+    {
+        return view('front.page.agb');
+    }
+
+    public function getImpressum()
+    {
+        return view('front.page.impressum');
+    }
 }

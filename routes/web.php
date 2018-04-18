@@ -214,3 +214,7 @@ Route::middleware(['web'])
     });
 
     // Route::get('pdf', 'Front\OrderController@getPdf');
+    Route::get('agb', 'Front\HomeController@getAGB');
+    Route::get('impressum', 'Front\HomeController@getImpressum');
+
+
