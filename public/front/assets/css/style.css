@@ -281,6 +281,7 @@ Header
 .header-bottom {
     background: #583520;
     border-collapse: collapse;
+	box-shadow:2px 2px 3px #333;
 }
 
 #hed {
@@ -717,12 +718,12 @@ Header
     font-weight: 500;
     margin: 0 0 0 0;
     position: relative;
-    border: 1px solid #e0e4f6;
     border-top: none;
 }
 
 .topmenu .mainmenu > li:hover {
     background: #734826;
+
 }
 
 .topmenu .mainmenu > li > a {
@@ -739,7 +740,7 @@ Header
 
 .topmenu .mainmenu > li > a:hover,
 .topmenu .mainmenu > li > a.active {
-    color: #c39e5f;
+    color: #fff;
     background: #734826;
 }
 
@@ -9043,11 +9044,14 @@ a:hover {
     background: #734826;
     position: relative;
     border: 1px solid #e0e4f6;
+	border-radius:5px;
 }
 
 .open_special_offer:hover {
-    background: #c39e5f;
+    background: #B18F79;
     color: #fff;
+	border:1px solid #B18F79;
+	box-shadow:2px 2px 2px #333;
 }
 
 .dim_background {
