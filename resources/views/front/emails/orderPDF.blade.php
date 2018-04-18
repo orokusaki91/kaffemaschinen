@@ -179,7 +179,7 @@
             <div id="nobold" class="customer-data" style="text-align: right;">
                 <p>Kunden-Nr.: {{ $user->id }}</p>
                 <p id="">Bestell-Nr.: {{ $orderNumber }}</p>
-                <p id="">{{ strftime("%a, %d. %m. %Y") }}</p>
+                <p id="">{{ strftime("%d. %m. %Y") }}</p>
             </div>
         </div>
     

@@ -110,12 +110,6 @@
                                         id="name" class="form-control checkout-input">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="control-label" for="input-shipping-address-2">{{ __('front.account-Address 2') }}</label>
-                                        <input type="text" name="address2" value="" placeholder="{{ __('front.account-Address 2') }}"
-                                        id="name" class="form-control checkout-input">
-                                    </div>
-
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             {{--<label class="control-label" for="input-shipping-postcode">{{ __('front.account-zip') }}*</label>--}}
