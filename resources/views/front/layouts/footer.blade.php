@@ -8,8 +8,8 @@
              <div class="f-menu">
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="http://centrocaffe.ch/">www.centrocaffe.ch</a></li>
-                    <li><a href="#">Althardstrasse 160</a></li>
-                    <li><a href="#"></i>CH-8105 Regensdorf</a></li>
+                    <li><p>Althardstrasse 160</p></li>
+                    <li><p></i>CH-8105 Regensdorf</p></li>
                 </ul>
             </div>
             

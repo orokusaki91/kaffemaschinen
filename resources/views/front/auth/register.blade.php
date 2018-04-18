@@ -82,7 +82,7 @@
                             <input type="submit" value="{{ __('front.account-register') }}">
                         </p>
                          <div class="crvena_zvezdica">
-                        	<p><span class="crvenazvezdica">*</span> Lorem ipsum</p>
+                        	<p>Required fields are marked with asterisk (<span class="crvenazvezdica">*</span>)</p>
                         </div>
                     </form>
                 </div>

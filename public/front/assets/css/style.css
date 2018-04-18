@@ -8065,6 +8065,12 @@ body .component-desc.component-desc-ct {
     font-weight: 300;
     padding: 5px 0;
 }
+.f-menu-list .f-menu ul li p {
+	 color: white;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 5px 0;
+}
 
 .f-menu-list .f-menu ul li a i {
     margin-right: 6px;
@@ -9451,6 +9457,7 @@ Media
 	z-index:99999999999;
 	min-width:195px;
 	text-align:left;
+	box-shadow:2px 2px 5px #333;
 }
 
 .dropdown-new:hover .dropdown-menu-new {
@@ -9642,5 +9649,26 @@ button.link-button {
 }
 
 
+.impressum {
+	background:#f1f1f1;
+	margin-top:20px;
+	margin-bottom:30px;
+	padding:20px;
+	box-shadow:2px 2px 4px #333;
+}
+.impressum h3 {
+	font-weight:bold;
+	letter-spacing:1px;
+}
 
+.impressum p {
+	margin-left:30px;
+	margin-top:10px;
+}
+.impressum_pocetak {
+	margin-bottom:30px;
+}
+.impressum_pocetak p {
+	margin-left:0;
+}
 
