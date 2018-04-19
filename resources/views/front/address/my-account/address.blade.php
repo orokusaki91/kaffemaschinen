@@ -16,7 +16,10 @@
                             <span>{{ __('front.address') }}</span>
                         </h3>
                         @if(count($addresses) <= 0)
+                        {{ dd($user) }}
                             <p>Keine Adresse vorhanden</p>
+                        }
+                        }
                         @else
                             <div class="row space">
                                 <div class="auth-wrap">

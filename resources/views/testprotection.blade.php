@@ -11,7 +11,7 @@
             <div class="auth-wrap">
                 <div class="auth-col">
                     <h2>Login</h2>
-                    <form class="login" role="form" method="POST" action="{{ route('luisb') }}">
+                    <form class="login" role="form" method="POST" action="{{ route('testprotection') }}">
                         {{ csrf_field() }}
                         @if (session('status'))
                             <div class="alert alert-danger">
