@@ -45,7 +45,7 @@
 
 			<div class="col-md-3">
 				<div class="auth-wrap">
-                      	<h3>Ich habe bereits ein Ex Libris-Konto</h3>
+                      	<h3>Ich habe bereits ein Centrocaffè-Konto</h3>
                         <form class="login" role="form" method="POST" action="{{ route('order.login.post') }}">
                         {{ csrf_field() }}
                         @if (session('status'))
