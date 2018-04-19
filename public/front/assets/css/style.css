@@ -8417,7 +8417,7 @@ Login
 
 .auth-wrap .auth-col h2 {
     font-size: 22px;
-    margin: 0 0 25px 20%;
+    margin: 0 0 25px 0%;
 }
 
 .auth-wrap .auth-col p {
@@ -8432,10 +8432,11 @@ Login
 .auth-wrap .auth-col p a {
     line-height: 1;
     display: inline-block;
+	color:#3a89cf !important;
 }
 
 .auth-wrap .auth-col .auth-lost_password {
-    padding: 0 0 0 20%;
+    padding: 0 0 0 0%;
 }
 
 .auth-wrap .auth-col label {
@@ -8504,7 +8505,7 @@ Login
 }
 
 .auth-wrap .auth-col1 p a:hover {
-    color: #fff;
+    color: #1D69AD;
 }
 
 .auth-wrap .auth-col1 .auth-lost_password {
@@ -8587,7 +8588,7 @@ Login
     position: absolute;
     top: 50%;
     margin: -10px 0 0;
-    right: 20%;
+    right: 0%;
     color: #fff;
 }
 
