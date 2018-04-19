@@ -26,7 +26,7 @@
     @else
     @if(!$product->available)
 
-            <h3 class="available_grid"><span style="color:red;" >{{ __('front.unavailable') }}</span></h3>
+            <h3 class="available_grid"><span style="color:red !important;" >{{ __('front.unavailable') }}</span></h3>
 
             <p class="prod-i-price">
             <b>{{ strlen($product->unavailable_text) > 20 ? substr($product->unavailable_text, 0, 20) . "..." : $product->unavailable_text }}</b>

@@ -89,16 +89,16 @@
 				<h3>Ich bin Neukunde</h3>
                 <form class="login" role="form" method="get" action="{{ route('order.register') }}">
 					<div class="login_button">
-	                 	<input class="button_login" type="submit" value="Registriren">
+	                 	<input class="button_login nikolabuttonlogin" type="submit" value="Registriren">
 	                </div>
 	            </form>
 			</div>
 
 			<div class="col-md-3">
-				<h3>Als Gast bestellen (ohne Registrierung)</h3>
+				<h3>Als Gast bestellen <br>(ohne Registrierung)</h3>
                 <form class="login" role="form" method="get" action="{{ route('order.address.guest') }}">
 					<div class="login_button">
-	                 	<input class="button_login" type="submit" value="Als Gast bestellen">
+	                 	<input class="button_login nikolabuttonlogin2" type="submit" value="Als Gast bestellen">
 	                </div>
 	            </form>
 			</div>
