@@ -81,8 +81,8 @@
                         <p class="auth-submit">
                             <input type="submit" value="{{ __('front.account-register') }}">
                         </p>
-                         <div class="crvena_zvezdica">
-                        	<p>Required fields are marked with asterisk (<span class="crvenazvezdica">*</span>)</p>
+                        <div class="crvena_zvezdica">
+                            <p>Obligatorische Felder sind mit (*) markiert</p>
                         </div>
                     </form>
                 </div>

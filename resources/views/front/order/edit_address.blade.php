@@ -125,9 +125,9 @@
                 <div class="row space">
                     <button type="submit" class="new_address_button">Speichern</button>
                 </div>
-                  <div class="crvena_zvezdica">
-                       <p>Required fields are marked with asterisk (<span class="crvenazvezdica">*</span>)</p>
-                  </div>
+                <div class="crvena_zvezdica">
+                    <p>Obligatorische Felder sind mit (*) markiert</p>
+                </div>
             </form>
         </section>
     </main>

@@ -10,7 +10,6 @@
         <div class="container">
             <div class="bat">
                 <div class="row">
-
                     @include('front.user.my-account.sidebar')
                     <div class="col-sm-7 profile-info">
                         <form action="{{ url(route('my-account.address.update',  $address->id)) }}" method="POST">
@@ -85,6 +84,9 @@
                             </div>
                             <div class="row space">
                                 <button type="submit" class="new_address_button">Speichern</button>
+                            </div>
+                            <div class="crvena_zvezdica">
+                                <p>Obligatorische Felder sind mit (*) markiert</p>
                             </div>
                         </form>
 
