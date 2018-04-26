@@ -8,7 +8,7 @@ return [
     'phone' => 'Telefon',
     'photo' => 'Foto',
     'message' => 'Botschaft',
-    'email-success-sent' => 'E-Mail würde erfolgreich gesendet!',
+    'email-success-sent' => 'E-Mail wurde erfolgreich gesendet!',
     'subscribe-success-sent' => 'Sie haben dieses Portal abonniert!',
     'i-want-to-subscribe' => 'Ich möchte den Newsletter abonnieren',
     'success' => 'Erfolg',

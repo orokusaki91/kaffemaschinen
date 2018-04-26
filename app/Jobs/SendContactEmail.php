@@ -35,6 +35,6 @@ class SendContactEmail implements ShouldQueue
     {
         $email = new ContactMail($this->contactForm);
 
-        Mail::to('mail@centrocaffe.ch')->send($email);
+        Mail::to('info@centrocaffe.ch')->send($email);
     }
 }
