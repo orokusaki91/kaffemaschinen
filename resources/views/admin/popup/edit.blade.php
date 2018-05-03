@@ -16,7 +16,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="h1">{{ __('lang.admin-create-new-popup') }}</div>
+                        <div class="h1">Popup Bearbeiten</div>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn-schoen">
-                            {{ __('lang.popup-edit') }}
+                            Speichern
                         </button>
                         <a href="{{ route('admin.popup.index') }}" class="btn ">{{ __('lang.cancel') }}</a>
                     </div>

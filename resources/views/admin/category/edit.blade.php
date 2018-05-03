@@ -14,7 +14,7 @@
 
                         @include('admin.category._fields')
 
-                        <button type="submit" class="btn-schoen">{{ __('lang.category-index-edit') }}</button>
+                        <button type="submit" class="btn-schoen">Speichern</button>
 
                         <a href="{{ route('admin.category.index') }}" class="btn btn-default">{{ __('lang.cancel') }}</a>
                     </form>

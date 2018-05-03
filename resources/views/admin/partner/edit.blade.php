@@ -68,7 +68,7 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn-schoen">
-                            {{ __('lang.admin-edit-partner') }}
+                            Speichern
                         </button>
                         <a href="{{ route('admin.partner.index') }}" class="btn ">{{ __('lang.cancel') }}</a>
                     </div>

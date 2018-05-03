@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="h1">{{ __("lang.package.create.text") }}</div>
+                        <div class="h1">Angebot bearbeiten</div>
                     </div>
                 </div>
                 <form
@@ -67,7 +67,7 @@
 
                     <div class="form-group">
                         <button type="button" class="btn-schoen" onclick="jQuery('#package-save-form').submit()">
-                            {{ __('lang.product-edit-product') }}
+                            Speichern
                         </button>
                         <button type="button"
                                 onclick="location='{{ route('admin.package.index') }}'"

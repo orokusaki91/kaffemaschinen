@@ -58,7 +58,7 @@
 
             <div class="form-group">
                 <button type="button" class="btn-schoen" onclick="jQuery('#product-save-form').submit()">
-                    {{ __('lang.product-edit-product') }}
+                    Speichern
                 </button>
                 <button type="button" class="btn" onclick="location='{{ route('admin.product.index') }}'">
                     {{ __('lang.cancel') }}
@@ -104,10 +104,10 @@
             $("input[name=available_toggle]").on('change', function () {
                 if ($('#available').val() == 1) {
                     $('#available').val(0);
-                    $('#unavailable_text').attr('disabled', '').removeAttr('required');
+                    $('#unavailable_text').removeAttr('disabled').attr('required', '');
                 } else {
                     $('#available').val(1);
-                    $('#unavailable_text').removeAttr('disabled').attr('required', '');
+                    $('#unavailable_text').attr('disabled', '').removeAttr('required');
                 }
             });
             @if(session()->has('slug'))

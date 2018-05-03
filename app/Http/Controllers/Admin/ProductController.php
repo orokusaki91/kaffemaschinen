@@ -61,6 +61,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['available' => 1]);
         try {
             $product = Product::create($request->all());
         } catch (\Exception $e) {
