@@ -5254,7 +5254,7 @@ Catalog | Gallery View
 
 .prod-cont .prod-price {
     font-size: 14px;
-    color: #f00 !important;
+    color: #000 !important;
     display: block;
     margin: 15px auto;
     text-align: right;
@@ -9834,4 +9834,5 @@ button.link-button {
 .price-off {
 	margin-left:5px;
 }
+
 

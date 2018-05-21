@@ -293,7 +293,7 @@ select.form-control:not([size]):not([multiple]) {
 	transition:0.7s ease all;
 }
 .card-body:hover:nth-of-type(1) {
-	background:#333;
+	
 }
 .boja1 {
 	background:#0084FF;
