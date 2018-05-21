@@ -9808,6 +9808,29 @@ button.link-button {
 	margin-left:0;
 }
 
+.agb-s {
+    background:#f1f1f1;
+    padding: 40px;
+}
+
+.agb-s h1 {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.agb-s p {
+    margin-top: 10px;
+}
+
+.agb-s ol {
+    margin: 20px 20px 0px 15px;
+    list-style: decimal;
+}
+
+.agb-s strong {
+    font-weight: bold;
+}
+
 .price-off {
 	margin-left:5px;
 }

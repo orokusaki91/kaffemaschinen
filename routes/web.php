@@ -71,6 +71,7 @@ Route::middleware(['testprotection']) // REMOVE IN PRODUCTION!!!
             Route::post('/cart/update/delivery', ['as' => 'cart.update.delivery', 'uses' => 'CartController@updateDelivery']);
 
             Route::post('/order', ['as' => 'order.place', 'uses' => 'OrderController@place']);
+            Route::get('/payment_status', ['as' => 'payment.status', 'uses' => 'OrderController@getPaymentStatus']);
 
             Route::get('/order/login', ['as' => 'order.login', 'uses' => 'OrderController@login']);
             Route::post('/order/login', ['as' => 'order.login.post', 'uses' => 'OrderController@postLogin']);

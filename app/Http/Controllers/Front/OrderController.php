@@ -16,10 +16,35 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use App\Jobs\SendVerificationEmail;
-use Stripe\{Stripe, Charge, Customer};
+
+use PayPal\Api\Item;
+use PayPal\Api\Payer;
+use PayPal\Api\Amount;
+use PayPal\Api\Payment;
+use PayPal\Api\Details;
+use PayPal\Api\ItemList;
+use PayPal\Api\Transaction;
+use PayPal\Rest\ApiContext;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\ShippingAddress;
+use PayPal\Api\PaymentExecution;
+use PayPal\Auth\OAuthTokenCredential;
 
 class OrderController extends Controller
 {
+	private $_api_context;
+
+	public function __construct()
+	{
+		$paypal_conf = config()->get('paypal');
+		$this->_api_context = new ApiContext(new OAuthTokenCredential(
+			$paypal_conf['client_id'],
+			$paypal_conf['secret']
+		));
+		$this->_api_context->setConfig($paypal_conf['settings']);
+	}
+
 	public function place(Request $request)
 	{
 		if (Auth::check()) {
@@ -32,9 +57,8 @@ class OrderController extends Controller
 
 		$cartItems = Session::get('cart');
 
-		DB::beginTransaction();
-
 		$address = $user->getBillingAddress();
+		$shipping = Session::get('subtotal') < 100 ? Session::get('shipping') : 0;
 		$deliverySyncedDataProducts = [];
 		$deliverySyncedDataPackages = [];
 
@@ -62,15 +86,34 @@ class OrderController extends Controller
                     }
                 }
             }
+
+            $paypalItem = new Item();
+			$paypalItem->setName($item['name'])
+				    ->setCurrency('CHF')
+				    ->setQuantity($item['qty'])
+				    ->setSku($item['id'])
+				    ->setPrice($item['price']);
+
+		    $items[] = $paypalItem;
         }
 
+        $paypalDiscount = Session::get('discount');
+
+        $discount = new Item();
+		$discount->setName('Rabatt')
+			    ->setCurrency('CHF')
+			    ->setQuantity(1)
+			    ->setPrice("-{$paypalDiscount}");
+
+	    $items[] = $discount;
+	
 		try {
 			$orders = [];
 			if (!empty($cartItemsForDelivery)) {
 				$orderForDelivery = new Order;
 				$orderForDelivery->user_id = $user->id;
 				$orderForDelivery->billing_address_id = $address->id;
-				$orderForDelivery->shipping_address_id = isset($shippingAddress) ? $shippingAddress->id : null;
+				$orderForDelivery->shipping_address_id = isset($shippingAddress) ? $shippingAddress->id : $address->id;
 				$orderForDelivery->payment_option = 'Lieferung';
 				$orderForDelivery->order_status_id = 1;
 				$orderForDelivery->total_amount = Session::get('total');
@@ -86,44 +129,78 @@ class OrderController extends Controller
 				$orders['deliveryOrder'] = $orderForDelivery;
 			}
 		} catch (Exception $e) {
-            DB::rollback();
-
-			return response()->json([
-				'status' => 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.'
-			]);
+			return redirect('/')->with('error', 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.');
 		}
+
+		$payer = new Payer();
+		$payer->setPaymentMethod("paypal");
+
+		$paypalAddress = isset($shippingAddress) ? $shippingAddress : $address;
+
+		$shipping_address = new ShippingAddress();
+		$shipping_address->setCity($paypalAddress->city);
+		$shipping_address->setCountryCode('CH');
+		$shipping_address->setPostalCode($paypalAddress->postcode);
+		$shipping_address->setLine1($paypalAddress->address1);
+		$shipping_address->setState($paypalAddress->state);
+		$shipping_address->setRecipientName($paypalAddress->first_name . ' ' . $paypalAddress->last_name);
+
+		$itemList = new ItemList();
+		$itemList->setItems($items)
+				->setShippingAddress($shipping_address);
+
+		$details = new Details();
+		$details->setShipping($shipping)
+		    ->setSubtotal(Session::get('paypalSubtotal'));
+
+		$amount = new Amount();
+		$amount->setCurrency("CHF")
+		    	->setTotal(Session::get('total'))
+		    	->setDetails($details);
+
+		$transaction = new Transaction();
+		$transaction->setItemList($itemList)
+					->setAmount($amount);
+
+		$redirectUrls = new RedirectUrls();
+		$redirectUrls->setReturnUrl(url('payment_status'))
+    				->setCancelUrl(url('payment_status'));
+
+    	$payment = new Payment();
+		$payment->setIntent("sale")
+		    	->setPayer($payer)
+		    	->setRedirectUrls($redirectUrls)
+		    	->setTransactions(array($transaction));
 
 		try {
-			$customer = Customer::create([
-				'email' => request('stripeEmail'),
-				'source' => request('stripeToken'),
-			]);
-			$user->stripe_id = $customer->id;
-			$user->save();
-
-			Charge::create([
-				'customer' => $user->stripe_id,
-				'amount' => Session::get('total') * 100,
-				'currency' => 'chf',
-			]);
-
-			dispatch(new SendOrderMail($orders, $user));
-
-			DB::commit();
-			Session::forget('cart');
-			Session::flash('order_made', __('front.order_successfully_made'));
-	        
-	        return response()->json([
-				'status' => true
-			]);
-
-		} catch (\Exception $e) {
-            DB::rollback();
-
-			return response()->json([
-				'status' => $e->getMessage()
-			], 422);
+		    $payment->create($this->_api_context);
+		} catch (\PayPal\Exception\PPConnectionException $ex) {
+			if (config()->get('app.debug')) {
+				Session::flash('error', 'Bezahlung fehlgeschlagen. Verbindungszeitüberschreitung.');
+				return redirect('/');
+			} else {
+				Session::flash('error', 'Bezahlung fehlgeschlagen. Bitte versuche es erneut.');
+				return redirect('/');
+			}
 		}
+
+		foreach ($payment->getLinks() as $link) {
+			if ($link->getRel() == 'approval_url') {
+				$redirect_url = $link->getHref();
+				break;
+			}
+		}
+
+		Session::put('paypal_payment_id', $payment->getId());
+		Session::put('user', $user);
+		Session::put('order', $orders);
+
+		if (isset($redirect_url)) {
+			return redirect()->away($redirect_url);
+		}
+
+		Session::flash('error', 'Bezahlung fehlgeschlagen. Bitte versuche es erneut.');
+		return redirect('/');
 	}
 
 	public function login()
@@ -359,5 +436,37 @@ class OrderController extends Controller
         $pdf = PDF::loadView('front.emails.orderPDF');
         return $pdf->stream();
         // return view('front.emails.orderPDF');
+	}
+
+	public function getPaymentStatus(Request $request)
+	{
+		$payment_id = Session::get('paypal_payment_id');
+		Session::forget('paypal_payment_id');
+
+		if (empty($request->PayerID) || empty($request->token)) {
+			Session::flash('error', 'Bezahlung fehlgeschlagen. Bitte versuche es erneut.');
+			return redirect('/');
+		}
+
+		$payment = Payment::get($payment_id, $this->_api_context);
+		$execution = new PaymentExecution();
+		$execution->setPayerId($request->PayerID);
+
+		// execute the payment
+		$result = $payment->execute($execution, $this->_api_context);
+
+		if ($result->getState() == 'approved') {
+			dispatch(new SendOrderMail(Session::get('order'), Session::get('user')));
+        	unlink(Session::get('pdf_path'));
+			Session::forget('user');
+			Session::forget('order');
+			Session::forget('cart');
+			Session::forget('pdf_path');
+			Session::flash('order_made', __('front.order_successfully_made'));
+			return redirect('/');
+		}
+
+		Session::flash('error', 'Bezahlung fehlgeschlagen. Bitte versuche es erneut.');
+		return redirect('/');		
 	}
 }

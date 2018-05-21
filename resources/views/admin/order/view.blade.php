@@ -1,6 +1,8 @@
 @php($page_name = 'Artikel verkauft')
 @extends('admin.layouts.app')
 
+<?php $pom = 0; ?>
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -75,14 +77,13 @@
                                 <th>{{ __('lang.order-price') }}</th>
                                 <th>{{ __('lang.order-total') }}</th>
                             </tr>
-                            @if ($order->payment_option == 'Lieferung')
-                                @php
-                                    $pom = 0;
+                            <?php
+                                if ($order->payment_option == 'Lieferung') {
                                     foreach ($order->products as $product) {
                                         $pom += $product->delivery_price;
                                     }
-                                @endphp
-                            @endif
+                                }
+                            ?>
                             @foreach($order->products as $product)
                                 <tr>
                                     <td> {{ $product->product_no }}</td>

@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use PDF;
+use Session;
 
 class OrderMail extends Mailable
 {
@@ -34,8 +35,9 @@ class OrderMail extends Mailable
         $pdf = PDF::loadView('front.emails.orderPDF', ['orders' => $this->orders, 'user' => $this->user]);
         $name = time() . '.pdf';
         $pdf->save(storage_path().'/app/email/'. $name);
-
         $email->attach(storage_path().'/app/email/'. $name);
+
+        Session::put('pdf_path', storage_path().'/app/email/'. $name);
 
         return $email;
     }

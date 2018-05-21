@@ -184,7 +184,7 @@
         </div>
     
         <div class="mid_part">
-            <table >
+            <table>
                 <tr>
                     <th style="border: none;">
                         @if(isset($billing))
@@ -212,7 +212,7 @@
             </table>
         </div>
 
-        <div style="overflow-x: auto;">
+        <div style="overflow-x: auto">
             <table class="receipt-table">
                 <tr>
                     <th>Artikel Nr.</th>
@@ -299,16 +299,13 @@
                 </tr>
             </table>
         </div>
-
         <div>
             <table>
                 <tr>
                 </tr>
             </table>
         </div>
-
     </div>
-
 </body>
 
 </html>

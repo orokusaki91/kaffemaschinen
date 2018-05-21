@@ -135,7 +135,10 @@
                             $total = $subTotalWithDiscount > 100 ? $subTotalWithDiscount : $subTotalWithDiscount + $shipping;
                             $deliveryTotal = $subTotalDelivery + $shipping;
                             $pickupTotal = $subTotalPickup;
+                            Session::put('shipping', $shipping);
                             Session::put('subtotal', $subTotal);
+                            Session::put('paypalSubtotal', $subTotal - $discount);
+                            Session::put('discount', $discount);
                             Session::put('total', $total);
                             Session::put('deliveryTotal', $deliveryTotal);
                             Session::put('pickupTotal', $pickupTotal);
@@ -188,12 +191,9 @@
                             </div>
 
                             <div class="payment float-right clearfix">
-                                <input type="submit" class="checkout-submit"
+                                <button type="submit" class="checkout-submit"
                                         data-loading-text="Loading..." 
-                                        id="place-order-button" 
-                                        value="{{ __('front.place-order') }}">
-                                <input type="hidden" name="stripeToken" id="stripeToken">
-                                <input type="hidden" name="stripeEmail" id="stripeEmail">
+                                        id="place-order-button">{{ __('front.place-order') }}</button>
                             </div>
                         </div>
                     </div>
@@ -213,6 +213,7 @@
 </div>
 </main>
 @endsection
+
 @push('scripts')
 <script>
     $(function () {
@@ -297,55 +298,6 @@
 @endpush
 
 @section('scripts')
-<script src="https://checkout.stripe.com/checkout.js"></script>
-<script>
-    let stripe = StripeCheckout.configure({
-        key: '{{ getStripePublishableKey() }}',
-        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-        locale: 'auto',
-        token: function (token) {
-            var stripeEmail = $('#stripeEmail');
-            var stripeToken = $('#stripeToken');
-            stripeEmail.val(token.email);
-            stripeToken.val(token.id);
-            // submit the form
-            var url = '{{ route('order.place') }}';
-            var token = $('input[name="_token"]').val();
-            var form = $('#place-order-form');
-            var data = form.serialize();
-            var errorEl = $('span.payment-error');
-            // add loading class
-            $('#loading').removeClass('is-hidden');
-            var buttonPlaceOrder = $('#place-order-button').attr('disabled', true);
-            errorEl.removeClass('has-error');
-            // fire ajax post request
-            $.post(url, data)
-            .done(function (data) {                
-                window.location.href = getUrl('/');
-            })
-            .fail(function(data, textStatus) {
-                $('#loading').addClass('is-hidden');
-                errorEl.addClass('has-error');
-                buttonPlaceOrder.attr('disabled', false);
-
-                // display the error
-                errorEl.text(data.responseJSON.status);
-
-                $('html, body').animate({
-                    scrollTop: (errorEl.offset().top - 30)
-                }, 1500);
-            });
-        }
-    });
-    $('#place-order-form').on('submit', function (e) {
-        stripe.open({
-            name: 'Centrocaffe',
-            description: 'Billing',
-        });
-        e.preventDefault();
-    });
-</script>
-
 <script>
     $(function () {
         // toggle show shipping address

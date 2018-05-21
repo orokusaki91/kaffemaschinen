@@ -327,6 +327,17 @@
 </script>
 @endif
 
+@if(Session::has('error'))
+<script>
+    swal({
+        title: 'Fühler!',
+        confirmButtonText: 'OK',
+        type: 'error',
+        text: '{{ Session::get('error') }}'
+    });
+</script>
+@endif
+
 @if(Session::has('registration_success'))
 <script>
     swal({
