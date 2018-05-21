@@ -189,9 +189,9 @@ ul.ul-2 li {
 #checkout-receipt h1 {
     font-size: 26px;
 }
-#checkout-receipt h1:nth-of-type(2){
+/*#checkout-receipt h1:nth-of-type(2){
 	color:red;
-}
+}*/
 
 #checkout-receipt h3 {
     font-size: 20px;

@@ -132,7 +132,7 @@
                         <table class="table table-responsive" style="background: #fff;">
                             @php
                             $subTotalWithDiscount = $subTotal - $discount;
-                            $total = $subTotalWithDiscount > 100 ? $subTotalWithDiscount : $subTotalWithDiscount + $shipping;
+                            $total = $subTotalWithDiscount >= 100 ? $subTotalWithDiscount : $subTotalWithDiscount + $shipping;
                             $deliveryTotal = $subTotalDelivery + $shipping;
                             $pickupTotal = $subTotalPickup;
                             Session::put('shipping', $shipping);
@@ -162,17 +162,17 @@
                                 <td class="text-right shipping-cost t-bold" data-shipping-cost="{{ $shipping }}">CHF {{ number_format($shipping, 2) }}</td>
                             </tr>
                             @endif
-                            <tr class="t-muted tax">
+{{--                             <tr class="t-muted tax">
                                 <td colspan="4" class="hidden-xs "><strong>{{ __('front.contain_vat', ['vat' => '2.5']) }}</strong></td>
                                 <td class="text-right t-bold">{{ 'CHF ' . number_format($totalTax25, 2) }}</td>
                             </tr>
                             <tr class="t-muted">
                                 <td colspan="4" class="hidden-xs"><strong>{{ __('front.contain_vat', ['vat' => '7.7']) }}</strong></td>
                                 <td class="text-right t-bold">{{ 'CHF ' . number_format($totalTax77, 2) }}</td>
-                            </tr>
+                            </tr> --}}
                             
                         </table>
-                        <h3 class="text-center" style="margin-top: 15px;" >{{ __('front.total') }} inkl. MwSt</h3>
+                        <h3 class="text-center" style="margin-top: 15px;" >{{ __('front.total') }} exkl. MwSt</h3>
                         <h1 class="total t-upcase t-bold text-center" data-total="{{ $total }}">CHF {{ number_format($total, 2) }}</h1>
                     </div>
                 </div>

@@ -177,7 +177,7 @@
                             <p>{{ __('front.cart-lower-than') }}</p>
                             <p>{{ __('front.cart-bigger-than') }}</p>
                         </li>
-                        <li class="cart-summ">Total (zzgl.MwSt): <b>CHF <span style="color: #ff0000;" class="total-sum-price">{{ number_format(($total > 100 ? $total : $total + $shipping),2) }}</span></b>
+                        <li class="cart-summ">Total (exkl.MwSt): <b>CHF <span style="color: #ff0000;" class="total-sum-price">{{ number_format(($total > 100 ? $total : $total + $shipping),2) }}</span></b>
                             {{-- {!! ($total < 100) ? '<p class="cart_pdv">'. __('front.shipping-included') .'</p>' : '<p class="cart_pdv">'. __('front.shipping-not-included') .'</p>' !!} --}}
                         </li>
                     </ul>
@@ -232,8 +232,8 @@
                 var discount = sum * 2 / 100;
                 sum = $('.auth-discount').length > 0 ? sum - discount : sum;
                 $('.auth-discount').text(number_format(discount, 2));
-                $('.shipping-amount').text(number_format(sum > 100 ? 0 : shipping, 2));
-                totalPrice.text(number_format(sum > 100 ? sum : sum + shipping, 2));
+                $('.shipping-amount').text(number_format(sum >= 100 ? 0 : shipping, 2));
+                totalPrice.text(number_format(sum >= 100 ? sum : sum + shipping, 2));
                 // $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
 
                 var idField = that.siblings('input[name="id"]')
@@ -287,8 +287,8 @@
                 $()
                 sum = $('.auth-discount').length > 0 ? sum - (sum * 2 / 100) : sum;
                 $('.auth-discount').text(number_format(discount, 2));
-                $('.shipping-amount').text(number_format(sum > 100 ? 0 : shipping, 2));
-                totalPrice.text(number_format(sum > 100 ? sum : sum + shipping, 2));
+                $('.shipping-amount').text(number_format(sum >= 100 ? 0 : shipping, 2));
+                totalPrice.text(number_format(sum >= 100 ? sum : sum + shipping, 2));
                 // $('.cart_pdv').text(sum > 100 ? shippingNotIncludedText : shippingIncludedText);
 
                 var idField = that.siblings('input[name="id"]')

@@ -250,7 +250,7 @@
                         $discount = $subtotal * 2 / 100;
                     }
                     $subTotalWithDiscount = $subtotal - $discount;
-                    $total = $subTotalWithDiscount > 100 ? $subTotalWithDiscount : $subTotalWithDiscount + $shipping_price;
+                    $total = $subTotalWithDiscount >= 100 ? $subTotalWithDiscount : $subTotalWithDiscount + $shipping_price;
                 @endphp
 
                 <tr class="calc">
@@ -274,9 +274,9 @@
                     <td></td>
                     <td></td>
                     <td class="text-right calc">Versandgebühren</td>
-                    <td>{{ number_format($subTotalWithDiscount > 100 ? 0 : $shipping_price, 2) }} CHF</td>
+                    <td>{{ number_format($subTotalWithDiscount >= 100 ? 0 : $shipping_price, 2) }} CHF</td>
                 </tr>
-                <tr class="calc">
+{{--                 <tr class="calc">
                     <td></td>
                     <td></td>
                     <td></td>
@@ -289,7 +289,7 @@
                     <td></td>
                     <td class="text-right calc">zzgl. MwSt 7,7%</td>
                     <td>{{ number_format($orders['deliveryOrder']->tax_77, 2) }} CHF</td>
-                </tr>
+                </tr> --}}
                 <tr class="calc">
                     <td></td>
                     <td></td>
