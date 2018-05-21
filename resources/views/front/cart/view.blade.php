@@ -165,7 +165,7 @@
                                         <td colspan="5" style="text-align: right">Porto / Versandkosten:</td>
                                         <td class="price-1">
                                             <span class="currency-1">CHF</span> 
-                                            <span class="shipping-amount">{{ $total > 100 ? '0.00' : '8.50' }}</span>
+                                            <span class="shipping-amount">{{ $total >= 100 ? '0.00' : '8.50' }}</span>
                                         </td>
                                     </tr>
                             </tbody>
@@ -177,7 +177,7 @@
                             <p>{{ __('front.cart-lower-than') }}</p>
                             <p>{{ __('front.cart-bigger-than') }}</p>
                         </li>
-                        <li class="cart-summ">Total (exkl.MwSt): <b>CHF <span style="color: #ff0000;" class="total-sum-price">{{ number_format(($total > 100 ? $total : $total + $shipping),2) }}</span></b>
+                        <li class="cart-summ">Total (exkl.MwSt): <b>CHF <span style="color: #ff0000;" class="total-sum-price">{{ number_format(($total >= 100 ? $total : $total + $shipping),2) }}</span></b>
                             {{-- {!! ($total < 100) ? '<p class="cart_pdv">'. __('front.shipping-included') .'</p>' : '<p class="cart_pdv">'. __('front.shipping-not-included') .'</p>' !!} --}}
                         </li>
                     </ul>
