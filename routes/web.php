@@ -14,27 +14,27 @@
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Cookie;
 
-Route::get('/test_protection', function() {
-    return view('testprotection');
-})->name('testprotection');
+// Route::get('/test_protection', function() {
+//     return view('testprotection');
+// })->name('testprotection');
 
-Route::post('/test_protection', function() {
-    $_email = 'test@centrocaffe.ch';
-        $_password = '123123';
+// Route::post('/test_protection', function() {
+//     $_email = 'test@centrocaffe.ch';
+//         $_password = '123123';
 
-    $email = Request::input('email');
-    $password = Request::input('password');
+//     $email = Request::input('email');
+//     $password = Request::input('password');
 
-    if (($email == $_email) && ($password == $_password)) {
-        Cookie::queue(Cookie::make('temp_login', true, 3600));
-        return redirect('/');
-    } else {
-        echo "Wrong username or password";
-    }
-});
+//     if (($email == $_email) && ($password == $_password)) {
+//         Cookie::queue(Cookie::make('temp_login', true, 3600));
+//         return redirect('/');
+//     } else {
+//         echo "Wrong username or password";
+//     }
+// });
 
-Route::middleware(['testprotection']) // REMOVE IN PRODUCTION!!!
-->group(function () {
+// Route::middleware(['testprotection']) // REMOVE IN PRODUCTION!!!
+// ->group(function () {
 
     Route::middleware(['web'])
         ->namespace('\Front')
@@ -130,7 +130,7 @@ Route::middleware(['testprotection']) // REMOVE IN PRODUCTION!!!
 
         });
 
-    Route::middleware(['web', 'front.auth'])
+    Route::middleware(['web']) // for test protection add front.auth next web middleware
         ->namespace('\Front')
         ->group(function () {
 
@@ -166,7 +166,7 @@ Route::middleware(['testprotection']) // REMOVE IN PRODUCTION!!!
             Route::get('password/reset', ['as' => 'admin.password.reset', 'uses' => 'ForgotPasswordController@showLinkRequestForm']);
         });
 
-    Route::middleware(['web', 'admin.auth'])
+    Route::middleware(['web']) // for test protection add admin.auth next web middleware
         ->prefix('admin')
         ->namespace('\Admin')
         ->group(function () {
@@ -223,7 +223,7 @@ Route::middleware(['testprotection']) // REMOVE IN PRODUCTION!!!
 
             Route::get('statistics', ['as' => 'admin.statistics', 'uses' => 'StatisticsController@index']);
         });
-});
+// });
 
 Route::middleware(['web'])
     ->namespace('\Front\Auth')
@@ -242,5 +242,15 @@ Route::middleware(['web'])
 // Route::get('pdf', 'Front\OrderController@getPdf');
 Route::get('agb', 'Front\HomeController@getAGB');
 Route::get('impressum', 'Front\HomeController@getImpressum');
+
+// Route::get('/optimize', function() {
+// $exitCode = Artisan::call('optimize');
+// return '<h1>Reoptimized class loader</h1>';
+// });
+
+// Route::get('/config-cache', function() {
+// $exitCode = Artisan::call('config:cache');
+// return '<h1>Clear Config cleared</h1>';
+// });
 
 
