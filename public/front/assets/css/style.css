@@ -8053,7 +8053,7 @@ body .component-desc.component-desc-ct {
 }
 
 .f-menu img {
-	width:25%;
+	width:28%;
 	float:left;
 	margin-right:10px;
 }
@@ -8256,6 +8256,11 @@ body .component-desc.component-desc-ct {
 	width:100% !important;
 }
 	
+.f-menu img {
+	width:32%;
+	margin-left:10px;
+}
+	
 }
 
 
@@ -8313,7 +8318,7 @@ body .component-desc.component-desc-ct {
 	}
 	
 	.f-menu img {
-		width:10%;
+		width:12%;
 		float:none;
 	}
 	
@@ -8351,6 +8356,9 @@ body .component-desc.component-desc-ct {
 	float:none;
 	width:100% !important;margin-top:50px;
 }
+
+
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -8394,6 +8402,11 @@ body .component-desc.component-desc-ct {
 	float:none;
 	width:100% !important;
 }
+
+.f-menu img {
+	width:20%;
+}
+
 }
 
 
@@ -9471,6 +9484,11 @@ Media
 }
 .nikolabuttonlogin2 {
 	margin-top:37% !important;
+}
+
+.f-menu img {
+	width:35%;
+	margin-left:10px;
 }
 	
 }

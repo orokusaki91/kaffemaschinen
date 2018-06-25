@@ -34,6 +34,8 @@
                     <li><img src="{{ asset('front/assets/img/cards/visa.png') }}" alt=""></li>
                     <li><img src="{{ asset('front/assets/img/cards/master-card.png') }}" alt=""></li>
                     <li><img src="{{ asset('front/assets/img/cards/american-express.png') }}" alt=""></li>
+                    <li><img src="{{ asset('front/assets/img/cards/discover.png') }}" alt=""></li>
+                    <li><img src="{{ asset('front/assets/img/cards/pay-pal.png') }}" alt=""></li>
                 </ul>
             </div>
             <div class="f-subscribe">
