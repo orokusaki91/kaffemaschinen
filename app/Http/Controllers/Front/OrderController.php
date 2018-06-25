@@ -58,6 +58,7 @@ class OrderController extends Controller
 		$cartItems = Session::get('cart');
 
 		$address = $user->getBillingAddress();
+		$shippingAddress = $user->getShippingAddress();
 		$shipping = Session::get('subtotal') < 100 ? Session::get('shipping') : 0;
 		$deliverySyncedDataProducts = [];
 		$deliverySyncedDataPackages = [];
@@ -106,31 +107,6 @@ class OrderController extends Controller
 			    ->setPrice("-{$paypalDiscount}");
 
 	    $items[] = $discount;
-	
-		try {
-			$orders = [];
-			if (!empty($cartItemsForDelivery)) {
-				$orderForDelivery = new Order;
-				$orderForDelivery->user_id = $user->id;
-				$orderForDelivery->billing_address_id = $address->id;
-				$orderForDelivery->shipping_address_id = isset($shippingAddress) ? $shippingAddress->id : $address->id;
-				$orderForDelivery->payment_option = 'Lieferung';
-				$orderForDelivery->order_status_id = 1;
-				$orderForDelivery->total_amount = Session::get('total');
-				$orderForDelivery->tax_25 = Session::get('totalTax25');
-				$orderForDelivery->tax_77 = Session::get('totalTax77');
-				$orderForDelivery->save();
-
-				$orderForDelivery->products()->sync($deliverySyncedDataProducts, false);
-				$orderForDelivery->packages()->sync($deliverySyncedDataPackages, false);
-
-				$orderForDelivery->setSubtotal(Session::get('subtotal'));
-
-				$orders['deliveryOrder'] = $orderForDelivery;
-			}
-		} catch (Exception $e) {
-			return redirect('/')->with('error', 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.');
-		}
 
 		$payer = new Payer();
 		$payer->setPaymentMethod("paypal");
@@ -193,7 +169,10 @@ class OrderController extends Controller
 
 		Session::put('paypal_payment_id', $payment->getId());
 		Session::put('user', $user);
-		Session::put('order', $orders);
+		Session::put('deliverySyncedDataProducts', $deliverySyncedDataProducts);
+		Session::put('deliverySyncedDataPackages', $deliverySyncedDataPackages);
+		Session::put('address', $address);
+		Session::put('shippingAddress', $shippingAddress);
 
 		if (isset($redirect_url)) {
 			return redirect()->away($redirect_url);
@@ -448,23 +427,58 @@ class OrderController extends Controller
 			return redirect('/');
 		}
 
-		$payment = Payment::get($payment_id, $this->_api_context);
-		$execution = new PaymentExecution();
-		$execution->setPayerId($request->PayerID);
+		DB::beginTransaction();
 
-		// execute the payment
-		$result = $payment->execute($execution, $this->_api_context);
+		try {
+			$orders = [];
+			$orderForDelivery = new Order;
+			$orderForDelivery->user_id = Session::get('user')->id;
+			$orderForDelivery->billing_address_id = Session::get('address')->id;
+			$orderForDelivery->shipping_address_id = Session::get('shippingAddress')->id;
+			$orderForDelivery->payment_option = 'Lieferung';
+			$orderForDelivery->order_status_id = 1;
+			$orderForDelivery->total_amount = Session::get('total');
+			$orderForDelivery->tax_25 = Session::get('totalTax25');
+			$orderForDelivery->tax_77 = Session::get('totalTax77');
+			$orderForDelivery->save();
+
+			$orderForDelivery->products()->sync(Session::get('deliverySyncedDataProducts'), false);
+			$orderForDelivery->packages()->sync(Session::get('deliverySyncedDataPackages'), false);
+			$orderForDelivery->setSubtotal(Session::get('subtotal'));
+			// 1. set orders
+			$orders['deliveryOrder'] = $orderForDelivery;
+
+			// 2. execute the payment
+			$payment = Payment::get($payment_id, $this->_api_context);
+			$execution = new PaymentExecution();
+			$execution->setPayerId($request->PayerID);
+			$result = $payment->execute($execution, $this->_api_context);
+
+			} catch (\Exception $e) {
+				DB::rollback();
+				return redirect('/')->with('error', 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.');
+			}
 
 		if ($result->getState() == 'approved') {
-			dispatch(new SendOrderMail(Session::get('order'), Session::get('user')));
+			// 3. commit the transaction
+			DB::commit();
+			// send email
+			dispatch(new SendOrderMail($orders, Session::get('user')));
+			// remove the pdf
         	unlink(Session::get('pdf_path'));
+        	// remove all sessions
 			Session::forget('user');
-			Session::forget('order');
 			Session::forget('cart');
+			Session::forget('deliverySyncedDataProducts');
+			Session::forget('deliverySyncedDataPackages');
+			Session::forget('address');
+			Session::forget('shippingAddress');
 			Session::forget('pdf_path');
 			Session::flash('order_made', __('front.order_successfully_made'));
 			return redirect('/');
 		}
+
+		DB::rollback();
 
 		Session::flash('error', 'Bezahlung fehlgeschlagen. Bitte versuche es erneut.');
 		return redirect('/');		

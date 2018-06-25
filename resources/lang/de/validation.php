@@ -123,9 +123,9 @@ return [
         'billing_postcode' => 'billing postleitzahl',
         'billing_city' => 'billing stadt',
         'billing_phone' => 'billing phone',
-        'email' => 'billing email',
-        'password' => 'Passwort',
-        'password_confirmation' => 'Passwort Bestätigen',
+        'email' => 'email',
+        'password' => 'passwort',
+        'password_confirmation' => 'passwort Bestätigen',
 
         'shipping_first_name' => 'shipping vorname',
         'shipping_last_name' => 'shipping nachname',
@@ -133,6 +133,7 @@ return [
         'shipping_postcode' => 'shipping postleitzahl',
         'shipping_city' => 'shipping stadt',
         'shipping_phone' => 'shipping phone',
+        'is_company' => 'kontotyp',
     ]
 
 ];

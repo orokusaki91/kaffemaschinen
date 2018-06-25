@@ -113,6 +113,7 @@ return [
     'unavailable' => 'Ausverkauft',
     'available' => 'Verfügbar',
     'please-select' => 'Bitte auswählen',
+    'select-account-type' => 'Kontotyp auswählen',
     'private-customer' => 'Privatkunde',
     'business-customer' => 'Geschäftskunde',
 
