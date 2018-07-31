@@ -146,9 +146,9 @@ class Provider extends ServiceProvider
 
          * Add Menu Product
          */
-        AdminMenuFacade::add('statistics')
-            ->label(__('lang.statistics'))
-            ->route('admin.statistics');
+        // AdminMenuFacade::add('statistics')
+        //     ->label(__('lang.statistics'))
+        //     ->route('admin.statistics');
     }
 
     public function provides()

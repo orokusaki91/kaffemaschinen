@@ -134,6 +134,13 @@ return [
         'shipping_city' => 'shipping stadt',
         'shipping_phone' => 'shipping phone',
         'is_company' => 'kontotyp',
+        'title' => 'anrede',
+        'phone' => 'telefon',
+        'address' => 'adresse',
+        'zip' => 'PLZ',
+        'city' => 'Ort',
+        'firstname' => 'vorname',
+        'lastname' => 'nachname',
     ]
 
 ];

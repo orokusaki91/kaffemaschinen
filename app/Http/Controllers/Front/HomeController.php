@@ -20,7 +20,13 @@ class HomeController extends Controller
         $mode = request('mode') == 'list' ? 'list' : 'grid';
         $orderBy = $request->order_by ? $request->order_by : null;
 
-        $hitAndNewProducts = Product::where('new_product', 1)->orWhere('hit_product', 1);
+        $hitAndNewProducts = Product::where([
+                                    ['status', 1],
+                                    ['new_product', 1,]
+                                ])->orWhere([
+                                    ['status', 1],
+                                    ['hit_product', 1]
+                                ]);
         $hitAndNewProducts = isset($orderBy) ? $hitAndNewProducts->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $hitAndNewProducts;
         $hitAndNewProducts = $hitAndNewProducts->paginate($view);
 

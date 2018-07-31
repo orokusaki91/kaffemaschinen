@@ -330,7 +330,7 @@
 @if(Session::has('error'))
 <script>
     swal({
-        title: 'Fühler!',
+        title: 'Fehler!',
         confirmButtonText: 'OK',
         type: 'error',
         text: '{{ Session::get('error') }}'

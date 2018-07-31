@@ -44,9 +44,11 @@ class LoginController extends AdminController
     {
         $this->guard()->logout();
 
-        $request->session()->flush();
+        // $request->session()->flush();
 
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
+
+        // dd('asd');
 
         return redirect('/');
     }

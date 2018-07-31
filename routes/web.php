@@ -166,7 +166,7 @@ use Illuminate\Support\Facades\Cookie;
             Route::get('password/reset', ['as' => 'admin.password.reset', 'uses' => 'ForgotPasswordController@showLinkRequestForm']);
         });
 
-    Route::middleware(['web']) // for test protection add admin.auth next web middleware
+    Route::middleware(['web', 'admin.auth'])
         ->prefix('admin')
         ->namespace('\Admin')
         ->group(function () {
@@ -221,7 +221,7 @@ use Illuminate\Support\Facades\Cookie;
             Route::get('page/wir-kaufen', ['as' => 'admin.page.wir-kaufen', 'uses' => 'PageController@wirKaufen']);
             Route::post('page/wirkaufen/update/{id}', ['as' => 'admin.wir-kaufen.update', 'uses' => 'PageController@updateWirKaufen']);
 
-            Route::get('statistics', ['as' => 'admin.statistics', 'uses' => 'StatisticsController@index']);
+            // Route::get('statistics', ['as' => 'admin.statistics', 'uses' => 'StatisticsController@index']);
         });
 // });
 
