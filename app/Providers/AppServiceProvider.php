@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $popup = Popup::where('active', 1)->first();
         View::share('popup', $popup);
 
-        $navs = Category::where('parent_id', null)->get();
+        $navs = Category::where('parent_id', null)->orderBy('created_at')->get();
         View::share('navs', $navs);
     }
 
